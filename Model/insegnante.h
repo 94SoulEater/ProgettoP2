@@ -8,8 +8,6 @@
 
 using std::vector;
 
-//prova 23
-
 class insegnante : virtual public utente{
 private:
     vector<lezione> lezioni;
