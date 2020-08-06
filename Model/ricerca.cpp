@@ -40,5 +40,9 @@ void ricerca::setDataPubblicazione(const QDate &value){
     dataPubblicazione = value;
 }
 
+bool ricerca::operator==(const ricerca &_ric) const{
+    return (_ric.autori==autori && _ric.dataPubblicazione == dataPubblicazione && _ric.link==link && _ric.rivistaPubblicazione == rivistaPubblicazione && _ric.titolo==titolo);
+}
+
 ricerca::ricerca(string _autori, string _titolo, string _link, string _rivistaPubblicazione, int _giornoPubblicazione, int _mesePubblicazione, int _annoPubblicazione):autori(_autori), titolo(_titolo), link(_link), rivistaPubblicazione(_rivistaPubblicazione), dataPubblicazione(_annoPubblicazione, _mesePubblicazione, _giornoPubblicazione){
 }

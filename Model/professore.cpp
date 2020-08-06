@@ -12,8 +12,12 @@ vector<ricerca> professore::getRicerche() const{
     return ricerche;
 }
 
-void professore::setRicerche(const vector<ricerca> &value){
-    ricerche = value;
+void professore::addRicerca(const ricerca &_ric){
+    ricerche.push_back(_ric);
+}
+
+void professore::removeRicerca(const ricerca &_ric){
+    ricerche.erase(std::remove(ricerche.begin(), ricerche.end(), _ric), ricerche.end());
 }
 
 int professore::getAnniServizio() const

@@ -15,7 +15,8 @@ public:
     insegnante(string="", string="", string="", string="", string="", int=1, int=1, int=1970, string="", string="", string="", string="", string="");
     ~insegnante() = default;
     vector<lezione> getLezioni() const;
-    void setLezioni(const vector<lezione> &value);
+    void addLezione(const lezione);
+    void removeLezione(const lezione);
 };
 
 #endif // INSEGNANTE_H

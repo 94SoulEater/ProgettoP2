@@ -18,7 +18,8 @@ public:
     string getTipo() const;
     void setTipo(const string &value);
     vector<ricerca> getRicerche() const;
-    void setRicerche(const vector<ricerca> &value);
+    void addRicerca(const ricerca &_ric);
+    void removeRicerca(const ricerca &_ric);
     int getAnniServizio() const;
     void setAnniServizio(int value);
 };
