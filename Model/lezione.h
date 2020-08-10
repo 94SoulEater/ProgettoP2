@@ -1,12 +1,14 @@
 #ifndef LEZIONE_H
 #define LEZIONE_H
 
+#include <Qt>
 #include <QTime>
 #include <string>
 #include <vector>
 
 using std::string;
 using std::vector;
+using Qt::DayOfWeek;
 
 struct giornoLezione{
     bool operator==(const giornoLezione &_lez)const{
@@ -14,7 +16,7 @@ struct giornoLezione{
     }
     QTime oraInizio;
     QTime oraFine;
-    string giornoSettimana;
+    DayOfWeek giornoSettimana;
 };
 
 class lezione{
@@ -38,8 +40,8 @@ public:
     int getCrediti() const;
     void setCrediti(int value);
     vector<giornoLezione> getGiorniLezione() const;
-    void addGiornoLezione(QTime, QTime, const string);
-    void removeGiornoLezione(QTime, QTime, const string);
+    void addGiornoLezione(QTime, QTime, DayOfWeek);
+    void removeGiornoLezione(QTime, QTime, DayOfWeek);
 };
 
 #endif // LEZIONE_H

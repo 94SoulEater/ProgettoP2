@@ -37,12 +37,12 @@ vector<giornoLezione> lezione::getGiorniLezione() const{
 }
 
 //YET TO TEST, COULD BREAK EVERYTHING
-void lezione::addGiornoLezione(QTime _inizio, QTime _fine, string _giorno){
+void lezione::addGiornoLezione(QTime _inizio, QTime _fine, DayOfWeek _giorno){
     giornoLezione g = {_inizio, _fine, _giorno};
     giorniLezione.push_back(g);
 }
 
-void lezione::removeGiornoLezione(QTime _inizio, QTime _fine, string _giorno){
+void lezione::removeGiornoLezione(QTime _inizio, QTime _fine, DayOfWeek _giorno){
     giornoLezione g = {_inizio, _fine, _giorno};
     giorniLezione.erase(std::remove(giorniLezione.begin(), giorniLezione.end(), g), giorniLezione.end());
 }

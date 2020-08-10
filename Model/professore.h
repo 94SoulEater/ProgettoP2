@@ -13,8 +13,9 @@ private:
     int anniServizio;
     vector<ricerca> ricerche;
 public:
-    professore(string="", int=0);
+    professore(string="", string="", string="", string="", string="", int=1, int=1, int=1970, string="", string="", string="", string="", string="", string="", int=0);
     ~professore() = default;
+    virtual professore* clone() const override;
     string getTipo() const;
     void setTipo(const string &value);
     vector<ricerca> getRicerche() const;

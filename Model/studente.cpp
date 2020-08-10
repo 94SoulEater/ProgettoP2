@@ -59,3 +59,7 @@ void studente::setDataIscrizione(const QDate &value){
 
 studente::studente(string _nome, string _cognome, string _codiceFiscale, string _telefono, string _email, int _giornoNascita, int _meseNascita, int _annoNascita, string _regione, string _comune, string _via, string _cap, string _numeroCivico, int _matricola, TipoLaurea _laurea, string _corso, int _annoCorso, bool _fuoriCorso, int _anniFuoriCorso, int _giornoIscrizione, int _meseIscrizione, int _annoIscrizione):utente(_nome, _cognome, _codiceFiscale, _telefono, _email, _giornoNascita, _meseNascita, _annoNascita, _regione, _comune, _via, _cap, _numeroCivico), matricola(_matricola), laurea(_laurea), corso(_corso), annoCorso(_annoCorso), fuoricorso(_fuoriCorso), anniFuoriCorso(_anniFuoriCorso), dataIscrizione(_annoIscrizione, _meseIscrizione, _giornoIscrizione){
 }
+
+studente* studente::clone() const{
+    return new studente(*this);
+}
