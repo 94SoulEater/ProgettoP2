@@ -50,6 +50,6 @@ public:
     void setNome(const string &value);
 
 };
- ostream& operator<<(ostream& os, const utente& u);
+
 
 #endif // UTENTE_H
