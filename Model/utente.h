@@ -5,8 +5,10 @@
 #include <QDate>
 
 using std::string;
+using std::ostream;
 
 class utente{
+    friend ostream& operator <<(ostream&,const utente&);
 private:
     string nome;
     string cognome;
@@ -47,4 +49,7 @@ public:
     void setNome(const string &value);
 };
 
+ostream& operator<<(ostream& os, const utente& u){
+    os<<u.getNome()<<","<<u.getCognome()<<","<<u.getCodiceFiscale()<<","<<u.getTelefono()<<","<<u.getEmail()<<","<<u.getDataNascita()<<","<<u.getRegione()<<","<<u.getComune()<<","<<u.getVia()<<","<<u.getCap()<<","<<u.getNumeroCivico()<<","
+}
 #endif // UTENTE_H
