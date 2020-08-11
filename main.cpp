@@ -1,27 +1,17 @@
 #include "university.h"
-//<<<<<<< HEAD
 #include "Model/utente.h"
-//=======
 #include "Model/insegnante.h"
 #include "Model/professore.h"
 #include "Model/lezione.h"
 #include "Model/lezione.h"
 #include "Model/ricerca.h"
 #include <Qt>
-//>>>>>>> 0899596a4769a65ae71821eb212fe0b15b749d3d
 #include <QApplication>
 #include <QTime>
 #include <iostream>
 
-//<<<<<<< HEAD
-#include <iostream>
 using namespace std;
 
-
-
-
-
-//=======
 using std::cout; using std::endl; using Qt::DayOfWeek;
 
 int main(int argc, char *argv[]){
@@ -62,7 +52,6 @@ int main(int argc, char *argv[]){
       cout<<"\t"<<it->getAutori()<<" "<<it->getTitolo()<<" "<<it->getLink()<<" "<<it->getRivistaPubblicazione()<<" "<<it->getDataPubblicazione().year()<<endl;
     }
 
-//>>>>>>> 0899596a4769a65ae71821eb212fe0b15b749d3d
     QApplication a(argc, argv);
     university w;
     w.show();
