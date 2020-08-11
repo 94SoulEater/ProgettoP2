@@ -1,5 +1,6 @@
 #include "Model/utente.h"
 using std::string;
+#include <iostream>
 
 string utente::getNumeroCivico() const{
     return numeroCivico;
@@ -87,6 +88,12 @@ string utente::getNome() const{
 
 void utente::setNome(const string &value){
     nome = value;
+}
+
+ostream &operator<<(ostream & os, const utente & u)
+{
+       std::cout<<u.getNome()<<","<<u.getCognome()<<","<<u.getCodiceFiscale()<<","<<u.getTelefono()<<","<<u.getEmail()<<","<<u.getDataNascita()<<","<<u.getRegione()<<","<<u.getComune()<<","<<u.getVia()<<","<<u.getCap()<<","<<u.getNumeroCivico();
+    return os;
 }
 
 utente::utente(string _nome, string _cognome, string _codiceFiscale, string _telefono, string _email, int _giornoNascita, int _meseNascita, int _annoNascita, string _regione, string _comune, string _via, string _cap, string _numeroCivico):nome(_nome), cognome(_cognome), codiceFiscale(_codiceFiscale), telefono(_telefono), email(_email), dataNascita(_annoNascita, _meseNascita, _giornoNascita), regione(_regione), comune(_comune), via(_via), cap(_cap), numeroCivico(_numeroCivico){

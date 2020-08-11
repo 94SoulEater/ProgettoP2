@@ -25,6 +25,7 @@ private:
 public:
     utente(string="", string="", string="", string="", string="", int=1, int=1, int=1970, string="", string="", string="", string="", string="");
     virtual ~utente() = default;
+    virtual utente* clone() const = 0;
     string getNumeroCivico() const;
     void setNumeroCivico(const string &value);
     string getCap() const;
@@ -47,9 +48,8 @@ public:
     void setCognome(const string &value);
     string getNome() const;
     void setNome(const string &value);
-};
 
-ostream& operator<<(ostream& os, const utente& u){
-    os<<u.getNome()<<","<<u.getCognome()<<","<<u.getCodiceFiscale()<<","<<u.getTelefono()<<","<<u.getEmail()<<","<<u.getDataNascita()<<","<<u.getRegione()<<","<<u.getComune()<<","<<u.getVia()<<","<<u.getCap()<<","<<u.getNumeroCivico()<<","
-}
+};
+ ostream& operator<<(ostream& os, const utente& u);
+
 #endif // UTENTE_H
