@@ -44,4 +44,5 @@ HEADERS += \
     Model/professore.h \
     Model/ricerca.h \
     Model/tutor.h \
-    menu.h
+    menu.h \
+    contenitore.h
