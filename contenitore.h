@@ -6,170 +6,217 @@ using std::string;
 
 template <class T>
 class contenitore{
+    friend class iteratore;
+    friend class iteratore_const;
 private:
-    class punto{
-        friend class contenitore<T>;
-    private:
+    class nodo{
+    public:
         T info;
-        punto* next;
-        punto(const T&, punto*=0);
-        punto(const punto&);
-        void distruggi();
+        nodo* next;
+        nodo();
+        ~nodo();
+        nodo(const T&, nodo*);
     };
-    punto *first,*last;
-    static punto* copia(punto*, punto*&);
+    nodo* head;
+    static nodo* copia(nodo*);
 
 public:
-    contenitore();
-    contenitore(const T&);
-    contenitore(const contenitore&);
-    ~contenitore();
-    contenitore & operator=(const contenitore&);
-
-    class iteratore{
+   class iteratore{
         friend class contenitore<T>;
     private:
-        punto* p;
-        iteratore(punto*);
+        nodo* p;
     public:
         iteratore();
-        iteratore& operator =(const iteratore&);
+        iteratore(nodo*);
         iteratore &operator++();
         iteratore &operator++(int);
-        T &operator*() const;
-        T *operator->() const;
-        bool operator ==(const iteratore&);
-        bool operator !=(const iteratore&);
+        T &operator*();
+        T *operator->();
+        bool operator ==(const iteratore&)const;
+        bool operator !=(const iteratore&)const;
     };
-    iteratore start();
-    iteratore fine();
+   class iteratore_const{
+        friend class contenitore<T>;
+    private:
+        nodo* p;
+    public:
+        iteratore_const();
+        iteratore_const(const iteratore&);
+        iteratore_const(nodo*);
+        iteratore_const& operator++();
+        iteratore_const& operator++(int);
+        const T& operator*() const;
+        const T* operator->() const;
+        bool operator==(const iteratore_const&)const;
+        bool operator!=(const iteratore_const&)const;
+    };
+   contenitore();
+   contenitore(const contenitore&);
+   ~contenitore();
+
+   void push(const T&);
+
+   iteratore begin();
+   iteratore end();
+   iteratore_const begin()const;
+   iteratore_const end()const;
+
+
 };
 
 #endif // CONTENITORE_H
 
+//Nodo---------------------------------------------------------
+
 template<class T>
-contenitore<T>::punto::punto(const T & pol, nodo* n): info(pol), next(n){
+contenitore<T>::nodo::nodo(const T& _info, nodo* _next): info(_info), next(_next){
 }
 
 template<class T>
-contenitore::punto::punto(const contenitore::punto & n): info(n.info), next(n.next){
+contenitore<T>::nodo::nodo(): next(0){
 }
 
 template<class T>
-void contenitore::punto::distruggi()
-{
-    if(next)  next->distruggi();
-    delete this;
+contenitore<T>::nodo::~nodo(){
+    if(next)delete next;
 }
 
+//Contenitore--------------------------------------------------
 
 template<class T>
-typename contenitore::punto *contenitore::copia(contenitore::punto *f, contenitore::punto *& l)
-{
-    if(f==0){
-        l=0;
-        return 0;
-    }
-    punto* punt=new punto(f->info,copia(f->next,l));
-    if(f->next==0)
-        l=punt;
-    return punt;
+contenitore<T>::contenitore(): head(0){
 }
 
 template<class T>
-contenitore::contenitore(): first(0), last(0){
+contenitore<T>::contenitore(const contenitore& c): head(copia(c.head)){
 }
 
 template<class T>
-contenitore<T>::contenitore(const T & pol): first(new punto(pol))
-{
-last=first;
+contenitore<T>::~contenitore(){
+    if(head) delete head;
 }
 
 template<class T>
-contenitore::contenitore(const contenitore & c): first(copia(c.first,last)){
+typename contenitore<T>::nodo* contenitore<T>::copia(contenitore<T>::nodo *_head){
+    if(_head==0)return 0;
+    nodo* p=new nodo(_head->info,copia(_head->next));
+    return p;
+}
+
+//Funzioni-Contenitore-----------------------------
+
+template<class T>
+void contenitore<T>::push(const T& t){
+    head=new nodo(t, head);
+}
+
+//Iteratore----------------------------------------
+
+template<class T>
+contenitore<T>::iteratore::iteratore(): p(0){
 }
 
 template<class T>
-contenitore::~contenitore()
-{
-    if(first)
-        first->distruggi();
+contenitore<T>::iteratore::iteratore(nodo* n): p(n){
 }
 
 template<class T>
-contenitore &contenitore::operator=(const contenitore & c){
-    if(this!=&c){
-        if(first) delete first;
-        first=copia(c.first,last);
-    }
-    return *this;
-}
-
-template<class T>
-contenitore::iteratore::iteratore(contenitore::punto * punt): p(punt){
-}
-
-template<class T>
-contenitore::iteratore::iteratore(): p(0){
-}
-
-template<class T>
-typename contenitore::iteratore &contenitore::iteratore::operator =(const contenitore::iteratore & iter)
-{
-    p=iter.p;
-    return *this;
-}
-
-template<class T>
-typename contenitore::iteratore &contenitore::iteratore::operator++()
-{
+typename contenitore<T>::iteratore &contenitore<T>::iteratore::operator++(){
     if(p) p=p->next;
     return *this;
 }
 
 template<class T>
-typename contenitore::iteratore &contenitore::iteratore::operator++(int)
-{
+typename contenitore<T>::iteratore &contenitore<T>::iteratore::operator++(int){
     iteratore aux= *this;
     if(p) p=p->next;
     return aux;
 }
 
 template<class T>
-T &contenitore::iteratore::operator*() const
-{
+T& contenitore<T>::iteratore::operator*(){
     return p->info;
 }
 
 template<class T>
-T *contenitore::iteratore::operator->() const
-{
+T* contenitore<T>::iteratore::operator->(){
     return &(p->info);
 }
 
 template<class T>
-bool contenitore::iteratore::operator ==(const contenitore::iteratore & iter)
-{
-    return p==iter.p;
+bool contenitore<T>::iteratore::operator==(const contenitore<T>::iteratore& it)const{
+    return p==it.p;
 }
 
 template<class T>
-bool contenitore::iteratore::operator !=(const contenitore::iteratore & iter)
-{
-    return p!=iter.p;
+bool contenitore<T>::iteratore::operator !=(const contenitore<T>::iteratore& it)const{
+    return p!=it.p;
 }
 
-
 template<class T>
-contenitore::iteratore contenitore::start()
-{
-    return iteratore(first);
+typename contenitore<T>::iteratore contenitore<T>::begin(){
+    return iteratore(head);
 }
 
-
 template<class T>
-contenitore::iteratore contenitore::fine()
-{
+typename contenitore<T>::iteratore contenitore<T>::end(){
     return iteratore(0);
+}
+
+//Iteratore_const------------------------------------
+
+template<class T>
+contenitore<T>::iteratore_const::iteratore_const(): p(0){
+}
+
+template<class T>
+contenitore<T>::iteratore_const::iteratore_const(const iteratore& i){
+    p = i.p;
+}
+
+template<class T>
+contenitore<T>::iteratore_const::iteratore_const(nodo* n): p(n){
+}
+
+template<class T>
+typename contenitore<T>::iteratore_const &contenitore<T>::iteratore_const::operator++(){
+    if(p) p=p->next;
+    return *this;
+}
+
+template<class T>
+typename contenitore<T>::iteratore_const &contenitore<T>::iteratore_const::operator++(int){
+    iteratore aux= *this;
+    if(p) p=p->next;
+    return aux;
+}
+
+template<class T>
+const T& contenitore<T>::iteratore_const::operator*() const{
+    return p->info;
+}
+
+template<class T>
+const T* contenitore<T>::iteratore_const::operator->() const{
+    return &(p->info);
+}
+
+template<class T>
+bool contenitore<T>::iteratore_const::operator==(const contenitore<T>::iteratore_const& it)const{
+    return p==it.p;
+}
+
+template<class T>
+bool contenitore<T>::iteratore_const::operator !=(const contenitore<T>::iteratore_const& it)const{
+    return p!=it.p;
+}
+
+template<class T>
+typename contenitore<T>::iteratore_const contenitore<T>::begin()const{
+    return iteratore_const(head);
+}
+
+template<class T>
+typename contenitore<T>::iteratore_const contenitore<T>::end()const{
+    return iteratore_const(0);
 }
