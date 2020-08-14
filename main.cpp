@@ -19,7 +19,7 @@ using std::cout; using std::endl; using Qt::DayOfWeek;
 int main(int argc, char *argv[]){
 
 
-
+    /*
     //  TEST CLASSI
 
     professore provaIns1("Marco", "Dello Iacovo","ctflelo1239CFCFCF", "3201512686", "marco.delloiacovo99@gmail.com", 18, 10, 1999, "Veneto", "Caerano di san marco", "San marco", "31031", "xx-Bis", "Ordinario", 30);
@@ -63,6 +63,7 @@ int main(int argc, char *argv[]){
     for(auto it = provaCont1.begin(); it!=provaCont1.end(); ++it){
         cout<<(*it)->getNome()<<endl;
     }
+    */
     QApplication a(argc, argv);
     university w;
     w.show();

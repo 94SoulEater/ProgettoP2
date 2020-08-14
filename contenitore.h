@@ -15,6 +15,7 @@ private:
         nodo* next;
         nodo();
         ~nodo();
+        nodo(const nodo&);
         nodo(const T&, nodo*);
     };
     nodo* head;
@@ -64,8 +65,6 @@ public:
 
 };
 
-#endif // CONTENITORE_H
-
 //Nodo---------------------------------------------------------
 
 template<class T>
@@ -74,6 +73,10 @@ contenitore<T>::nodo::nodo(const T& _info, nodo* _next): info(_info), next(_next
 
 template<class T>
 contenitore<T>::nodo::nodo(): next(0){
+}
+
+template<class T>
+contenitore<T>::nodo::nodo(const contenitore::nodo & _nodo): info(_nodo.info), next(_nodo.next){
 }
 
 template<class T>
@@ -220,3 +223,5 @@ template<class T>
 typename contenitore<T>::iteratore_const contenitore<T>::end()const{
     return iteratore_const(0);
 }
+
+#endif // CONTENITORE_H
