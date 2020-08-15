@@ -56,6 +56,7 @@ public:
    ~contenitore();
 
    void push(const T&);
+   int size() const;
 
    iteratore begin();
    iteratore end();
@@ -111,6 +112,17 @@ typename contenitore<T>::nodo* contenitore<T>::copia(contenitore<T>::nodo *_head
 template<class T>
 void contenitore<T>::push(const T& t){
     head=new nodo(t, head);
+}
+
+template<class T>
+int contenitore<T>::size() const{
+    int count = 0;
+    nodo* p = head;
+    while(p){
+        count++;
+        p = p->next;
+    }
+    return count;
 }
 
 //Iteratore----------------------------------------
