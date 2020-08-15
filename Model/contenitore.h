@@ -81,7 +81,7 @@ contenitore<T>::nodo::nodo(const contenitore::nodo & _nodo): info(_nodo.info), n
 
 template<class T>
 contenitore<T>::nodo::~nodo(){
-    if(next)delete next;
+    if(next) delete next;
 }
 
 //Contenitore--------------------------------------------------

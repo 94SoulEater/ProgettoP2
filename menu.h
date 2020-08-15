@@ -1,6 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include "tablemodel.h"
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -9,6 +10,9 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QComboBox>
+#include <QTableView>
+#include <QHeaderView>
+#include <QSortFilterProxyModel>
 
 class menu : public QWidget
 {
@@ -24,6 +28,9 @@ private:
     QLabel *cercaLabel, *perLabel, *visualizzaLabel;
     QLineEdit *cercaLineEdit;
     QComboBox *colonnaRicercaComboBox, *tipoUtenteComboBox;
+    QTableView *utentiTableView;
+    tablemodel *modello;
+    QSortFilterProxyModel *modelloProxy;
 };
 
 #endif // MENU_H

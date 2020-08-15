@@ -7,7 +7,7 @@
 #include "Model/tutor.h"
 #include "Model/lezione.h"
 #include "Model/ricerca.h"
-#include "contenitore.h"
+#include "Model/contenitore.h"
 #include <Qt>
 #include <QApplication>
 #include <QTime>

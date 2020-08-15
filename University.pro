@@ -29,10 +29,11 @@ SOURCES += \
     Model/insegnante.cpp \
     Model/lezione.cpp \
     main.cpp \
+    menu.cpp \
     Model/professore.cpp \
     Model/ricerca.cpp \
     Model/tutor.cpp \
-    menu.cpp
+    tablemodel.cpp
 
 HEADERS += \
     Model/insegnante.h \
@@ -42,5 +43,7 @@ HEADERS += \
     Model/professore.h \
     Model/ricerca.h \
     Model/tutor.h \
-    contenitore.h \
-    menu.h
+    Model/contenitore.h \
+    menu.h \
+    tablemodel.h \
+    Model/puntatoresmart.h

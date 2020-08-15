@@ -29,7 +29,14 @@ menu::menu(QWidget *parent)
     mainLayout->addLayout(ricercaLayout);
 
     //Lista Utenti
-
+    modello = new tablemodel();
+    modelloProxy = new QSortFilterProxyModel();
+    modelloProxy->setSourceModel(modello);
+    utentiTableView = new QTableView();
+    utentiTableView->setModel(modelloProxy);
+    utentiTableView->setSortingEnabled(true);
+    utentiTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    mainLayout->addWidget(utentiTableView);
 
     //Modalità Visualizzazione
     visualizzazioneLayout = new QHBoxLayout();
