@@ -1,4 +1,5 @@
-#include "university.h"
+#include "menu.h"
+#include "menu.h"
 #include "Model/utente.h"
 #include "Model/insegnante.h"
 #include "Model/professore.h"
@@ -65,7 +66,7 @@ int main(int argc, char *argv[]){
     }
     */
     QApplication a(argc, argv);
-    university w;
+    menu w;
     w.show();
 
     return a.exec();

@@ -1,26 +1,29 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <QMenuBar>
-#include <QVBoxLayout>
-
 #include <QWidget>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QMenuBar>
+#include <QPushButton>
+#include <QLabel>
+#include <QLineEdit>
+#include <QComboBox>
 
 class menu : public QWidget
 {
     Q_OBJECT
 public:
-    explicit menu(QWidget *parent = nullptr);
-
-signals:
-
-public slots:
+    menu(QWidget *parent = nullptr);
+    ~menu();
 
 private:
-
     QVBoxLayout *mainLayout;
-
-    void addMenu();
+    QHBoxLayout *aggiungiRimuoviButtonsLayout, *ricercaLayout, *visualizzazioneLayout;
+    QPushButton *aggiungiButton, *rimuoviButton;
+    QLabel *cercaLabel, *perLabel, *visualizzaLabel;
+    QLineEdit *cercaLineEdit;
+    QComboBox *colonnaRicercaComboBox, *tipoUtenteComboBox;
 };
 
 #endif // MENU_H
