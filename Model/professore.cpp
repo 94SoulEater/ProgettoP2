@@ -1,5 +1,9 @@
 #include "Model/professore.h"
 
+tipoutente professore::getTipoUtente() const{
+    return Professore;
+}
+
 string professore::getTipo() const{
     return tipo;
 }

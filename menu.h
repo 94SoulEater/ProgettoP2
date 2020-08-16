@@ -2,6 +2,7 @@
 #define MENU_H
 
 #include "tablemodel.h"
+#include "proxymodel.h"
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -30,7 +31,7 @@ private:
     QComboBox *colonnaRicercaComboBox, *tipoUtenteComboBox;
     QTableView *utentiTableView;
     tablemodel *modello;
-    QSortFilterProxyModel *modelloProxy;
+    proxymodel *modelloProxy;
 };
 
 #endif // MENU_H

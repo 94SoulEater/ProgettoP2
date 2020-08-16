@@ -1,6 +1,10 @@
 #include "studente.h"
 using std::string;
 
+tipoutente studente::getTipoUtente() const{
+    return Studente;
+}
+
 int studente::getMatricola() const{
     return matricola;
 }

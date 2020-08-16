@@ -57,6 +57,8 @@ public:
 
    void push(const T&);
    int size() const;
+   void clear();
+   bool contains(const T&) const;
 
    iteratore begin();
    iteratore end();
@@ -77,7 +79,7 @@ contenitore<T>::nodo::nodo(): next(0){
 }
 
 template<class T>
-contenitore<T>::nodo::nodo(const contenitore::nodo & _nodo): info(_nodo.info), next(_nodo.next){
+contenitore<T>::nodo::nodo(const nodo & _nodo): info(_nodo.info), next(_nodo.next){
 }
 
 template<class T>
@@ -123,6 +125,24 @@ int contenitore<T>::size() const{
         p = p->next;
     }
     return count;
+}
+
+template<class T>
+void contenitore<T>::clear(){
+    if(head){
+        delete head;
+        head = 0;
+    }
+}
+
+template<class T>
+bool contenitore<T>::contains(const T& t) const{
+    nodo* p = head;
+    while(p){
+        if(p->info == t) return true;
+        p = p->next;
+    }
+    return false;
 }
 
 //Iteratore----------------------------------------

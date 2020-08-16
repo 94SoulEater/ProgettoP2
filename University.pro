@@ -33,7 +33,8 @@ SOURCES += \
     Model/professore.cpp \
     Model/ricerca.cpp \
     Model/tutor.cpp \
-    tablemodel.cpp
+    tablemodel.cpp \
+    proxymodel.cpp
 
 HEADERS += \
     Model/insegnante.h \
@@ -46,4 +47,5 @@ HEADERS += \
     Model/contenitore.h \
     menu.h \
     tablemodel.h \
-    Model/puntatoresmart.h
+    Model/puntatoresmart.h \
+    proxymodel.h

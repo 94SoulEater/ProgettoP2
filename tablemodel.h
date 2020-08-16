@@ -4,8 +4,14 @@
 #include "Model/contenitore.h"
 #include "Model/puntatoresmart.h"
 #include "Model/utente.h"
+#include "Model/professore.h" //
+#include "Model/tutor.h" //
+#include "Model/lezione.h" //
+#include "Model/ricerca.h" //
 #include "QAbstractTableModel"
+#include <QTime> //
 #include <QModelIndex>
+#include <iostream>
 
 class tablemodel : public QAbstractTableModel{
     Q_OBJECT

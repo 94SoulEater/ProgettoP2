@@ -16,6 +16,7 @@ public:
     professore(string="", string="", string="", string="", string="", int=1, int=1, int=1970, string="", string="", string="", string="", string="", string="", int=0);
     ~professore() = default;
     virtual professore* clone() const override;
+    tipoutente getTipoUtente() const;
     string getTipo() const;
     void setTipo(const string &value);
     vector<ricerca> getRicerche() const;

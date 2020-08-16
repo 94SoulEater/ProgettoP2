@@ -6,20 +6,21 @@ class puntatoresmart{
 private:
     T* puntatore;
 public:
-    puntatoresmart(const T* p=0);
+    puntatoresmart(T* p=0);
     puntatoresmart(const puntatoresmart& x);
     ~puntatoresmart();
     puntatoresmart& operator=(const puntatoresmart& x);
     bool operator==(const puntatoresmart& x) const;
     T& operator*() const;
+    T* operator->() const;
 };
 
 template <class T>
-puntatoresmart<T>::puntatoresmart(const T* p): puntatore(p ? new T(*p) : 0){
+puntatoresmart<T>::puntatoresmart(T* p): puntatore(p){
 }
 
 template <class T>
-puntatoresmart<T>::puntatoresmart(const puntatoresmart<T>& x):puntatore(x.puntatore ? new T(*(x.puntatore)) : 0){
+puntatoresmart<T>::puntatoresmart(const puntatoresmart<T>& x):puntatore(x.puntatore ? x.puntatore->clone() : 0){
 }
 
 template <class T>
@@ -31,7 +32,7 @@ template <class T>
 puntatoresmart<T>& puntatoresmart<T>::operator=(const puntatoresmart& x){
     if(this != &x){
         delete puntatore;
-        puntatore = x.puntatore ? new T(*(x.puntatore)) : 0;
+        puntatore = x.puntatore;
     }
     return *this;
 }
@@ -39,6 +40,11 @@ puntatoresmart<T>& puntatoresmart<T>::operator=(const puntatoresmart& x){
 template <class T>
 T& puntatoresmart<T>::operator*() const{
     return *puntatore;
+}
+
+template <class T>
+T* puntatoresmart<T>::operator->() const{
+    return puntatore;
 }
 
 template <class T>

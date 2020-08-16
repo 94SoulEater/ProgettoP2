@@ -14,6 +14,7 @@ private:
 public:
     insegnante(string="", string="", string="", string="", string="", int=1, int=1, int=1970, string="", string="", string="", string="", string="");
     ~insegnante() = default;
+    tipoutente getTipoUtente() const;
     vector<lezione> getLezioni() const;
     void addLezione(const lezione);
     void removeLezione(const lezione);

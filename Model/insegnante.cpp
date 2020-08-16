@@ -1,5 +1,9 @@
 #include "Model/insegnante.h"
 
+tipoutente insegnante::getTipoUtente() const{
+    return Insegnante;
+}
+
 vector<lezione> insegnante::getLezioni() const{
     return lezioni;
 }

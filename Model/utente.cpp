@@ -1,6 +1,31 @@
 #include "Model/utente.h"
 using std::string;
-#include <iostream>
+
+tipoutente utente::getTipoUtente() const{
+    return Utente;
+}
+
+string utente::fromTipoUtente(const tipoutente &_tipoUtente){
+    switch(_tipoUtente){
+    case Utente:
+        return "Utente";
+    case Studente:
+        return "Studente";
+    case Professore:
+        return "Professore";
+    case Insegnante:
+        return "Insegnante";
+    case Tutor:
+        return "Tutor";
+    }
+}
+tipoutente utente::toTipoUtente(const string &_tipoUtente){
+    if(_tipoUtente == "Utente") return Utente;
+    if(_tipoUtente == "Studente") return Studente;
+    if(_tipoUtente == "Professore") return Professore;
+    if(_tipoUtente == "Insegnante") return Insegnante;
+    if(_tipoUtente == "Tutor") return Tutor;
+}
 
 string utente::getNumeroCivico() const{
     return numeroCivico;

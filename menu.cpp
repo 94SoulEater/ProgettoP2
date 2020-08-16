@@ -30,8 +30,9 @@ menu::menu(QWidget *parent)
 
     //Lista Utenti
     modello = new tablemodel();
-    modelloProxy = new QSortFilterProxyModel();
+    modelloProxy = new proxymodel();
     modelloProxy->setSourceModel(modello);
+    modelloProxy->setFiltroColonne(Utente);
     utentiTableView = new QTableView();
     utentiTableView->setModel(modelloProxy);
     utentiTableView->setSortingEnabled(true);
