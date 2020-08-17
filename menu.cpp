@@ -4,6 +4,9 @@ menu::menu(QWidget *parent)
     : QWidget(parent){
     mainLayout = new QVBoxLayout(this);
 
+    //Chiusura
+    addCLose();
+
     //Bottoni di aggiunta / rimozione utenti
     aggiungiRimuoviButtonsLayout = new QHBoxLayout();
     aggiungiButton = new QPushButton("Aggiungi Utente");
@@ -26,7 +29,8 @@ menu::menu(QWidget *parent)
     ricercaLayout->addWidget(cercaLineEdit);
     ricercaLayout->addWidget(perLabel);
     ricercaLayout->addWidget(colonnaRicercaComboBox);
-    mainLayout->addLayout(ricercaLayout);
+     mainLayout->addLayout(ricercaLayout);
+
 
     //Lista Utenti
     modello = new tablemodel(this);
@@ -41,7 +45,7 @@ menu::menu(QWidget *parent)
 
     //Modalità Visualizzazione
     visualizzazioneLayout = new QHBoxLayout();
-    visualizzaLabel = new QLabel("Visualizza");
+    visualizzaButton = new QPushButton("Visualizza");
     tipoUtenteComboBox = new QComboBox();
     tipoUtenteComboBox->addItem("Utenti");
     tipoUtenteComboBox->addItem("Studenti");
@@ -49,13 +53,28 @@ menu::menu(QWidget *parent)
     tipoUtenteComboBox->addItem("Professori");
     tipoUtenteComboBox->addItem("Tutor");
 
-    visualizzazioneLayout->addWidget(visualizzaLabel);
+    visualizzazioneLayout->addWidget(visualizzaButton);
     visualizzazioneLayout->addWidget(tipoUtenteComboBox);
     mainLayout->addLayout(visualizzazioneLayout);
 
     setLayout(mainLayout);
+
 }
 
 menu::~menu(){
+}
+
+void menu::addCLose()
+{
+
+    QMenuBar* menubar=new QMenuBar(this);
+    QMenu* close=new QMenu("File", menubar);
+    QAction* esci=new QAction("Esci", close);
+
+     connect(esci,SIGNAL(triggered()),this,SLOT(close()));
+    close->addAction(esci);
+    menubar->addMenu(close);
+    mainLayout->addWidget(menubar);
+
 }
 

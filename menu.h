@@ -25,13 +25,14 @@ public:
 private:
     QVBoxLayout *mainLayout;
     QHBoxLayout *aggiungiRimuoviButtonsLayout, *ricercaLayout, *visualizzazioneLayout;
-    QPushButton *aggiungiButton, *rimuoviButton;
-    QLabel *cercaLabel, *perLabel, *visualizzaLabel;
+    QPushButton *aggiungiButton, *rimuoviButton, *visualizzaButton;
+    QLabel *cercaLabel, *perLabel;
     QLineEdit *cercaLineEdit;
     QComboBox *colonnaRicercaComboBox, *tipoUtenteComboBox;
     QTableView *utentiTableView;
     tablemodel *modello;
     proxymodel *modelloProxy;
+    void addCLose();
 };
 
 #endif // MENU_H
