@@ -13,6 +13,8 @@ public:
     proxymodel(QObject *parent = nullptr);
     bool filterAcceptsColumn(int source_column, const QModelIndex&) const;
     void setFiltroColonne(tipoutente _tipoUtente);
+signals:
+    void colonneModificate();
 };
 
 #endif // PROXYMODEL_H

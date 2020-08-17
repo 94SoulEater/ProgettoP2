@@ -8,6 +8,7 @@
 #include "Model/lezione.h"
 #include "Model/ricerca.h"
 #include "Model/contenitore.h"
+#include "tablemodel.h"
 #include <Qt>
 #include <QApplication>
 #include <QTime>
@@ -20,6 +21,8 @@ using std::cout; using std::endl; using Qt::DayOfWeek;
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
     menu w;
+    tablemodel modello;
+    w.setModel(&modello);
     w.show();
 
     return a.exec();

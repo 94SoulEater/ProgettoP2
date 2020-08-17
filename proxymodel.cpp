@@ -10,9 +10,9 @@ bool proxymodel::filterAcceptsColumn(int source_column, const QModelIndex&) cons
 }
 
 void proxymodel::setFiltroColonne(tipoutente _tipoUtente){
+    colonneNascoste.clear();
     switch(_tipoUtente){
     case Utente:
-        colonneNascoste.clear();
         colonneNascoste.push(1);
         break;
     case Studente:
@@ -24,4 +24,6 @@ void proxymodel::setFiltroColonne(tipoutente _tipoUtente){
     case Tutor:
         break;
     }
+    invalidateFilter();
+    emit colonneModificate();
 }

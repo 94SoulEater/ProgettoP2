@@ -21,6 +21,10 @@ class menu : public QWidget
 public:
     menu(QWidget *parent = nullptr);
     ~menu();
+    void setModel(tablemodel *_model);
+
+private slots:
+    void tipoUtenteComboBoxChanged(const QString&);
 
 private:
     QVBoxLayout *mainLayout;
@@ -30,7 +34,6 @@ private:
     QLineEdit *cercaLineEdit;
     QComboBox *colonnaRicercaComboBox, *tipoUtenteComboBox;
     QTableView *utentiTableView;
-    tablemodel *modello;
     proxymodel *modelloProxy;
 };
 

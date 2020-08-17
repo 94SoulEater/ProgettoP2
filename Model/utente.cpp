@@ -20,10 +20,10 @@ string utente::fromTipoUtente(const tipoutente &_tipoUtente){
     }
 }
 tipoutente utente::toTipoUtente(const string &_tipoUtente){
-    if(_tipoUtente == "Utente") return Utente;
-    if(_tipoUtente == "Studente") return Studente;
-    if(_tipoUtente == "Professore") return Professore;
-    if(_tipoUtente == "Insegnante") return Insegnante;
+    if(_tipoUtente == "Utente" || _tipoUtente == "Utenti") return Utente;
+    if(_tipoUtente == "Studente" || _tipoUtente == "Studenti") return Studente;
+    if(_tipoUtente == "Professore" || _tipoUtente == "Professori") return Professore;
+    if(_tipoUtente == "Insegnante" || _tipoUtente == "Insegnanti") return Insegnante;
     if(_tipoUtente == "Tutor") return Tutor;
 }
 

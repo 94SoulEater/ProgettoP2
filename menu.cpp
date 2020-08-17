@@ -29,15 +29,16 @@ menu::menu(QWidget *parent)
     mainLayout->addLayout(ricercaLayout);
 
     //Lista Utenti
-    modello = new tablemodel(this);
+
     modelloProxy = new proxymodel(this);
-    modelloProxy->setSourceModel(modello);
-    modelloProxy->setFiltroColonne(Utente);
+    modelloProxy->setFiltroColonne(Studente);
     utentiTableView = new QTableView();
     utentiTableView->setModel(modelloProxy);
     utentiTableView->setSortingEnabled(true);
     utentiTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     mainLayout->addWidget(utentiTableView);
+    connect(modelloProxy, SIGNAL(colonneModificate()), utentiTableView->horizontalHeader(), SLOT(resizeSections()));
+
 
     //Modalità Visualizzazione
     visualizzazioneLayout = new QHBoxLayout();
@@ -45,15 +46,24 @@ menu::menu(QWidget *parent)
     tipoUtenteComboBox = new QComboBox();
     tipoUtenteComboBox->addItem("Utenti");
     tipoUtenteComboBox->addItem("Studenti");
-    tipoUtenteComboBox->addItem("Insegnanti");
     tipoUtenteComboBox->addItem("Professori");
+    tipoUtenteComboBox->addItem("Insegnanti");
     tipoUtenteComboBox->addItem("Tutor");
+    connect(tipoUtenteComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(tipoUtenteComboBoxChanged(QString)));
 
     visualizzazioneLayout->addWidget(visualizzaLabel);
     visualizzazioneLayout->addWidget(tipoUtenteComboBox);
     mainLayout->addLayout(visualizzazioneLayout);
 
     setLayout(mainLayout);
+}
+
+void menu::setModel(tablemodel *_model){
+    modelloProxy->setSourceModel(_model);
+}
+
+void menu::tipoUtenteComboBoxChanged(const QString &_string){
+    modelloProxy->setFiltroColonne(utente::toTipoUtente(_string.toStdString()));
 }
 
 menu::~menu(){
