@@ -35,7 +35,7 @@ menu::menu(QWidget *parent)
     //Lista Utenti
 
     modelloProxy = new proxymodel(this);
-    modelloProxy->setFiltroColonne(Studente);
+    modelloProxy->setFiltroColonne(Utente);
     utentiTableView = new QTableView();
     utentiTableView->setModel(modelloProxy);
     utentiTableView->setSortingEnabled(true);
