@@ -29,8 +29,8 @@ menu::menu(QWidget *parent)
     mainLayout->addLayout(ricercaLayout);
 
     //Lista Utenti
-    modello = new tablemodel();
-    modelloProxy = new proxymodel();
+    modello = new tablemodel(this);
+    modelloProxy = new proxymodel(this);
     modelloProxy->setSourceModel(modello);
     modelloProxy->setFiltroColonne(Utente);
     utentiTableView = new QTableView();

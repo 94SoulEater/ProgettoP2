@@ -106,15 +106,65 @@ QVariant tablemodel::headerData(int section, Qt::Orientation orientation, int ro
 }
 
 Qt::ItemFlags tablemodel::flags(const QModelIndex &index) const{
+    if (!index.isValid())
+        return Qt::ItemIsEnabled;
+
+    return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
 }
 
 bool tablemodel::setData(const QModelIndex &index, const QVariant &value, int role){
+    if (index.isValid() && role == Qt::EditRole) {
+        int row = index.row();
+        puntatoresmart<utente> tmp = listaUtenti.value(row);
+
+        switch(index.column()){
+        case 0:
+            (*tmp).setCodiceFiscale(value.toString().toStdString());
+            break;
+        case 1:
+            break;
+        case 2:
+            (*tmp).setNome(value.toString().toStdString());
+            break;
+        case 3:
+            (*tmp).setCognome(value.toString().toStdString());
+            break;
+        case 4:
+            (*tmp).setDataNascita(QDate::fromString(value.toString()));
+            break;
+        default:
+            return false;
+        }
+        listaUtenti.replace(row, tmp);
+        emit(dataChanged(index, index));
+
+        return true;
+    }
+
+    return false;
 }
 
-bool tablemodel::insertRow(int row, const QModelIndex &parent){
+bool tablemodel::insertRows(int position, int rows, const QModelIndex &index){
+    Q_UNUSED(index);
+    beginInsertRows(QModelIndex(), position, position + rows - 1);
+
+    for (int row = 0; row < rows; ++row) {
+        listaUtenti.push(puntatoresmart<utente>());
+    }
+
+    endInsertRows();
+    return true;
 }
 
-bool tablemodel::removeRow(int row, const QModelIndex &parent){
-}
+bool tablemodel::removeRows(int position, int rows, const QModelIndex &index){
+    Q_UNUSED(index);
+    beginRemoveRows(QModelIndex(), position, position + rows - 1);
 
+    for (int row = 0; row < rows; ++row) {
+        listaUtenti.remove(position);
+    }
+
+    endRemoveRows();
+    return true;
+}
 

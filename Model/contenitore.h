@@ -26,6 +26,7 @@ public:
         friend class contenitore<T>;
     private:
         nodo* p;
+        nodo* getNodo();
     public:
         iteratore();
         iteratore(nodo*);
@@ -40,6 +41,7 @@ public:
         friend class contenitore<T>;
     private:
         nodo* p;
+        const nodo* getNodo() const;
     public:
         iteratore_const();
         iteratore_const(const iteratore&);
@@ -59,6 +61,9 @@ public:
    int size() const;
    void clear();
    bool contains(const T&) const;
+   T& value(int _pos);
+   void remove(int _pos);
+   void replace(int _pos, const T&);
 
    iteratore begin();
    iteratore end();
@@ -145,6 +150,51 @@ bool contenitore<T>::contains(const T& t) const{
     return false;
 }
 
+template<class T>
+T& contenitore<T>::value(int _pos){
+    iteratore it = begin();
+    for(int i=0; i<_pos; i++) ++it;
+    return *it;
+}
+
+template<class T>
+void contenitore<T>::remove(int _pos){
+    if (!head) return;
+    nodo* p = head;
+    if (_pos == 0){
+        head = p->next;
+        p->next = 0;
+        delete p;
+        return;
+    }
+    for (int i=0; p && i<_pos-1; i++) p = p->next;
+    if (!p || !p->next) return;
+
+    nodo *next = p->next->next;
+    p->next->next = 0;
+    delete p->next;
+    p->next = next;
+}
+
+template<class T>
+void contenitore<T>::replace(int _pos,const T& t){
+    if (!head) return;
+    nodo* p = head;
+    if (_pos == 0){
+        head = new nodo(t, p->next);
+        p->next = 0;
+        delete p;
+        return;
+    }
+    for (int i=0; p && i<_pos-1; i++) p = p->next;
+    if (!p || !p->next) return;
+
+    nodo *next = p->next->next;
+    p->next->next = 0;
+    delete p->next;
+    p->next = new nodo(t, next);
+}
+
 //Iteratore----------------------------------------
 
 template<class T>
@@ -176,6 +226,11 @@ T& contenitore<T>::iteratore::operator*(){
 template<class T>
 T* contenitore<T>::iteratore::operator->(){
     return &(p->info);
+}
+
+template<class T>
+typename contenitore<T>::nodo* contenitore<T>::iteratore::getNodo(){
+    return p;
 }
 
 template<class T>
@@ -234,6 +289,11 @@ const T& contenitore<T>::iteratore_const::operator*() const{
 template<class T>
 const T* contenitore<T>::iteratore_const::operator->() const{
     return &(p->info);
+}
+
+template<class T>
+const typename contenitore<T>::nodo* contenitore<T>::iteratore_const::getNodo() const{
+    return p;
 }
 
 template<class T>

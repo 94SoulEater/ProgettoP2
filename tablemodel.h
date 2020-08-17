@@ -24,8 +24,8 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
     Qt::ItemFlags flags(const QModelIndex &index) const;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
-    bool insertRow(int row, const QModelIndex &parent);
-    bool removeRow(int row, const QModelIndex &parent);
+    bool insertRows(int position, int rows, const QModelIndex &parent);
+    bool removeRows(int row, int count, const QModelIndex &parent);
 private:
     contenitore<puntatoresmart<utente>> listaUtenti;
 };
