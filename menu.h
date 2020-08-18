@@ -14,6 +14,8 @@
 #include <QTableView>
 #include <QHeaderView>
 #include <QSortFilterProxyModel>
+#include <QFormLayout>
+#include <QDialog>
 
 class menu : public QWidget
 {
@@ -25,6 +27,7 @@ public:
 
 private slots:
     void tipoUtenteComboBoxChanged(const QString&);
+    void aggiungi_clicked();
 
 private:
     QVBoxLayout *mainLayout;

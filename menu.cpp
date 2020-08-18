@@ -71,6 +71,16 @@ void menu::tipoUtenteComboBoxChanged(const QString &_string){
     modelloProxy->setFiltroColonne(utente::toTipoUtente(_string.toStdString()));
 }
 
+//Nuova finestra aggiunta cliente
+void menu::aggiungi_clicked()
+{
+    QDialog aggiungi;
+        aggiungi.setWindowTitle("Aggiungi utente");
+       aggiungi.setMinimumSize(QSize(300, 150));
+        aggiungi.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+      aggiungi.exec();
+}
+
 menu::~menu(){
 }
 
