@@ -9,12 +9,12 @@ menu::menu(QWidget *parent)
 
     //Bottoni di aggiunta / rimozione utenti
     aggiungiRimuoviButtonsLayout = new QHBoxLayout();
-    aggiungiButton = new QPushButton("Aggiungi Utente");
-    rimuoviButton = new QPushButton("Rimuovi Utente");
-
+    aggiungiButton= new QPushButton("aggiungi utente");
+    rimuoviButton= new QPushButton("rimuovi utente");
     aggiungiRimuoviButtonsLayout->addWidget(aggiungiButton);
     aggiungiRimuoviButtonsLayout->addWidget(rimuoviButton);
     mainLayout->addLayout(aggiungiRimuoviButtonsLayout);
+     connect(aggiungiButton,SIGNAL(clicked()),this,SLOT(aggiungiExec()));
 
     //Ricerca per campi
     ricercaLayout = new QHBoxLayout();
@@ -67,23 +67,19 @@ void menu::setModel(tablemodel *_model){
     modelloProxy->setSourceModel(_model);
 }
 
+
 void menu::tipoUtenteComboBoxChanged(const QString &_string){
     modelloProxy->setFiltroColonne(utente::toTipoUtente(_string.toStdString()));
 }
 
 //Nuova finestra aggiunta cliente
-void menu::aggiungiClicked()
-{
-    connect(aggiungiButton, SIGNAL(clicked()), this, SLOT(aggiungiExec()) );
-}
-
 void menu::aggiungiExec()
 {
     QDialog aggiungi;
         aggiungi.setWindowTitle("Aggiungi utente");
-       aggiungi.setMinimumSize(QSize(300, 150));
+       aggiungi.setMinimumSize(QSize(400, 250));
         aggiungi.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-   aggiungi.exec();
+        aggiungi.exec();
 }
 
 menu::~menu(){
@@ -102,4 +98,6 @@ void menu::addCLose()
     mainLayout->addWidget(menubar);
 
 }
+
+
 

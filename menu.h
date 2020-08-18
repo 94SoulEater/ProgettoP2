@@ -16,6 +16,10 @@
 #include <QSortFilterProxyModel>
 #include <QFormLayout>
 #include <QDialog>
+#include <QWizard>
+#include <QtWidgets>
+#include <QLineEdit>
+#include <set>
 
 class menu : public QWidget
 {
@@ -27,7 +31,6 @@ public:
 
 private slots:
     void tipoUtenteComboBoxChanged(const QString&);
-    void aggiungiClicked();
     void aggiungiExec();
 
 private:
@@ -39,7 +42,9 @@ private:
     QComboBox *colonnaRicercaComboBox, *tipoUtenteComboBox;
     QTableView *utentiTableView;
     proxymodel *modelloProxy;
+
+
     void addCLose();
-};
+ };
 
 #endif // MENU_H
