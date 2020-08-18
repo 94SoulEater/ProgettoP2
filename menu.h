@@ -27,7 +27,8 @@ public:
 
 private slots:
     void tipoUtenteComboBoxChanged(const QString&);
-    void aggiungi_clicked();
+    void aggiungiClicked();
+    void aggiungiExec();
 
 private:
     QVBoxLayout *mainLayout;

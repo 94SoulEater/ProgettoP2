@@ -72,13 +72,18 @@ void menu::tipoUtenteComboBoxChanged(const QString &_string){
 }
 
 //Nuova finestra aggiunta cliente
-void menu::aggiungi_clicked()
+void menu::aggiungiClicked()
+{
+    connect(aggiungiButton, SIGNAL(clicked()), this, SLOT(aggiungiExec()) );
+}
+
+void menu::aggiungiExec()
 {
     QDialog aggiungi;
         aggiungi.setWindowTitle("Aggiungi utente");
        aggiungi.setMinimumSize(QSize(300, 150));
         aggiungi.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-      aggiungi.exec();
+   aggiungi.exec();
 }
 
 menu::~menu(){
