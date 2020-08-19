@@ -15,7 +15,10 @@ menu::menu(tablemodel *_model, QWidget *parent)
     aggiungiRimuoviButtonsLayout->addWidget(aggiungiButton);
     aggiungiRimuoviButtonsLayout->addWidget(rimuoviButton);
     mainLayout->addLayout(aggiungiRimuoviButtonsLayout);
+        
+    //Apre nuova finestra per inserimento dati utente
     connect(aggiungiButton, SIGNAL(clicked()), this, SLOT(aggiungiExec()));
+    //Rimuove l'utente selezionato
     connect(rimuoviButton, SIGNAL(clicked()), this, SLOT(rimuoviUtente()));
 
     //Ricerca per campi
@@ -30,8 +33,10 @@ menu::menu(tablemodel *_model, QWidget *parent)
     ricercaLayout->addWidget(perLabel);
     ricercaLayout->addWidget(colonnaRicercaComboBox);
     mainLayout->addLayout(ricercaLayout);
-
+    
+    //Ricerca per parola nella colonna selezionata
     connect(cercaLineEdit, SIGNAL(textChanged(QString)), this, SLOT(aggiornaFiltro()));
+    //Aggiorna colonna selezionata per ricerca di parola
     connect(colonnaRicercaComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(aggiornaColonnaRicerca(QString)));
 
     //Lista Utenti
@@ -46,7 +51,9 @@ menu::menu(tablemodel *_model, QWidget *parent)
     utentiTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     mainLayout->addWidget(utentiTableView);
 
+    //Quando vengono aggiunte/rimosse colonne aggiusta la loro dimensione per riempire tutto lo spazio a loro disposizione
     connect(modelloProxy, SIGNAL(colonneModificate()), utentiTableView->horizontalHeader(), SLOT(resizeSections()));
+    //Quando viene selezionata una riga viene sbloccato il pulsante di rimozione, altrimenti viene bloccato
     connect(utentiTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornaAzioni(QItemSelection,QItemSelection)));
 
     //Modalità Visualizzazione
@@ -59,6 +66,7 @@ menu::menu(tablemodel *_model, QWidget *parent)
     tipoUtenteComboBox->addItem("Insegnanti");
     tipoUtenteComboBox->addItem("Tutor");
 
+    //Quando cambia il tipo utente selezionato aggiorna le colonne visibili
     connect(tipoUtenteComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(tipoUtenteComboBoxChanged(QString)));
 
     tipoUtenteComboBoxChanged("Utente");
