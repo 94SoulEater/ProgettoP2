@@ -9,12 +9,12 @@ menu::menu(QWidget *parent)
 
     //Bottoni di aggiunta / rimozione utenti
     aggiungiRimuoviButtonsLayout = new QHBoxLayout();
-    aggiungiButton= new QPushButton("aggiungi utente");
-    rimuoviButton= new QPushButton("rimuovi utente");
+    aggiungiButton= new QPushButton("Aggiungi utente");
+    rimuoviButton= new QPushButton("Rimuovi utente");
     aggiungiRimuoviButtonsLayout->addWidget(aggiungiButton);
     aggiungiRimuoviButtonsLayout->addWidget(rimuoviButton);
     mainLayout->addLayout(aggiungiRimuoviButtonsLayout);
-     connect(aggiungiButton,SIGNAL(clicked()),this,SLOT(aggiungiExec()));
+    connect(aggiungiButton,SIGNAL(clicked()),this,SLOT(aggiungiExec()));
 
     //Ricerca per campi
     ricercaLayout = new QHBoxLayout();
@@ -29,7 +29,7 @@ menu::menu(QWidget *parent)
     ricercaLayout->addWidget(cercaLineEdit);
     ricercaLayout->addWidget(perLabel);
     ricercaLayout->addWidget(colonnaRicercaComboBox);
-     mainLayout->addLayout(ricercaLayout);
+    mainLayout->addLayout(ricercaLayout);
 
 
     //Lista Utenti
@@ -73,30 +73,27 @@ void menu::tipoUtenteComboBoxChanged(const QString &_string){
 }
 
 //Nuova finestra aggiunta cliente
-void menu::aggiungiExec()
-{
-    QDialog aggiungi;
-        aggiungi.setWindowTitle("Aggiungi utente");
-       aggiungi.setMinimumSize(QSize(400, 250));
-        aggiungi.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-        aggiungi.exec();
+void menu::aggiungiExec(){
+    menudatiutente aggiungi;
+    if (aggiungi.exec()) {
+        //QString nome = aggiungi.nomeText->text();
+        //QString cognome = aggiungi.cognomeText->text();
+        //emit sendDetails(nome, cognome, ....);
+    }
 }
 
 menu::~menu(){
 }
 
-void menu::addCLose()
-{
-
+void menu::addCLose(){
     QMenuBar* menubar=new QMenuBar(this);
     QMenu* close=new QMenu("File", menubar);
     QAction* esci=new QAction("Esci", close);
 
-     connect(esci,SIGNAL(triggered()),this,SLOT(close()));
+    connect(esci,SIGNAL(triggered()),this,SLOT(close()));
     close->addAction(esci);
     menubar->addMenu(close);
     mainLayout->addWidget(menubar);
-
 }
 
 

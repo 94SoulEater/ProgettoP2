@@ -3,6 +3,7 @@
 
 #include "tablemodel.h"
 #include "proxymodel.h"
+#include "menudatiutente.h"
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
