@@ -4,8 +4,8 @@ using std::cout; using std::endl;
 
 tablemodel::tablemodel(QObject *parent)
     : QAbstractTableModel(parent), listaUtenti(){
-    professore provaIns1("Marco", "Dello Iacovo","ctflelo1239CFCFCF", "3201512686", "marco.delloiacovo99@gmail.com", 18, 10, 1999, "Veneto", "Caerano di san marco", "San marco", "31031", "xx-Bis", "Ordinario", 30);
-    tutor provaIns2("Luca", "Gualtieri","ctflelo123qeweFCFCF", "3202222686", "gualtieri.l@gmail.com", 1, 9, 1999, "Veneto", "Caselle d'altivole", "San francesco", "31044", "xx-Bis", 1193422, triennale, "Informatica", 2, false, 0, 10, 11, 2018);
+    professore provaIns1("Marco", "Dello Iacovo","CPPFBA03C27H501Y", "3201512686", "marco.delloiacovo99@gmail.com", 18, 10, 1999, "Veneto", "Caerano di san marco", "San marco", "31031", "xx-Bis", "Ordinario", 30);
+    tutor provaIns2("Luca", "Gualtieri","LRCCRC05T15C351I", "3202222686", "gualtieri.l@gmail.com", 1, 9, 1999, "Veneto", "Caselle d'altivole", "San francesco", "31044", "xx-Bis", 1193422, triennale, "Informatica", 2, false, 0, 10, 11, 2018);
     lezione provaLez1("Programmazione ad oggetti", "SC1167 - Informatica", "Lum250", 12);
     lezione provaLez2("Verifica del software", "SC1176 - LM Informatica", "P200", 12);
     QTime oraInizio(12, 30), oraFine(14, 30);

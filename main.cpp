@@ -20,9 +20,8 @@ using std::cout; using std::endl; using Qt::DayOfWeek;
 
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
-    menu w;
     tablemodel modello;
-    w.setModel(&modello);
+    menu w(&modello);
     w.show();
 
     return a.exec();

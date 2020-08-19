@@ -9,6 +9,11 @@ bool proxymodel::filterAcceptsColumn(int source_column, const QModelIndex&) cons
     else return true;
 }
 
+bool proxymodel::filterAcceptsRow(int source_row, const QModelIndex &sourceParent) const{
+    QModelIndex index = sourceModel()->index(source_row, colonnaRicerca, sourceParent);
+    return (sourceModel()->data(index).toString().contains(filterRegExp()));
+}
+
 void proxymodel::setFiltroColonne(tipoutente _tipoUtente){
     colonneNascoste.clear();
     switch(_tipoUtente){
@@ -26,4 +31,9 @@ void proxymodel::setFiltroColonne(tipoutente _tipoUtente){
     }
     invalidateFilter();
     emit colonneModificate();
+}
+
+void proxymodel::setColonnaRicerca(int _colonnaRicerca){
+    colonnaRicerca = _colonnaRicerca;
+    invalidateFilter();
 }

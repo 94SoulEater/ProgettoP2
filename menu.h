@@ -16,29 +16,29 @@
 #include <QHeaderView>
 #include <QSortFilterProxyModel>
 #include <QFormLayout>
-#include <QDialog>
-#include <QWizard>
 #include <QtWidgets>
 #include <QLineEdit>
-#include <set>
 
 class menu : public QWidget
 {
     Q_OBJECT
 public:
-    menu(QWidget *parent = nullptr);
+    menu(tablemodel *_model, QWidget *parent = nullptr);
     ~menu();
-    void setModel(tablemodel *_model);
 
 private slots:
     void tipoUtenteComboBoxChanged(const QString&);
+    void rimuoviUtente();
+    void aggiornaAzioni(const QItemSelection &selected , const QItemSelection &deselected);
     void aggiungiExec();
+    void aggiornaFiltro();
+    void aggiornaColonnaRicerca(const QString&);
 
 private:
     QVBoxLayout *mainLayout;
     QHBoxLayout *aggiungiRimuoviButtonsLayout, *ricercaLayout, *visualizzazioneLayout;
-    QPushButton *aggiungiButton, *rimuoviButton, *visualizzaButton;
-    QLabel *cercaLabel, *perLabel;
+    QPushButton *aggiungiButton, *rimuoviButton;
+    QLabel *cercaLabel, *perLabel, *visualizzaLabel;
     QLineEdit *cercaLineEdit;
     QComboBox *colonnaRicercaComboBox, *tipoUtenteComboBox;
     QTableView *utentiTableView;
