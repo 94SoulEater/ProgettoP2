@@ -2,56 +2,52 @@
 
 using std::cout; using std::endl;
 
-tablemodel::tablemodel(QObject *parent)
-    : QAbstractTableModel(parent), listaUtenti(){
-    professore provaIns1("Marco", "Dello Iacovo","CPPFBA03C27H501Y", "3201512686", "marco.delloiacovo99@gmail.com", 18, 10, 1999, "Veneto", "Caerano di san marco", "San marco", "31031", "xx-Bis", "Ordinario", 30);
-    tutor provaIns2("Luca", "Gualtieri","LRCCRC05T15C351I", "3202222686", "gualtieri.l@gmail.com", 1, 9, 1999, "Veneto", "Caselle d'altivole", "San francesco", "31044", "xx-Bis", 1193422, triennale, "Informatica", 2, false, 0, 10, 11, 2018);
+void tablemodel::aggiungiUtenti(){
+    professore provaIns1("Francesco", "Ranzato", "FRTCSL03L49F205V", "3190231829", "ranzato@gmail.com", 31, 1, 1976, "Veneto", "Padova", "San Giacomo", "31000",  "91", "Ordinario", 21);
+    tutor provaIns2("Luca", "Gualtieri","LRCCRC05T15C351I", "3202222686", "gualtieri.l@gmail.com", 10, 2, 1999, "Veneto", "Caselle d'altivole", "San Francesco", "31044", "21", 1193422, triennale, "Informatica", 2, false, 0, 10, 11, 2018);
+    studente provaIns3("Andrea", "Trentini", "LFNSLV07L17D612W", "3492947120", "a.trentini@hotmail.it", 21, 12, 1998, "Toscana", "Firenze", "San Torriceno", "30200", "9", 1183920, magistrale, "Psicologia", 3, false, 0, 20, 8, 2017);
+    studente provaIns4("Isidoro", "Baresi", "NBLTCL06B60C351K", "3294019283", "isibar97@protonmail.com", 9, 4, 1997, "Veneto", "Padova", "Sant Andrea", "31000", "21H", 1172121, triennale, "Informatica", 3, true, 1, 16, 7, 2016);
+    professore provaIns5("Claudio", "Palazzi","CPPFBA03C27H501Y", "3201521939", "cpalazzi@gmail.com", 18, 10, 1980, "Veneto", "Caerano di san marco", "San Marco", "31031", "xx-Bis", "Ordinario", 10);
     lezione provaLez1("Programmazione ad oggetti", "SC1167 - Informatica", "Lum250", 12);
     lezione provaLez2("Verifica del software", "SC1176 - LM Informatica", "P200", 12);
+    lezione provaLez3("Sistemi Operativi", "SC1167 - Informatica", "P200", 10);
     QTime oraInizio(12, 30), oraFine(14, 30);
     provaLez1.addGiornoLezione(oraInizio, oraFine, Qt::Monday);
     provaLez2.addGiornoLezione(oraInizio, oraFine, Qt::Tuesday);
+    provaLez3.addGiornoLezione(oraInizio, oraFine, Qt::Wednesday);
     oraInizio = QTime(14, 30), oraFine = QTime(16, 30);
     provaLez1.addGiornoLezione(oraInizio, oraFine, Qt::Thursday);
     provaLez2.addGiornoLezione(oraInizio, oraFine, Qt::Wednesday);
+    provaLez3.addGiornoLezione(oraInizio, oraFine, Qt::Monday);
     provaIns1.addLezione(provaLez1);
     provaIns1.addLezione(provaLez2);
-    //provaIns1.removeLezione(provaLez2);
+    provaIns5.addLezione(provaLez3);
     ricerca provaRic1("G. Filè and F. Ranzato", "Improving abstract interpretations by systematic lifting to the powerset", "https://www.math.unipd.it/~ranzato/papers/ilps94.pdf", "The MIT Press", 1, 1, 1994);
     provaIns1.addRicerca(provaRic1);
-    ricerca provaRic2 ("A. Cortesi, R. Giacobazzi, G. Filé, C. Palamidessi, and F. Ranzato", "Complementation in abstract interpretation", "https://www.math.unipd.it/~ranzato/papers/sas95.pdf", "Springer-Verlag", 1, 1, 1995);
+    ricerca provaRic2("A. Cortesi, R. Giacobazzi, G. Filé, C. Palamidessi, and F. Ranzato", "Complementation in abstract interpretation", "https://www.math.unipd.it/~ranzato/papers/sas95.pdf", "Springer-Verlag", 1, 1, 1995);
     provaIns1.addRicerca(provaRic2);
-    //provaIns1.removeRicerca(provaRic2);
-    vector<lezione> provaLezVec1 = provaIns1.getLezioni();
-    vector<ricerca> provaRicVec1 = provaIns1.getRicerche();
-    vector<giornoLezione> provaGiorniLez1;
-    //Stampa
-    cout<<provaIns1.getNome()<<" "<<provaIns1.getCognome()<<" "<<provaIns1.getDataNascita().toString().toStdString()<<" "<<provaIns1.getAnniServizio()<<endl;
-    for(auto it = provaLezVec1.begin(); it != provaLezVec1.end(); ++it){
-        provaGiorniLez1 = it->getGiorniLezione();
-        cout<<it->getCorsoLaurea()<<" "<<it->getMateria()<<" "<<it->getCrediti()<<" "<<it->getStanza()<<" Orari:"<<endl;
-        for(auto it1 = provaGiorniLez1.begin(); it1 != provaGiorniLez1.end(); ++it1){
-            cout<<"\t"<<it1->oraInizio.toString().toStdString()<<" - "<<it1->oraFine.toString().toStdString()<<" "<<it1->giornoSettimana<<endl;
-        }
-    }
-    cout<<"Ricerche: "<<endl;
-    for(auto it = provaRicVec1.begin(); it!=provaRicVec1.end(); ++it){
-        cout<<"\t"<<it->getAutori()<<" "<<it->getTitolo()<<" "<<it->getLink()<<" "<<it->getRivistaPubblicazione()<<" "<<it->getDataPubblicazione().year()<<endl;
-    }
-    puntatoresmart<utente> punt1 = provaIns1.clone();
-    puntatoresmart<utente> punt2 = provaIns2.clone();
-    listaUtenti.push(punt1);
-    listaUtenti.push(punt2);
+    ricerca provaRic3("C. De Francesco, C. E. Palazzi, D. Ronzani","Fast Message Broadcasting in Vehicular Networks: Model Analysis and Performance Evaluation", "https://ieeexplore.ieee.org/document/9088960", "IEEE Communications Letters", 1, 4, 2020);
+    provaIns5.addRicerca(provaRic3);
+    listaUtenti.push(puntatoresmart<utente>(provaIns1.clone()));
+    listaUtenti.push(puntatoresmart<utente>(provaIns2.clone()));
+    listaUtenti.push(puntatoresmart<utente>(provaIns3.clone()));
+    listaUtenti.push(puntatoresmart<utente>(provaIns4.clone()));
+    listaUtenti.push(puntatoresmart<utente>(provaIns5.clone()));
 }
-//-------------------------------------------------------
-int tablemodel::rowCount(const QModelIndex & /*parent*/) const{
+
+tablemodel::tablemodel(QObject *parent)
+    : QAbstractTableModel(parent), listaUtenti(){
+    aggiungiUtenti();
+}
+
+int tablemodel::rowCount(const QModelIndex&) const{
     return listaUtenti.size();
 }
-//-------------------------------------------------------
-int tablemodel::columnCount(const QModelIndex & /*parent*/) const{
+
+int tablemodel::columnCount(const QModelIndex&) const{
     return 6;
 }
-//-------------------------------------------------------
+
 QVariant tablemodel::data(const QModelIndex &index, int role) const{
     if (role == Qt::DisplayRole) {
         contenitore<puntatoresmart<utente>>::iteratore_const it = listaUtenti.begin();
@@ -106,9 +102,7 @@ QVariant tablemodel::headerData(int section, Qt::Orientation orientation, int ro
 }
 
 Qt::ItemFlags tablemodel::flags(const QModelIndex &index) const{
-    if (!index.isValid())
-        return Qt::ItemIsEnabled;
-
+    if (!index.isValid())return Qt::ItemIsEnabled;
     return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
 }
 

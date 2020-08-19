@@ -28,6 +28,7 @@ public:
     bool removeRows(int row, int count, const QModelIndex &parent);
 private:
     contenitore<puntatoresmart<utente>> listaUtenti;
+    void aggiungiUtenti();
 };
 
 #endif // TABLEMODEL_H

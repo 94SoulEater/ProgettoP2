@@ -14,6 +14,7 @@ bool proxymodel::filterAcceptsRow(int source_row, const QModelIndex &sourceParen
     return (sourceModel()->data(index).toString().contains(filterRegExp()));
 }
 
+//Mostra o nasconde colonne in base al tipo di utente da visualizzare
 void proxymodel::setFiltroColonne(tipoutente _tipoUtente){
     colonneNascoste.clear();
     switch(_tipoUtente){
@@ -33,6 +34,7 @@ void proxymodel::setFiltroColonne(tipoutente _tipoUtente){
     emit colonneModificate();
 }
 
+//Imposta la colonna per la ricerca testuale
 void proxymodel::setColonnaRicerca(int _colonnaRicerca){
     colonnaRicerca = _colonnaRicerca;
     invalidateFilter();

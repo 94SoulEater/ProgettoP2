@@ -72,11 +72,11 @@ menu::menu(tablemodel *_model, QWidget *parent)
 
 }
 
+//Aggiorna la combobox che filtra per colonne con i nuovi valori delle colonne
 void menu::tipoUtenteComboBoxChanged(const QString &_string){
     modelloProxy->setFiltroColonne(utente::toTipoUtente(_string.toStdString()));
     colonnaRicercaComboBox->clear();
     QStringList headers;
-    int t = modelloProxy->columnCount();
     for(int i = 0; i < modelloProxy->columnCount(); i++){
       headers.append(modelloProxy->headerData(i, Qt::Horizontal).toString());
     }
@@ -93,17 +93,17 @@ void menu::aggiungiExec(){
     }
 }
 
+//Rimuove l'utente selezionato quando viene premuto il bottone
 void menu::rimuoviUtente(){
     QItemSelectionModel *selectionModel = utentiTableView->selectionModel();
-
     QModelIndexList indexes = selectionModel->selectedRows();
-
     foreach (QModelIndex index, indexes) {
         int row = modelloProxy->mapToSource(index).row();
         modelloProxy->removeRows(row, 1, QModelIndex());
     }
 }
 
+//Disabilita il pulsante di rimozione utente se nessuna riga è selezionata
 void menu::aggiornaAzioni(const QItemSelection &selected , const QItemSelection &deselected){
     Q_UNUSED(deselected);
     QModelIndexList indexes = selected.indexes();
@@ -114,6 +114,7 @@ void menu::aggiornaAzioni(const QItemSelection &selected , const QItemSelection 
     }
 }
 
+//Aggiorna il filtro per cercare nella colonna selezionata i valori nel QLineEdit di ricerca
 void menu::aggiornaFiltro(){
     QRegExp regExp(cercaLineEdit->text(),
                    Qt::CaseInsensitive,
@@ -121,11 +122,11 @@ void menu::aggiornaFiltro(){
     modelloProxy->setFilterRegExp(regExp);
 }
 
+//Aggiorna la colonna di ricerca in base all'elemento selezionato nella ComboBox delle colonne
 void menu::aggiornaColonnaRicerca(const QString& _colonna){
     for(int i = 0; i < modelloProxy->sourceModel()->columnCount(); i++){
         QString t = modelloProxy->sourceModel()->headerData(i, Qt::Horizontal).toString();
-        bool test = t.compare(_colonna, Qt::CaseSensitive);
-        if(!test){
+        if(!t.compare(_colonna, Qt::CaseSensitive)){
             modelloProxy->setColonnaRicerca(i);
             return;
         }
