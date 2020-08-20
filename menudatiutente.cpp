@@ -70,17 +70,15 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     connect(annullaMenuButton,SIGNAL(clicked()),this,SLOT(reject()));
     connect(aggiungiMenuButton, SIGNAL(clicked()), this, SLOT(accept()));
-    clear();
+    connect(cancellaMenuButton, SIGNAL(clicked()), this, SLOT(clear()));
 
     setLayout(maindatiLayout);
 }
 
-void menudatiutente::clear()
-{
-    //manca reset combobox(se serve)
-    connect(cancellaMenuButton,SIGNAL(clicked()),codiceFiscaleLineEdit,SLOT(clear()));
-    connect(cancellaMenuButton,SIGNAL(clicked()),nomeLineEdit,SLOT(clear()));
-    connect(cancellaMenuButton,SIGNAL(clicked()),cognomeLineEdit,SLOT(clear()));
-    connect(cancellaMenuButton,SIGNAL(clicked()),dataNascitaLineEdit,SLOT(clear()));
+void menudatiutente::clear(){
+    codiceFiscaleLineEdit->clear();
+    nomeLineEdit->clear();
+    cognomeLineEdit->clear();
+    dataNascitaLineEdit->clear();
 }
 
