@@ -73,8 +73,8 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     setLayout(maindatiLayout);
 */
-
-    formLayout = new QFormLayout(this);
+    maindatiLayout = new QVBoxLayout(this);
+    formLayout = new QFormLayout();
 
     //codice fiscale
     codiceFiscaleLineEdit = new QLineEdit();
@@ -105,16 +105,23 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
      aggiungiMenuButton= new QPushButton("Aggiungi");
      cancellaMenuButton= new QPushButton("Cancella tutto");
      annullaMenuButton= new QPushButton("Annulla inserimento");
-   formLayout->addRow(aggiungiMenuButton);
-   formLayout->addRow( cancellaMenuButton);
-   formLayout->addRow(annullaMenuButton);
+
+     bottoniLayout = new QHBoxLayout();
+
+
+    bottoniLayout->addWidget(aggiungiMenuButton);
+   bottoniLayout->addWidget( cancellaMenuButton);
+   bottoniLayout->addWidget(annullaMenuButton);
+
+   maindatiLayout->addLayout(formLayout);
+   maindatiLayout->addLayout(bottoniLayout);
 
      connect(annullaMenuButton,SIGNAL(clicked()),this,SLOT(reject()));
      connect(aggiungiMenuButton, SIGNAL(clicked()), this, SLOT(accept()));
      connect(cancellaMenuButton, SIGNAL(clicked()), this, SLOT(clear()));
 
 
-    setLayout(formLayout);
+    setLayout(maindatiLayout);
 }
 
 void menudatiutente::clear(){

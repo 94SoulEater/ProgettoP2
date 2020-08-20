@@ -19,7 +19,7 @@ public:
 
     QFormLayout *formLayout;
     QVBoxLayout *maindatiLayout;
-    QHBoxLayout *labelLayout, *aggiungiAnnullaMenuButtonLayout;
+    QHBoxLayout *bottoniLayout, *labelLayout, *aggiungiAnnullaMenuButtonLayout;
     QPushButton *aggiungiMenuButton, *annullaMenuButton, *cancellaMenuButton;
     QComboBox *tipoUtenteMenuComboBox;
     QLabel *codiceFiscaleLabel, *nomeLabel, *cognomeLabel, *dataNascitaLabel, *tipoUtenteLabel;
