@@ -22,6 +22,9 @@ public:
     QComboBox *tipoUtenteMenuComboBox;
     QLabel *codiceFiscaleLabel, *nomeLabel, *cognomeLabel, *dataNascitaLabel, *tipoUtenteLabel;
     QLineEdit *codiceFiscaleLineEdit, *nomeLineEdit, *cognomeLineEdit, *dataNascitaLineEdit;
+
+private slots:
+    void clear();
 };
 
 #endif // MENUDATIUTENTE_H

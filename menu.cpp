@@ -102,7 +102,7 @@ void menu::aggiungiExec(){
         QString cognome = aggiungi.cognomeLineEdit->text();
         QString dataNascita = aggiungi.dataNascitaLineEdit->text();
         std::cout<<codiceFiscale.toStdString()<<" "<<nome.toStdString()<<" "<<cognome.toStdString()<<" "<<dataNascita.toStdString()<<std::endl;
-        //QString cognome = aggiungi.cognomeText->text();
+
         // emit sendDetails(codiceFiscale, nome, cognome, dataNascita, tipoUtente);
     }
 }
