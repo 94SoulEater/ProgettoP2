@@ -62,16 +62,19 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
              aggiungiAnnullaMenuButtonLayout = new QHBoxLayout();
              aggiungiMenuButton= new QPushButton("Aggiungi");
              aggiungiAnnullaMenuButtonLayout->addWidget(aggiungiMenuButton);
-             annullaMenuButton= new QPushButton("Cancella tutto");
+             cancellaMenuButton= new QPushButton("Cancella tutto");
+             aggiungiAnnullaMenuButtonLayout->addWidget(cancellaMenuButton);
+             annullaMenuButton= new QPushButton("Annulla inserimento");
              aggiungiAnnullaMenuButtonLayout->addWidget(annullaMenuButton);
              maindatiLayout->addLayout(aggiungiAnnullaMenuButtonLayout);
 
+             connect(annullaMenuButton,SIGNAL(clicked()),this,SLOT(close()));
 
             //manca reset combobox(se serve)
-             connect(annullaMenuButton,SIGNAL(clicked()),codiceFiscaleLineEdit,SLOT(clear()));
-             connect(annullaMenuButton,SIGNAL(clicked()),nomeLineEdit,SLOT(clear()));
-             connect(annullaMenuButton,SIGNAL(clicked()),cognomeLineEdit,SLOT(clear()));
-             connect(annullaMenuButton,SIGNAL(clicked()),dataNascitaLineEdit,SLOT(clear()));
+             connect(cancellaMenuButton,SIGNAL(clicked()),codiceFiscaleLineEdit,SLOT(clear()));
+             connect(cancellaMenuButton,SIGNAL(clicked()),nomeLineEdit,SLOT(clear()));
+             connect(cancellaMenuButton,SIGNAL(clicked()),cognomeLineEdit,SLOT(clear()));
+             connect(cancellaMenuButton,SIGNAL(clicked()),dataNascitaLineEdit,SLOT(clear()));
 
       setLayout(maindatiLayout);
 }
