@@ -9,73 +9,74 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     maindatiLayout = new QVBoxLayout(this);
 
     //codice fiscale
-   labelLayout = new QHBoxLayout();
+    labelLayout = new QHBoxLayout();
     codiceFiscaleLabel = new QLabel("Codice Fiscale");
     codiceFiscaleLineEdit = new QLineEdit();
-     codiceFiscaleLabel->setAlignment(Qt::AlignCenter);
+    codiceFiscaleLabel->setAlignment(Qt::AlignCenter);
     labelLayout->addWidget(codiceFiscaleLabel);
     labelLayout->addWidget(codiceFiscaleLineEdit);
-     maindatiLayout->addLayout(labelLayout);
+    maindatiLayout->addLayout(labelLayout);
 
-     //nome
-      labelLayout = new QHBoxLayout();
-      nomeLabel = new QLabel("Nome");
-      nomeLineEdit = new QLineEdit();
-       nomeLabel->setAlignment(Qt::AlignCenter);
-      labelLayout->addWidget(nomeLabel);
-      labelLayout->addWidget(nomeLineEdit);
-       maindatiLayout->addLayout(labelLayout);
+    //nome
+    labelLayout = new QHBoxLayout();
+    nomeLabel = new QLabel("Nome");
+    nomeLineEdit = new QLineEdit();
+    nomeLabel->setAlignment(Qt::AlignCenter);
+    labelLayout->addWidget(nomeLabel);
+    labelLayout->addWidget(nomeLineEdit);
+    maindatiLayout->addLayout(labelLayout);
 
-       //cognome
-        labelLayout = new QHBoxLayout();
-        cognomeLabel = new QLabel("Cognome");
-        cognomeLineEdit = new QLineEdit();
-         cognomeLabel->setAlignment(Qt::AlignCenter);
-        labelLayout->addWidget(cognomeLabel);
-        labelLayout->addWidget(cognomeLineEdit);
-         maindatiLayout->addLayout(labelLayout);
+    //cognome
+    labelLayout = new QHBoxLayout();
+    cognomeLabel = new QLabel("Cognome");
+    cognomeLineEdit = new QLineEdit();
+    cognomeLabel->setAlignment(Qt::AlignCenter);
+    labelLayout->addWidget(cognomeLabel);
+    labelLayout->addWidget(cognomeLineEdit);
+    maindatiLayout->addLayout(labelLayout);
 
-         //data di nascita
-          labelLayout = new QHBoxLayout();
-          dataNascitaLabel = new QLabel("Data di Nascita");
-         dataNascitaLineEdit = new QLineEdit();
-           dataNascitaLabel->setAlignment(Qt::AlignCenter);
-          labelLayout->addWidget(dataNascitaLabel);
-          labelLayout->addWidget(dataNascitaLineEdit);
-           maindatiLayout->addLayout(labelLayout);
+    //data di nascita
+    labelLayout = new QHBoxLayout();
+    dataNascitaLabel = new QLabel("Data di Nascita");
+    dataNascitaLineEdit = new QLineEdit();
+    dataNascitaLabel->setAlignment(Qt::AlignCenter);
+    labelLayout->addWidget(dataNascitaLabel);
+    labelLayout->addWidget(dataNascitaLineEdit);
+    maindatiLayout->addLayout(labelLayout);
 
-           //tipo utente
-            labelLayout = new QHBoxLayout();
-            tipoUtenteLabel = new QLabel("Tipo Utente");
-            tipoUtenteMenuComboBox = new QComboBox();
-            tipoUtenteMenuComboBox->addItem("Utente");
-            tipoUtenteMenuComboBox->addItem("Studente");
-            tipoUtenteMenuComboBox->addItem("Professore");
-            tipoUtenteMenuComboBox->addItem("Insegnante");
-            tipoUtenteMenuComboBox->addItem("Tutor");
-             tipoUtenteLabel->setAlignment(Qt::AlignLeft);
-            labelLayout->addWidget(tipoUtenteLabel);
-            labelLayout->addWidget( tipoUtenteMenuComboBox);
-             maindatiLayout->addLayout(labelLayout);
+    //tipo utente
+    labelLayout = new QHBoxLayout();
+    tipoUtenteLabel = new QLabel("Tipo Utente");
+    tipoUtenteMenuComboBox = new QComboBox();
+    tipoUtenteMenuComboBox->addItem("Utente");
+    tipoUtenteMenuComboBox->addItem("Studente");
+    tipoUtenteMenuComboBox->addItem("Professore");
+    tipoUtenteMenuComboBox->addItem("Insegnante");
+    tipoUtenteMenuComboBox->addItem("Tutor");
+    tipoUtenteLabel->setAlignment(Qt::AlignLeft);
+    labelLayout->addWidget(tipoUtenteLabel);
+    labelLayout->addWidget( tipoUtenteMenuComboBox);
+    maindatiLayout->addLayout(labelLayout);
 
-             //aggiungi e annulla
-             aggiungiAnnullaMenuButtonLayout = new QHBoxLayout();
-             aggiungiMenuButton= new QPushButton("Aggiungi");
-             aggiungiAnnullaMenuButtonLayout->addWidget(aggiungiMenuButton);
-             cancellaMenuButton= new QPushButton("Cancella tutto");
-             aggiungiAnnullaMenuButtonLayout->addWidget(cancellaMenuButton);
-             annullaMenuButton= new QPushButton("Annulla inserimento");
-             aggiungiAnnullaMenuButtonLayout->addWidget(annullaMenuButton);
-             maindatiLayout->addLayout(aggiungiAnnullaMenuButtonLayout);
+    //aggiungi e annulla
+    aggiungiAnnullaMenuButtonLayout = new QHBoxLayout();
+    aggiungiMenuButton= new QPushButton("Aggiungi");
+    aggiungiAnnullaMenuButtonLayout->addWidget(aggiungiMenuButton);
+    cancellaMenuButton= new QPushButton("Cancella tutto");
+    aggiungiAnnullaMenuButtonLayout->addWidget(cancellaMenuButton);
+    annullaMenuButton= new QPushButton("Annulla inserimento");
+    aggiungiAnnullaMenuButtonLayout->addWidget(annullaMenuButton);
+    maindatiLayout->addLayout(aggiungiAnnullaMenuButtonLayout);
 
-             connect(annullaMenuButton,SIGNAL(clicked()),this,SLOT(close()));
+    connect(annullaMenuButton,SIGNAL(clicked()),this,SLOT(reject()));
+    connect(aggiungiMenuButton, SIGNAL(clicked()), this, SLOT(accept()));
 
-            //manca reset combobox(se serve)
-             connect(cancellaMenuButton,SIGNAL(clicked()),codiceFiscaleLineEdit,SLOT(clear()));
-             connect(cancellaMenuButton,SIGNAL(clicked()),nomeLineEdit,SLOT(clear()));
-             connect(cancellaMenuButton,SIGNAL(clicked()),cognomeLineEdit,SLOT(clear()));
-             connect(cancellaMenuButton,SIGNAL(clicked()),dataNascitaLineEdit,SLOT(clear()));
+    //manca reset combobox(se serve)
+    connect(cancellaMenuButton,SIGNAL(clicked()),codiceFiscaleLineEdit,SLOT(clear()));
+    connect(cancellaMenuButton,SIGNAL(clicked()),nomeLineEdit,SLOT(clear()));
+    connect(cancellaMenuButton,SIGNAL(clicked()),cognomeLineEdit,SLOT(clear()));
+    connect(cancellaMenuButton,SIGNAL(clicked()),dataNascitaLineEdit,SLOT(clear()));
 
-      setLayout(maindatiLayout);
+    setLayout(maindatiLayout);
 }
 

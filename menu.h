@@ -46,6 +46,6 @@ private:
 
 
     void addCLose();
- };
+};
 
 #endif // MENU_H

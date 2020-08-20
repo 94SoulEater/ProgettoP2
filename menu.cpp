@@ -15,7 +15,7 @@ menu::menu(tablemodel *_model, QWidget *parent)
     aggiungiRimuoviButtonsLayout->addWidget(aggiungiButton);
     aggiungiRimuoviButtonsLayout->addWidget(rimuoviButton);
     mainLayout->addLayout(aggiungiRimuoviButtonsLayout);
-        
+
     //Apre nuova finestra per inserimento dati utente
     connect(aggiungiButton, SIGNAL(clicked()), this, SLOT(aggiungiExec()));
     //Rimuove l'utente selezionato
@@ -86,7 +86,7 @@ void menu::tipoUtenteComboBoxChanged(const QString &_string){
     colonnaRicercaComboBox->clear();
     QStringList headers;
     for(int i = 0; i < modelloProxy->columnCount(); i++){
-      headers.append(modelloProxy->headerData(i, Qt::Horizontal).toString());
+        headers.append(modelloProxy->headerData(i, Qt::Horizontal).toString());
     }
     colonnaRicercaComboBox->addItems(headers);
 }
@@ -101,8 +101,9 @@ void menu::aggiungiExec(){
         QString nome = aggiungi.nomeLineEdit->text();
         QString cognome = aggiungi.cognomeLineEdit->text();
         QString dataNascita = aggiungi.dataNascitaLineEdit->text();
+        std::cout<<codiceFiscale.toStdString()<<" "<<nome.toStdString()<<" "<<cognome.toStdString()<<" "<<dataNascita.toStdString()<<std::endl;
         //QString cognome = aggiungi.cognomeText->text();
-       // emit sendDetails(codiceFiscale, nome, cognome, dataNascita, tipoUtente);
+        // emit sendDetails(codiceFiscale, nome, cognome, dataNascita, tipoUtente);
     }
 }
 
