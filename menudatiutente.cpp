@@ -18,7 +18,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
      maindatiLayout->addLayout(labelLayout);
 
      //nome
-     labelLayout = new QHBoxLayout();
+      labelLayout = new QHBoxLayout();
       nomeLabel = new QLabel("Nome");
       nomeLineEdit = new QLineEdit();
        nomeLabel->setAlignment(Qt::AlignCenter);
@@ -27,7 +27,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
        maindatiLayout->addLayout(labelLayout);
 
        //cognome
-       labelLayout = new QHBoxLayout();
+        labelLayout = new QHBoxLayout();
         cognomeLabel = new QLabel("Cognome");
         cognomeLineEdit = new QLineEdit();
          cognomeLabel->setAlignment(Qt::AlignCenter);
@@ -36,7 +36,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
          maindatiLayout->addLayout(labelLayout);
 
          //data di nascita
-         labelLayout = new QHBoxLayout();
+          labelLayout = new QHBoxLayout();
           dataNascitaLabel = new QLabel("Data di Nascita");
          dataNascitaLineEdit = new QLineEdit();
            dataNascitaLabel->setAlignment(Qt::AlignCenter);
@@ -45,19 +45,26 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
            maindatiLayout->addLayout(labelLayout);
 
            //tipo utente
-           labelLayout = new QHBoxLayout();
+            labelLayout = new QHBoxLayout();
             tipoUtenteLabel = new QLabel("Tipo Utente");
-            tipoUtenteLineEdit = new QLineEdit();
-             tipoUtenteLabel->setAlignment(Qt::AlignCenter);
+            tipoUtenteMenuComboBox = new QComboBox();
+            tipoUtenteMenuComboBox->addItem("Utente");
+            tipoUtenteMenuComboBox->addItem("Studente");
+            tipoUtenteMenuComboBox->addItem("Professore");
+            tipoUtenteMenuComboBox->addItem("Insegnante");
+            tipoUtenteMenuComboBox->addItem("Tutor");
+             tipoUtenteLabel->setAlignment(Qt::AlignLeft);
             labelLayout->addWidget(tipoUtenteLabel);
-            labelLayout->addWidget(tipoUtenteLineEdit);
+            labelLayout->addWidget( tipoUtenteMenuComboBox);
              maindatiLayout->addLayout(labelLayout);
 
              //aggiungi
-             aggiungiMenuButtonLayout = new QHBoxLayout();
+             aggiungiAnnullaMenuButtonLayout = new QHBoxLayout();
              aggiungiMenuButton= new QPushButton("Aggiungi");
-             aggiungiMenuButtonLayout->addWidget(aggiungiMenuButton);
-             maindatiLayout->addLayout(aggiungiMenuButtonLayout);
+             aggiungiAnnullaMenuButtonLayout->addWidget(aggiungiMenuButton);
+             annullaMenuButton= new QPushButton("Annulla");
+             aggiungiAnnullaMenuButtonLayout->addWidget(annullaMenuButton);
+             maindatiLayout->addLayout(aggiungiAnnullaMenuButtonLayout);
 
 
       setLayout(maindatiLayout);

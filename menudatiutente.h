@@ -8,6 +8,7 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QWidget>
+#include <QComboBox>
 
 
 class menudatiutente : public QDialog{
@@ -16,8 +17,9 @@ public:
     menudatiutente(QWidget *parent = nullptr);
 
     QVBoxLayout *maindatiLayout;
-    QHBoxLayout *labelLayout, *aggiungiMenuButtonLayout;
-    QPushButton *aggiungiMenuButton;
+    QHBoxLayout *labelLayout, *aggiungiAnnullaMenuButtonLayout;
+    QPushButton *aggiungiMenuButton, *annullaMenuButton;
+    QComboBox *tipoUtenteMenuComboBox;
     QLabel *codiceFiscaleLabel, *nomeLabel, *cognomeLabel, *dataNascitaLabel, *tipoUtenteLabel;
     QLineEdit *codiceFiscaleLineEdit, *nomeLineEdit, *cognomeLineEdit, *dataNascitaLineEdit, *tipoUtenteLineEdit;
 };
