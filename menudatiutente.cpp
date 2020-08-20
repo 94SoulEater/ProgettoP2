@@ -80,5 +80,11 @@ void menudatiutente::clear(){
     nomeLineEdit->clear();
     cognomeLineEdit->clear();
     dataNascitaLineEdit->clear();
+    tipoUtenteMenuComboBox->clear();
+    tipoUtenteMenuComboBox->addItem("Utente");
+    tipoUtenteMenuComboBox->addItem("Studente");
+    tipoUtenteMenuComboBox->addItem("Professore");
+    tipoUtenteMenuComboBox->addItem("Insegnante");
+    tipoUtenteMenuComboBox->addItem("Tutor");
 }
 
