@@ -101,7 +101,6 @@ void menu::aggiungiExec(){
         QString nome = aggiungi.nomeLineEdit->text();
         QString cognome = aggiungi.cognomeLineEdit->text();
         QString dataNascita = aggiungi.dataNascitaLineEdit->text();
-        QString tipoUtente = aggiungi.tipoUtenteLineEdit->text();
         //QString cognome = aggiungi.cognomeText->text();
        // emit sendDetails(codiceFiscale, nome, cognome, dataNascita, tipoUtente);
     }

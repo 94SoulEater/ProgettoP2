@@ -21,7 +21,7 @@ public:
     QPushButton *aggiungiMenuButton, *annullaMenuButton;
     QComboBox *tipoUtenteMenuComboBox;
     QLabel *codiceFiscaleLabel, *nomeLabel, *cognomeLabel, *dataNascitaLabel, *tipoUtenteLabel;
-    QLineEdit *codiceFiscaleLineEdit, *nomeLineEdit, *cognomeLineEdit, *dataNascitaLineEdit, *tipoUtenteLineEdit;
+    QLineEdit *codiceFiscaleLineEdit, *nomeLineEdit, *cognomeLineEdit, *dataNascitaLineEdit;
 };
 
 #endif // MENUDATIUTENTE_H
