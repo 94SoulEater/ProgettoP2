@@ -9,6 +9,7 @@
 #include <QPushButton>
 #include <QWidget>
 #include <QComboBox>
+#include <QFormLayout>
 
 
 class menudatiutente : public QDialog{
@@ -16,6 +17,7 @@ class menudatiutente : public QDialog{
 public:
     menudatiutente(QWidget *parent = nullptr);
 
+    QFormLayout *formLayout;
     QVBoxLayout *maindatiLayout;
     QHBoxLayout *labelLayout, *aggiungiAnnullaMenuButtonLayout;
     QPushButton *aggiungiMenuButton, *annullaMenuButton, *cancellaMenuButton;
