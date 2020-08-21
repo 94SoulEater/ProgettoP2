@@ -101,8 +101,8 @@ void menu::aggiungiExec(){
         QString codiceFiscale = aggiungi.codiceFiscaleLineEdit->text();
         QString nome = aggiungi.nomeLineEdit->text();
         QString cognome = aggiungi.cognomeLineEdit->text();
-        QString dataNascita = aggiungi.dataNascitaLineEdit->text();
-        std::cout<<codiceFiscale.toStdString()<<" "<<nome.toStdString()<<" "<<cognome.toStdString()<<" "<<dataNascita.toStdString()<<std::endl;
+       // QString dataNascita = aggiungi.dataNascitaLineEdit->text();
+        std::cout<<codiceFiscale.toStdString()<<" "<<nome.toStdString()<<" "<<cognome.toStdString()<<std::endl;
 
         // emit sendDetails(codiceFiscale, nome, cognome, dataNascita, tipoUtente);
     }

@@ -80,6 +80,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     //iscrizione
      dataIscrizioneEdit = new QDateEdit();
+      dataIscrizioneEdit->setCalendarPopup(true);
      formLayout->addRow(tr("Data di Iscrizione:"), dataIscrizioneEdit);
 
      //fuoricorso e annifuoricorso
@@ -138,5 +139,19 @@ void menudatiutente::clear(){
     nomeLineEdit->clear();
     cognomeLineEdit->clear();
     dataNascitaEdit->clear();
+    emailLineEdit->clear();
+    telefonoLineEdit->clear();
+    capLineEdit->clear();
+    regioneLineEdit->clear();
+    comuneLineEdit->clear();
+    viaLineEdit->clear();
+    numeroCivicoLineEdit->clear();
+    corsoLineEdit->clear();
+    annocorsoLineEdit->clear();
+    dataIscrizioneEdit->clear();
+    spinBox->clear();
+   // tipoLineEdit->clear();
+    //anniServizioLineEdit->clear();
+
 }
 
