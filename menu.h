@@ -44,10 +44,6 @@ private:
     QTableView *utentiTableView;
     proxymodel *modelloProxy;
 
-
-
-
-
     void addCLose();
 };
 

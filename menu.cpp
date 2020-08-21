@@ -47,8 +47,8 @@ menu::menu(tablemodel *_model, QWidget *parent)
     utentiTableView = new QTableView();
     utentiTableView->setModel(modelloProxy);
     utentiTableView->setSortingEnabled(true);
-    utentiTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    //utentiTableView->setHorizontalScrollBarPolicy(QAbstractScrollArea::AdjustToContents);
+    utentiTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    utentiTableView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
     utentiTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     mainLayout->addWidget(utentiTableView);
 
@@ -78,7 +78,9 @@ menu::menu(tablemodel *_model, QWidget *parent)
     mainLayout->addLayout(visualizzazioneLayout);
 
     setLayout(mainLayout);
-
+    utentiTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    adjustSize();
+    utentiTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 //Aggiorna la combobox che filtra per colonne con i nuovi valori delle colonne
@@ -97,13 +99,13 @@ void menu::aggiungiExec(){
     menudatiutente aggiungi;
     if (aggiungi.exec()) {
 
-
+        /*
         QString codiceFiscale = aggiungi.codiceFiscaleLineEdit->text();
         QString nome = aggiungi.nomeLineEdit->text();
         QString cognome = aggiungi.cognomeLineEdit->text();
-       // QString dataNascita = aggiungi.dataNascitaLineEdit->text();
-        std::cout<<codiceFiscale.toStdString()<<" "<<nome.toStdString()<<" "<<cognome.toStdString()<<std::endl;
-
+        QString dataNascita = aggiungi.dataNascitaLineEdit->text();
+        std::cout<<codiceFiscale.toStdString()<<" "<<nome.toStdString()<<" "<<cognome.toStdString()<<" "<<dataNascita.toStdString()<<std::endl;
+        */
         // emit sendDetails(codiceFiscale, nome, cognome, dataNascita, tipoUtente);
     }
 }
