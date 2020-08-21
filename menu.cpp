@@ -47,7 +47,8 @@ menu::menu(tablemodel *_model, QWidget *parent)
     utentiTableView = new QTableView();
     utentiTableView->setModel(modelloProxy);
     utentiTableView->setSortingEnabled(true);
-    utentiTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    utentiTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    //utentiTableView->setHorizontalScrollBarPolicy(QAbstractScrollArea::AdjustToContents);
     utentiTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     mainLayout->addWidget(utentiTableView);
 

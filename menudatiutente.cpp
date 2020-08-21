@@ -29,6 +29,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     //data di nascita
     dataNascitaEdit = new QDateEdit();
+    dataNascitaEdit->setCalendarPopup(true);
     formLayout->addRow(tr("Data di Nascita:"), dataNascitaEdit);
 
     //email
@@ -136,6 +137,6 @@ void menudatiutente::clear(){
     codiceFiscaleLineEdit->clear();
     nomeLineEdit->clear();
     cognomeLineEdit->clear();
-    dataNascitaLineEdit->clear();
+    dataNascitaEdit->clear();
 }
 
