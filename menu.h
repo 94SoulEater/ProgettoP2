@@ -45,6 +45,9 @@ private:
     proxymodel *modelloProxy;
 
 
+
+
+
     void addCLose();
 };
 

@@ -23,7 +23,7 @@ string studente::getLaurea() const{
         return "Diploma Specializzazione";
     case 4:
         return "Dottorato Ricerca";
-    };
+    }
 }
 
 void studente::setLaurea(const TipoLaurea &value){

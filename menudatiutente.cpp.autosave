@@ -65,8 +65,8 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     laureaMenuComboBox = new QComboBox();
     laureaMenuComboBox->addItem("Triennale");
     laureaMenuComboBox->addItem("Magistrale");
-    laureaMenuComboBox->addItem(" Diploma Specializzazione");
-    laureaMenuComboBox->addItem(" Dottorato Ricerca");
+    laureaMenuComboBox->addItem("Diploma Specializzazione");
+    laureaMenuComboBox->addItem("Dottorato Ricerca");
     formLayout->addRow(tr("Tipo Laurea:"), laureaMenuComboBox);
 
     //corso
