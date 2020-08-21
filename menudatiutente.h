@@ -17,6 +17,7 @@
 
 
 
+
 class menudatiutente : public QDialog{
     Q_OBJECT
 public:

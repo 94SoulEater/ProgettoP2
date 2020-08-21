@@ -17,6 +17,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     //UTENTE
     //codice fiscale
     codiceFiscaleLineEdit = new QLineEdit();
+    codiceFiscaleLineEdit->setInputMask("NNNNNNNNNNNNNNNN;");
     formLayout->addRow(tr("Codice Fiscale:"), codiceFiscaleLineEdit);
 
     //nome
@@ -38,10 +39,12 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     //telefono
     telefonoLineEdit = new QLineEdit();
+    telefonoLineEdit->setInputMask("+99 9999999999;");
     formLayout->addRow(tr("Telefono:"), telefonoLineEdit);
 
     //cap
     capLineEdit = new QLineEdit();
+    capLineEdit->setValidator(new QIntValidator());
     formLayout->addRow(tr("CAP:"), capLineEdit);
 
     //regione
@@ -58,6 +61,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     //numerocivico
     numeroCivicoLineEdit = new QLineEdit();
+    numeroCivicoLineEdit->setInputMask("999/N;");
     formLayout->addRow(tr("Numero Civico:"), numeroCivicoLineEdit);
 
 
@@ -76,6 +80,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     //annocorso
     annocorsoLineEdit = new QLineEdit();
+    annocorsoLineEdit->setValidator(new QIntValidator());
     formLayout->addRow(tr("Anno corso:"), annocorsoLineEdit);
 
     //iscrizione
@@ -107,6 +112,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     //anni servizio
     anniServizioLineEdit = new QLineEdit();
+    anniServizioLineEdit->setValidator(new QIntValidator());
     formLayout->addRow(tr("Anni di Servizio:"), anniServizioLineEdit);
 */
 
