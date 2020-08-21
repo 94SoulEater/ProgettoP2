@@ -1,6 +1,7 @@
 #ifndef CONTENITORE_H
 #define CONTENITORE_H
 #include <string>
+#include <iostream>
 
 using std::string;
 
@@ -57,12 +58,16 @@ public:
    contenitore(const contenitore&);
    ~contenitore();
 
+   bool operator==(const contenitore&)const;
+   bool operator!=(const contenitore&)const;
+
    void push(const T&);
    int size() const;
    void clear();
    bool contains(const T&) const;
    T& value(int _pos);
    void remove(int _pos);
+   void remove(const T& t);
    void replace(int _pos, const T&);
 
    iteratore begin();
@@ -114,6 +119,24 @@ typename contenitore<T>::nodo* contenitore<T>::copia(contenitore<T>::nodo *_head
     return p;
 }
 
+template<class T>
+bool contenitore<T>::operator ==(const contenitore& _con)const{
+    iteratore_const it1 = begin();
+    iteratore_const it2 = _con.begin();
+    while(it1 == it2){
+        ++it1;
+        ++it2;
+        if((it1 == nullptr) && (it2 == nullptr)) return true;
+    }
+    return false;
+}
+
+template<class T>
+bool contenitore<T>::operator !=(const contenitore& _con)const{
+    return !(*this == _con);
+}
+
+
 //Funzioni-Contenitore-----------------------------
 
 template<class T>
@@ -155,6 +178,26 @@ T& contenitore<T>::value(int _pos){
     iteratore it = begin();
     for(int i=0; i<_pos; i++) ++it;
     return *it;
+}
+
+template<class T>
+void contenitore<T>::remove(const T& t){
+    if (!head) return;
+    if(!contains(t)) return;
+    nodo* p = head;
+    if (p->info == t){
+        head = p->next;
+        p->next = 0;
+        delete p;
+        return;
+    }
+    for (int i=0; p && p->next && (p->next->info != t); i++) p = p->next;
+    if (!p || !p->next) return;
+
+    nodo *next = p->next->next;
+    p->next->next = 0;
+    delete p->next;
+    p->next = next;
 }
 
 template<class T>

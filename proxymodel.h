@@ -9,6 +9,7 @@ class proxymodel : public QSortFilterProxyModel{
     Q_OBJECT
 private:
     contenitore<int> colonneNascoste;
+    tipoutente filtroTipoUtente;
     int colonnaRicerca;
 public:
     proxymodel(QObject *parent = nullptr);

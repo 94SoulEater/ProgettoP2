@@ -4,15 +4,17 @@
 #include <Qt>
 #include <QTime>
 #include <string>
-#include <vector>
+#include "Model/contenitore.h"
 
 using std::string;
-using std::vector;
 using Qt::DayOfWeek;
 
 struct giornoLezione{
     bool operator==(const giornoLezione &_lez)const{
         return (oraInizio==_lez.oraInizio && oraFine == _lez.oraFine && giornoSettimana == _lez.giornoSettimana);
+    }
+    bool operator!=(const giornoLezione &_lez)const{
+        return (oraInizio!=_lez.oraInizio || oraFine != _lez.oraFine || giornoSettimana != _lez.giornoSettimana);
     }
     QTime oraInizio;
     QTime oraFine;
@@ -25,12 +27,13 @@ private:
     string corsoLaurea;
     string stanza;
     int crediti;
-    vector<giornoLezione> giorniLezione;
+    contenitore<giornoLezione> giorniLezione;
 
 public:
     lezione(string="", string="", string="", int=0);
     ~lezione() = default;
     bool operator==(const lezione&)const;
+    bool operator!=(const lezione&)const;
     string getMateria() const;
     void setMateria(const string &value);
     string getCorsoLaurea() const;
@@ -39,7 +42,7 @@ public:
     void setStanza(const string &value);
     int getCrediti() const;
     void setCrediti(int value);
-    vector<giornoLezione> getGiorniLezione() const;
+    contenitore<giornoLezione> getGiorniLezione() const;
     void addGiornoLezione(QTime, QTime, DayOfWeek);
     void removeGiornoLezione(QTime, QTime, DayOfWeek);
 };

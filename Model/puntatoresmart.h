@@ -20,7 +20,11 @@ puntatoresmart<T>::puntatoresmart(T* p): puntatore(p){
 }
 
 template <class T>
-puntatoresmart<T>::puntatoresmart(const puntatoresmart<T>& x):puntatore(x.puntatore->clone()){
+puntatoresmart<T>::puntatoresmart(const puntatoresmart& x){
+    if(x.puntatore == nullptr)
+        puntatore = nullptr;
+    else
+        puntatore = x.puntatore->clone();
 }
 
 template <class T>
@@ -32,7 +36,7 @@ template <class T>
 puntatoresmart<T>& puntatoresmart<T>::operator=(const puntatoresmart& x){
     if(this != &x){
         delete puntatore;
-        puntatore = x.puntatore;
+        puntatore = x.puntatore->clone();
     }
     return *this;
 }

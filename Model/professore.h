@@ -3,15 +3,13 @@
 
 #include <Model/insegnante.h>
 #include <Model/ricerca.h>
-#include <vector>
-
-using std::vector;
+#include <Model/contenitore.h>
 
 class professore : public insegnante{
 private:
     string tipo;
     int anniServizio;
-    vector<ricerca> ricerche;
+    contenitore<ricerca> ricerche;
 public:
     professore(string="", string="", string="", string="", string="", int=1, int=1, int=1970, string="", string="", string="", string="", string="", string="", int=0);
     ~professore() = default;
@@ -19,7 +17,7 @@ public:
     tipoutente getTipoUtente() const;
     string getTipo() const;
     void setTipo(const string &value);
-    vector<ricerca> getRicerche() const;
+    contenitore<ricerca> getRicerche() const;
     void addRicerca(const ricerca &_ric);
     void removeRicerca(const ricerca &_ric);
     int getAnniServizio() const;

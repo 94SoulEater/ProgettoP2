@@ -22,7 +22,7 @@ public:
     tipoutente getTipoUtente() const;
     int getMatricola() const;
     void setMatricola(int value);
-    TipoLaurea getLaurea() const;
+    string getLaurea() const;
     void setLaurea(const TipoLaurea &value);
     string getCorso() const;
     void setCorso(const string &value);

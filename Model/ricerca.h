@@ -17,6 +17,7 @@ public:
     ricerca(string="", string="", string="", string="", int=1, int=1, int=1970);
     ~ricerca() = default;
     bool operator==(const ricerca&)const;
+    bool operator!=(const ricerca&)const;
     QDate getDataPubblicazione() const;
     void setDataPubblicazione(const QDate &value);
     string getRivistaPubblicazione() const;

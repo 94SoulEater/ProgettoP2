@@ -12,16 +12,16 @@ void professore::setTipo(const string &value){
     tipo = value;
 }
 
-vector<ricerca> professore::getRicerche() const{
+contenitore<ricerca> professore::getRicerche() const{
     return ricerche;
 }
 
 void professore::addRicerca(const ricerca &_ric){
-    ricerche.push_back(_ric);
+    ricerche.push(_ric);
 }
 
 void professore::removeRicerca(const ricerca &_ric){
-    ricerche.erase(std::remove(ricerche.begin(), ricerche.end(), _ric), ricerche.end());
+    ricerche.remove(_ric);
 }
 
 int professore::getAnniServizio() const

@@ -3,21 +3,20 @@
 
 #include <Model/utente.h>
 #include <Model/lezione.h>
+#include <Model/contenitore.h>
 #include <QDate>
-#include <vector>
-
-using std::vector;
 
 class insegnante : virtual public utente{
 private:
-    vector<lezione> lezioni;
+    contenitore<lezione> lezioni;
 public:
     insegnante(string="", string="", string="", string="", string="", int=1, int=1, int=1970, string="", string="", string="", string="", string="");
     ~insegnante() = default;
+    virtual insegnante* clone() const = 0;
     tipoutente getTipoUtente() const;
-    vector<lezione> getLezioni() const;
-    void addLezione(const lezione);
-    void removeLezione(const lezione);
+    contenitore<lezione> getLezioni() const;
+    void addLezione(const lezione& _lez);
+    void removeLezione(const lezione& _lez);
 };
 
 #endif // INSEGNANTE_H

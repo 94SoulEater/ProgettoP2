@@ -13,8 +13,17 @@ void studente::setMatricola(int value){
     matricola = value;
 }
 
-TipoLaurea studente::getLaurea() const{
-    return laurea;
+string studente::getLaurea() const{
+    switch(laurea){
+    case 1:
+        return "Triennale";
+    case 2:
+        return "Magistrale";
+    case 3:
+        return "Diploma Specializzazione";
+    case 4:
+        return "Dottorato Ricerca";
+    };
 }
 
 void studente::setLaurea(const TipoLaurea &value){
