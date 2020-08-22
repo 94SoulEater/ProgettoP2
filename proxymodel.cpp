@@ -35,6 +35,10 @@ bool proxymodel::filterAcceptsRow(int source_row, const QModelIndex &sourceParen
     return (filtroUtente && sourceModel()->data(index).toString().contains(filterRegExp()));
 }
 
+bool proxymodel::isColonnaNascosta(int _col){
+    return colonneNascoste.contains(_col);
+}
+
 //Mostra o nasconde colonne in base al tipo di utente da visualizzare
 void proxymodel::setFiltroColonne(tipoutente _tipoUtente){
     filtroTipoUtente = _tipoUtente;
@@ -46,9 +50,13 @@ void proxymodel::setFiltroColonne(tipoutente _tipoUtente){
         colonneNascoste.push(8);
         colonneNascoste.push(9);
         colonneNascoste.push(10);
+        colonneNascoste.push(12);
+        colonneNascoste.push(13);
         break;
     case Studente:
         colonneNascoste.push(0);
+        colonneNascoste.push(12);
+        colonneNascoste.push(13);
         break;
     case Professore:
         colonneNascoste.push(1);
@@ -64,9 +72,13 @@ void proxymodel::setFiltroColonne(tipoutente _tipoUtente){
         colonneNascoste.push(8);
         colonneNascoste.push(9);
         colonneNascoste.push(10);
+        colonneNascoste.push(12);
+        colonneNascoste.push(13);
         break;
     case Tutor:
         colonneNascoste.push(11);
+        colonneNascoste.push(12);
+        colonneNascoste.push(13);
         break;
     }
     invalidateFilter();

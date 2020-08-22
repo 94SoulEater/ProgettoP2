@@ -5,7 +5,7 @@ menu::menu(tablemodel *_model, QWidget *parent)
     mainLayout = new QVBoxLayout(this);
 
     //Chiusura
-    addCLose();
+    //addCLose();
 
     //Bottoni di aggiunta / rimozione utenti
     aggiungiRimuoviButtonsLayout = new QHBoxLayout();
@@ -40,20 +40,20 @@ menu::menu(tablemodel *_model, QWidget *parent)
     connect(colonnaRicercaComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(aggiornaColonnaRicerca(QString)));
 
     //Lista Utenti
-
     modelloProxy = new proxymodel(this);
     modelloProxy->setSourceModel(_model);
-    modelloProxy->setFiltroColonne(Utente);
     utentiTableView = new QTableView();
     utentiTableView->setModel(modelloProxy);
     utentiTableView->setSortingEnabled(true);
-    utentiTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    //Fa in modo che sizeHint() mostra tutte le colonne della tabella senza scrolling
     utentiTableView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+    //Seleziona una riga al posto di una singola cella
     utentiTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     mainLayout->addWidget(utentiTableView);
 
     //Quando vengono aggiunte/rimosse colonne aggiusta la loro dimensione per riempire tutto lo spazio a loro disposizione
     connect(modelloProxy, SIGNAL(colonneModificate()), utentiTableView->horizontalHeader(), SLOT(resizeSections()));
+
     //Quando viene selezionata una riga viene sbloccato il pulsante di rimozione, altrimenti viene bloccato
     connect(utentiTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornaAzioni(QItemSelection,QItemSelection)));
 
@@ -67,20 +67,49 @@ menu::menu(tablemodel *_model, QWidget *parent)
     tipoUtenteComboBox->addItem("Insegnanti");
     tipoUtenteComboBox->addItem("Tutor");
 
-    //Quando cambia il tipo utente selezionato aggiorna le colonne visibili
-    connect(tipoUtenteComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(tipoUtenteComboBoxChanged(QString)));
-
-    tipoUtenteComboBoxChanged("Utente");
-
     visualizzaLabel->setAlignment(Qt::AlignCenter);
     visualizzazioneLayout->addWidget(visualizzaLabel);
     visualizzazioneLayout->addWidget(tipoUtenteComboBox);
+
     mainLayout->addLayout(visualizzazioneLayout);
 
+    //Quando cambia il tipo utente selezionato aggiorna le colonne visibili
+    connect(tipoUtenteComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(tipoUtenteComboBoxChanged(QString)));
+
+    //Setup iniziale
+    tipoUtenteComboBoxChanged("Utente");
+
     setLayout(mainLayout);
-    utentiTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    adjustSize();
+
+
+    //Imposta la dimensione della finestra in modo che tutte le colonne siano ben visibili in qualsiasi caso
+    modelloProxy->setFiltroColonne(Tutor);
+    setMinimumSize(sizeHint());
+    modelloProxy->setFiltroColonne(Utente);
+
+    //Allinea la finestra al centro dello schermo
+    setGeometry(
+            QStyle::alignedRect(
+            Qt::LeftToRight,
+            Qt::AlignCenter,
+            size(),
+            qApp->desktop()->availableGeometry()
+        )
+    );
+}
+
+//Imposta la dimensione delle colonne adatta al contenuto della tabella
+void menu::setupColonneTableView(tipoutente _tipoutente){
     utentiTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    if(_tipoutente != Studente) utentiTableView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+    if(_tipoutente != Tutor){
+        utentiTableView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
+        utentiTableView->horizontalHeader()->setSectionResizeMode(5, QHeaderView::ResizeToContents);
+        return;
+    }else{
+        utentiTableView->horizontalHeader()->setSectionResizeMode(4, QHeaderView::ResizeToContents);
+        utentiTableView->horizontalHeader()->setSectionResizeMode(6, QHeaderView::ResizeToContents);
+    }
 }
 
 //Aggiorna la combobox che filtra per colonne con i nuovi valori delle colonne
@@ -92,6 +121,7 @@ void menu::tipoUtenteComboBoxChanged(const QString &_string){
         headers.append(modelloProxy->headerData(i, Qt::Horizontal).toString());
     }
     colonnaRicercaComboBox->addItems(headers);
+    setupColonneTableView(utente::toTipoUtente(_string.toStdString()));
 }
 
 //Nuova finestra aggiunta cliente
@@ -152,7 +182,7 @@ void menu::aggiornaColonnaRicerca(const QString& _colonna){
 
 menu::~menu(){
 }
-
+/*Aggiunge barra menu
 void menu::addCLose(){
     QMenuBar* menubar=new QMenuBar(this);
     QMenu* close=new QMenu("File", menubar);
@@ -163,6 +193,7 @@ void menu::addCLose(){
     menubar->addMenu(close);
     mainLayout->addWidget(menubar);
 }
+*/
 
 
 

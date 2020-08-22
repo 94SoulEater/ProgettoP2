@@ -45,6 +45,7 @@ private:
     proxymodel *modelloProxy;
 
     void addCLose();
+    void setupColonneTableView(tipoutente _tipoutente);
 };
 
 #endif // MENU_H

@@ -4,7 +4,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     setWindowTitle("Aggiungi utente");
     //setMinimumSize(QSize(400, 250));
     setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-    maindatiLayout = new QVBoxLayout(this);
+    maindatiLayout = new QVBoxLayout();
     formLayout = new QFormLayout();
 
     //tipo utente (non si possono istanziare utente e studente)
@@ -91,7 +91,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
      //fuoricorso e annifuoricorso
      checkBox = new QCheckBox();
      spinBox = new QSpinBox();
-     fuoricorsoLabel = new QLabel("Fouri Corso:");
+     fuoricorsoLabel = new QLabel("Fuori Corso:");
      annifuoricorsoLabel = new QLabel("Anni Fuori Corso:");
 
       fuoriLayout = new QHBoxLayout();

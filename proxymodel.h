@@ -17,6 +17,7 @@ public:
     bool filterAcceptsRow(int source_row, const QModelIndex&) const;
     void setFiltroColonne(tipoutente _tipoUtente);
     void setColonnaRicerca(int _colonnaRicerca);
+    bool isColonnaNascosta(int _col);
 signals:
     void colonneModificate();
 };

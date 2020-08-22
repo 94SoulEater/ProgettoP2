@@ -45,7 +45,7 @@ int tablemodel::rowCount(const QModelIndex&) const{
 }
 
 int tablemodel::columnCount(const QModelIndex&) const{
-    return 12;
+    return 14;
 }
 
 QVariant tablemodel::data(const QModelIndex &index, int role) const{
@@ -115,6 +115,22 @@ QVariant tablemodel::data(const QModelIndex &index, int role) const{
         case 11:
             for(int i=0; i<index.row(); i++) ++it;
             return QString::fromStdString(utente::fromTipoUtente((*(*it)).getTipoUtente()));
+        case 12:{
+            for(int i=0; i<index.row(); i++) ++it;
+            professore* tmp = dynamic_cast<professore*>((*it).operator ->());
+            if(tmp){
+                return QString::fromStdString(tmp->getTipo());
+            }
+            return QVariant();
+        }
+        case 13:{
+            for(int i=0; i<index.row(); i++) ++it;
+            professore* tmp = dynamic_cast<professore*>((*it).operator ->());
+            if(tmp){
+                return QString::number(tmp->getAnniServizio());
+            }
+            return QVariant();
+        }
         default:
             return QVariant();
         }
@@ -140,15 +156,19 @@ QVariant tablemodel::headerData(int section, Qt::Orientation orientation, int ro
         case 6:
             return QString("Email");
         case 7:
-            return QString("Corso di Studio");
+            return QString("Corso");
         case 8:
             return QString("Tipo corso");
         case 9:
             return QString("Anno");
         case 10:
-            return QString("Anni fuori corso");
+            return QString("Fuori corso");
         case 11:
             return QString("Tipo Utente");
+        case 12:
+            return QString("Tipo Professore");
+        case 13:
+            return QString("Anni di servizio");
         }
     }
     return QVariant();
