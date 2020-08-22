@@ -55,17 +55,25 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     comuneLineEdit = new QLineEdit();
     formLayout->addRow(tr("Comune:"), comuneLineEdit);
 
-    //via
-    viaLineEdit = new QLineEdit();
-    formLayout->addRow(tr("Via:"), viaLineEdit);
+     viaLineEdit = new QLineEdit();
+     numeroCivicoLineEdit = new QLineEdit();
+   viaLabel = new QLabel("Via:");
+    numeroCivicoLabel = new QLabel("Numero Civico:");
 
-    //numerocivico
-    numeroCivicoLineEdit = new QLineEdit();
-    numeroCivicoLineEdit->setInputMask("999/N;");
-    formLayout->addRow(tr("Numero Civico:"), numeroCivicoLineEdit);
+    fuoriLayout = new QHBoxLayout();
+    fuoriLayout->addWidget(viaLabel);
+    fuoriLayout->addWidget(viaLineEdit);
+    fuoriLayout->addWidget(numeroCivicoLabel);
+    fuoriLayout->addWidget(numeroCivicoLineEdit);
+
+    maindatiLayout->addLayout(formLayout);
+    maindatiLayout->addLayout(fuoriLayout);
 
 
-    //STUDENTE
+    //riprendo layout
+      formLayout = new QFormLayout();
+
+      //STUDENTE
     //matricola
     matricolaLineEdit = new QLineEdit();
     matricolaLineEdit->setValidator(new QIntValidator());
@@ -120,7 +128,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     anniServizioLineEdit->setValidator(new QIntValidator());
     formLayout->addRow(tr("Anni di Servizio:"), anniServizioLineEdit);
 */
-
+    setLayout(formLayout);
 
 
     //aggiungi, annulla e cancella
