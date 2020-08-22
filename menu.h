@@ -30,7 +30,7 @@ private slots:
     void tipoUtenteComboBoxChanged(const QString&);
     void aggiornaAzioni(const QItemSelection &selected , const QItemSelection &deselected);
     void aggiungiUtente();
-    void modificaUtente(const QModelIndex &index);
+    void modificaUtente(const QModelIndex &index = QModelIndex());
     void rimuoviUtente();
     void aggiornaFiltro();
     void aggiornaColonnaRicerca(const QString&);
@@ -38,7 +38,7 @@ private slots:
 private:
     QVBoxLayout *mainLayout;
     QHBoxLayout *aggiungiRimuoviButtonsLayout, *ricercaLayout, *visualizzazioneLayout;
-    QPushButton *aggiungiButton, *rimuoviButton;
+    QPushButton *aggiungiButton, *rimuoviButton, *modificaButton;
     QLabel *cercaLabel, *perLabel, *visualizzaLabel;
     QLineEdit *cercaLineEdit;
     QComboBox *colonnaRicercaComboBox, *tipoUtenteComboBox;

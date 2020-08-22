@@ -11,8 +11,11 @@ menu::menu(tablemodel *_model, QWidget *parent)
     aggiungiRimuoviButtonsLayout = new QHBoxLayout();
     aggiungiButton= new QPushButton("Aggiungi utente");
     rimuoviButton= new QPushButton("Rimuovi utente");
+    modificaButton= new QPushButton("Visualizza utente");
     rimuoviButton->setEnabled(false);
+    modificaButton->setEnabled(false);
     aggiungiRimuoviButtonsLayout->addWidget(aggiungiButton);
+    aggiungiRimuoviButtonsLayout->addWidget(modificaButton);
     aggiungiRimuoviButtonsLayout->addWidget(rimuoviButton);
     mainLayout->addLayout(aggiungiRimuoviButtonsLayout);
 
@@ -20,6 +23,8 @@ menu::menu(tablemodel *_model, QWidget *parent)
     connect(aggiungiButton, SIGNAL(clicked()), this, SLOT(aggiungiUtente()));
     //Rimuove l'utente selezionato
     connect(rimuoviButton, SIGNAL(clicked()), this, SLOT(rimuoviUtente()));
+    //Visualizza l'utente selezionato
+    connect(modificaButton, SIGNAL(clicked()), this, SLOT(modificaUtente()));
 
     //Ricerca per campi
     ricercaLayout = new QHBoxLayout();
@@ -154,8 +159,15 @@ void menu::modificaUtente(const QModelIndex &index){
     QString via;
     QString cap;
     QString numeroCivico;
-    int row = modelloProxy->mapToSource(index).row();
+    int row;
 
+    if(!index.isValid()){
+        //Se sono selezionate più righe modifica la prima
+        QModelIndexList indexes = utentiTableView->selectionModel()->selectedRows();
+        row = modelloProxy->mapToSource(indexes.at(0)).row();
+    }else{
+        row = modelloProxy->mapToSource(index).row();
+    }
     QModelIndex codiceFiscaleIndex = modelloProxy->sourceModel()->index(row, 0, QModelIndex());
     codiceFiscale = modelloProxy->sourceModel()->data(codiceFiscaleIndex, Qt::DisplayRole).toString();
 
@@ -204,8 +216,10 @@ void menu::aggiornaAzioni(const QItemSelection &selected , const QItemSelection 
     QModelIndexList indexes = selected.indexes();
     if (!indexes.isEmpty()) {
         rimuoviButton->setEnabled(true);
+        modificaButton->setEnabled(true);
     } else {
         rimuoviButton->setEnabled(false);
+        modificaButton->setEnabled(false);
     }
 }
 
