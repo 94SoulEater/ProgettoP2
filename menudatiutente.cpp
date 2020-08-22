@@ -7,7 +7,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     maindatiLayout = new QVBoxLayout();
     formLayout = new QFormLayout();
 
-    //tipo utente (non si possono istanziare utente e studente)
+    //tipo utente (non si possono istanziare utente e insegnante)
     tipoUtenteMenuComboBox = new QComboBox();
     tipoUtenteMenuComboBox->addItem("Studente");
     tipoUtenteMenuComboBox->addItem("Professore");
@@ -66,6 +66,11 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
 
     //STUDENTE
+    //matricola
+    matricolaLineEdit = new QLineEdit();
+    matricolaLineEdit->setValidator(new QIntValidator());
+    formLayout->addRow(tr("Matricola:"), matricolaLineEdit);
+
     //laurea
     laureaMenuComboBox = new QComboBox();
     laureaMenuComboBox->addItem("Triennale");
