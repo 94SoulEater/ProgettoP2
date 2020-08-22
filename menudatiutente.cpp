@@ -16,8 +16,6 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     formLayout->addRow(tr("Tipo Utente:"), tipoUtenteMenuComboBox);
      connect(tipoUtenteMenuComboBox, SIGNAL(currentIndexChanged(QString)), this,SLOT (showRow(QString)));
 
-
-
     //UTENTE
     //codice fiscale
      codiceFiscaleLabel=new QLabel("Codice Fiscale:");
@@ -98,6 +96,17 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     anniServizioLineEdit->setValidator(new QIntValidator());
     formLayout->addRow(anniServizioLabel, anniServizioLineEdit);
 
+    //ricerca
+    ricercaLabel=new QLabel("Aggiungi Ricerca:");
+    ricercaButton= new QPushButton("Aggiungi");
+    formLayout->addRow(ricercaLabel,ricercaButton);
+
+    //LEZIONE
+    lezioneLabel=new QLabel("Aggiungi Lezione:");
+    lezioneButton= new QPushButton("Aggiungi");
+    formLayout->addRow(lezioneLabel,lezioneButton);
+
+
       //STUDENTE
     //matricola
     matricolaLabel=new QLabel("Matricola:");
@@ -146,9 +155,6 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     maindatiLayout->addLayout(formLayout);
     maindatiLayout->addLayout(fuoriLayout);
 
-        //riprendo layout
-   formLayout=new QFormLayout();
-
     //aggiungi, annulla e cancella
     aggiungiMenuButton= new QPushButton("Aggiungi");
     cancellaMenuButton= new QPushButton("Cancella tutto");
@@ -173,6 +179,10 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     tipoLabel->setVisible(false);
    anniServizioLineEdit->setVisible(false);
    anniServizioLabel->setVisible(false);
+    ricercaLabel->setVisible(false);
+    ricercaButton->setVisible(false);
+    lezioneLabel->setVisible(false);
+    lezioneButton->setVisible(false);
 
 }
 
@@ -223,8 +233,17 @@ void menudatiutente::showRow(QString combo)
       tipoLabel->setVisible(false);
      anniServizioLineEdit->setVisible(false);
      anniServizioLabel->setVisible(false);
+     ricercaLabel->setVisible(false);
+     ricercaButton->setVisible(false);
+     lezioneLabel->setVisible(false);
+     lezioneButton->setVisible(false);
 
 }
+    if(combo=="Tutor"){
+        lezioneLabel->setVisible(true);
+        lezioneButton->setVisible(true);
+    }
+
     if(combo=="Professore"){
 
         matricolaLineEdit->setVisible(false);
@@ -246,6 +265,10 @@ void menudatiutente::showRow(QString combo)
      tipoLabel->setVisible(true);
     anniServizioLineEdit->setVisible(true);
       anniServizioLabel->setVisible(true);
+      ricercaLabel->setVisible(true);
+      ricercaButton->setVisible(true);
+      lezioneLabel->setVisible(true);
+      lezioneButton->setVisible(true);
 
     }
 }
