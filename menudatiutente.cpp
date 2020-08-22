@@ -44,7 +44,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     //cap
     capLineEdit = new QLineEdit();
-    capLineEdit->setValidator(new QIntValidator());
+    capLineEdit->setValidator(new QIntValidator(this));
     formLayout->addRow(tr("CAP:"), capLineEdit);
 
     //regione
@@ -76,7 +76,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
       //STUDENTE
     //matricola
     matricolaLineEdit = new QLineEdit();
-    matricolaLineEdit->setValidator(new QIntValidator());
+    matricolaLineEdit->setValidator(new QIntValidator(this));
     formLayout->addRow(tr("Matricola:"), matricolaLineEdit);
 
     //laurea
@@ -93,7 +93,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     //annocorso
     annocorsoLineEdit = new QLineEdit();
-    annocorsoLineEdit->setValidator(new QIntValidator());
+    annocorsoLineEdit->setValidator(new QIntValidator(this));
     formLayout->addRow(tr("Anno corso:"), annocorsoLineEdit);
 
     //iscrizione

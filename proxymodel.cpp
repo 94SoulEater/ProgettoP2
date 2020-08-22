@@ -1,7 +1,7 @@
 #include "proxymodel.h"
 
 proxymodel::proxymodel(QObject *parent):
-    QSortFilterProxyModel(parent), colonneNascoste(){
+    QSortFilterProxyModel(parent), colonneNascoste(), filtroTipoUtente(Utente){
 }
 
 bool proxymodel::filterAcceptsColumn(int source_column, const QModelIndex&) const{
@@ -14,24 +14,25 @@ bool proxymodel::filterAcceptsRow(int source_row, const QModelIndex &sourceParen
     QModelIndex tipoUtente = sourceModel()->index(source_row, 11, sourceParent);
     bool filtroUtente;
     switch(filtroTipoUtente){
-    case Utente:
+    case Utente: //Mostra tutti gli utenti
         filtroUtente = true;
         break;
-    case Studente:
+    case Studente: //Mostra studenti e tutor
         filtroUtente = sourceModel()->data(tipoUtente).toString().contains(QString::fromStdString("Studente"));
         filtroUtente = filtroUtente || sourceModel()->data(tipoUtente).toString().contains(QString::fromStdString("Tutor"));
         break;
-    case Tutor:
+    case Tutor: //Mostra solo tutor
         filtroUtente = sourceModel()->data(tipoUtente).toString().contains(QString::fromStdString("Tutor"));
         break;
-    case Insegnante:
+    case Insegnante: //Mostra professori e tutor
         filtroUtente = sourceModel()->data(tipoUtente).toString().contains(QString::fromStdString("Tutor"));
         filtroUtente = filtroUtente || sourceModel()->data(tipoUtente).toString().contains(QString::fromStdString("Professore"));
         break;
-    case Professore:
+    case Professore: //Mostra solo professori
         filtroUtente = sourceModel()->data(tipoUtente).toString().contains(QString::fromStdString("Professore"));
         break;
     }
+    //Se l'utente appartiene al tipo selezionato e contiene la stringa cercata viene mostrato
     return (filtroUtente && sourceModel()->data(index).toString().contains(filterRegExp()));
 }
 
@@ -43,44 +44,22 @@ bool proxymodel::isColonnaNascosta(int _col){
 void proxymodel::setFiltroColonne(tipoutente _tipoUtente){
     filtroTipoUtente = _tipoUtente;
     colonneNascoste.clear();
-    switch(_tipoUtente){
-    case Utente:
-        colonneNascoste.push(1);
-        colonneNascoste.push(7);
-        colonneNascoste.push(8);
-        colonneNascoste.push(9);
-        colonneNascoste.push(10);
-        colonneNascoste.push(12);
-        colonneNascoste.push(13);
-        break;
-    case Studente:
-        colonneNascoste.push(0);
-        colonneNascoste.push(12);
-        colonneNascoste.push(13);
-        break;
-    case Professore:
-        colonneNascoste.push(1);
-        colonneNascoste.push(7);
-        colonneNascoste.push(8);
-        colonneNascoste.push(9);
-        colonneNascoste.push(10);
-        colonneNascoste.push(11);
-        break;
-    case Insegnante:
-        colonneNascoste.push(1);
-        colonneNascoste.push(7);
-        colonneNascoste.push(8);
-        colonneNascoste.push(9);
-        colonneNascoste.push(10);
-        colonneNascoste.push(12);
-        colonneNascoste.push(13);
-        break;
-    case Tutor:
-        colonneNascoste.push(11);
-        colonneNascoste.push(12);
-        colonneNascoste.push(13);
-        break;
+    if(_tipoUtente != Studente && _tipoUtente != Tutor){
+        colonneNascoste.push(1); //Matricola
+        colonneNascoste.push(7); //Corso
+        colonneNascoste.push(8); //Laurea
+        colonneNascoste.push(9); //Anno
+        colonneNascoste.push(10);//Anni fuori corso
     }
+    if(_tipoUtente != Professore){
+        colonneNascoste.push(12); //Tipo professore
+        colonneNascoste.push(13); //Anni di servizio
+    }
+    if(_tipoUtente == Professore || _tipoUtente == Tutor){
+        colonneNascoste.push(11); //Tipo utente
+    }
+    if(_tipoUtente == Studente) colonneNascoste.push(0); //CodiceFiscale
+
     invalidateFilter();
     emit colonneModificate();
 }

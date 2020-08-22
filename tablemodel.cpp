@@ -53,47 +53,47 @@ QVariant tablemodel::data(const QModelIndex &index, int role) const{
     if (role == Qt::DisplayRole) {
         utente* utenteTemp = listaUtenti.value(index.row()).operator->();
         switch(index.column()){
-        case 0:
+        case 0: //Codice fiscale
             return QString::fromStdString(utenteTemp->getCodiceFiscale());
-        case 1:{
+        case 1:{ //Matricola
             studente* tmp = dynamic_cast<studente*>(utenteTemp);
             if(tmp){
                 return QString::number(tmp->getMatricola());
             }
             return QVariant();
         }
-        case 2:
+        case 2: //Nome
             return QString::fromStdString(utenteTemp->getNome());
-        case 3:
+        case 3: //Cognome
             return QString::fromStdString(utenteTemp->getCognome());
-        case 4:
+        case 4: //Data di nascita
             return QString(utenteTemp->getDataNascita().toString());
-        case 5:
+        case 5: //Numero di telefono
             return QString::fromStdString(utenteTemp->getTelefono());
-        case 6:
+        case 6: //Email
             return QString::fromStdString(utenteTemp->getEmail());
-        case 7:{
+        case 7:{ //Corso di studi
             studente* tmp = dynamic_cast<studente*>(utenteTemp);
             if(tmp){
                 return QString::fromStdString(tmp->getCorso());
             }
             return QVariant();
         }
-        case 8:{
+        case 8:{ //Tipo di laurea
             studente* tmp = dynamic_cast<studente*>(utenteTemp);
             if(tmp){
                 return QString::fromStdString(tmp->getLaurea());
             }
             return QVariant();
         }
-        case 9:{
+        case 9:{ //Anno corso
             studente* tmp = dynamic_cast<studente*>(utenteTemp);
             if(tmp){
                 return QString::number(tmp->getAnnoCorso());
             }
             return QVariant();
         }
-        case 10:{
+        case 10:{ //Anni fuori corso
             studente* tmp = dynamic_cast<studente*>(utenteTemp);
             if(tmp){
                 if(tmp->getFuoricorso()) return QString::number(tmp->getAnniFuoriCorso());
@@ -101,16 +101,16 @@ QVariant tablemodel::data(const QModelIndex &index, int role) const{
             }
             return QVariant();
         }
-        case 11:
+        case 11: //Tipo utente
             return QString::fromStdString(utente::fromTipoUtente(utenteTemp->getTipoUtente()));
-        case 12:{
+        case 12:{ //Tipo professore
             professore* tmp = dynamic_cast<professore*>(utenteTemp);
             if(tmp){
                 return QString::fromStdString(tmp->getTipo());
             }
             return QVariant();
         }
-        case 13:{
+        case 13:{ //Anni di servizio
             professore* tmp = dynamic_cast<professore*>(utenteTemp);
             if(tmp){
                 return QString::number(tmp->getAnniServizio());
@@ -171,45 +171,45 @@ bool tablemodel::setData(const QModelIndex &index, const QVariant &value, int ro
         puntatoresmart<utente> tmp = listaUtenti.value(row);
 
         switch(index.column()){
-        case 0:
+        case 0: //CodiceFiscale
             tmp->setCodiceFiscale(value.toString().toStdString());
             break;
-        case 1:
+        case 1: //Matricola
             if(dynamic_cast<studente*>(tmp.operator->())){
                 dynamic_cast<studente*>(tmp.operator->())->setMatricola(value.toString().toInt());
             }
             break;
-        case 2:
+        case 2: //Nome
             tmp->setNome(value.toString().toStdString());
             break;
-        case 3:
+        case 3: //Cognome
             tmp->setCognome(value.toString().toStdString());
             break;
-        case 4:
+        case 4: //Data di nascita
             tmp->setDataNascita(QDate::fromString(value.toString()));
             break;
-        case 5:
+        case 5: //Numero di telefono
             tmp->setTelefono(value.toString().toStdString());
             break;
-        case 6:
+        case 6: //Email
             tmp->setEmail(value.toString().toStdString());
             break;
-        case 7:
+        case 7: //Corso di studi
             if(dynamic_cast<studente*>(tmp.operator->())){
                 dynamic_cast<studente*>(tmp.operator->())->setCorso(value.toString().toStdString());
             }
             break;
-        case 8:
+        case 8: //Tipo laurea
             if(dynamic_cast<studente*>(tmp.operator->())){
                 dynamic_cast<studente*>(tmp.operator->())->setLaurea(value.toString().toStdString());
             }
             break;
-        case 9:
+        case 9: //Anno corso
             if(dynamic_cast<studente*>(tmp.operator->())){
                 dynamic_cast<studente*>(tmp.operator->())->setAnnoCorso(value.toInt());
             }
             break;
-        case 10:
+        case 10: //Anni fuori corso
             if(dynamic_cast<studente*>(tmp.operator->())){
                 if(value.toInt()){
                     dynamic_cast<studente*>(tmp.operator->())->setFuoricorso(true);
@@ -220,14 +220,14 @@ bool tablemodel::setData(const QModelIndex &index, const QVariant &value, int ro
                 }
             }
             break;
-        case 11:
+        case 11: //Tipo utente
             break;
-        case 12:
+        case 12: //Tipo professore
             if(dynamic_cast<professore*>(tmp.operator->())){
                 dynamic_cast<professore*>(tmp.operator->())->setTipo(value.toString().toStdString());
             }
             break;
-        case 13:
+        case 13: //Anni di servizio
             if(dynamic_cast<professore*>(tmp.operator->())){
                 dynamic_cast<professore*>(tmp.operator->())->setAnniServizio(value.toInt());
             }
@@ -246,11 +246,9 @@ bool tablemodel::setData(const QModelIndex &index, const QVariant &value, int ro
 bool tablemodel::insertRows(int position, int rows, const QModelIndex &index){
     Q_UNUSED(index);
     beginInsertRows(QModelIndex(), position, position + rows - 1);
-
     for (int row = 0; row < rows; ++row) {
         listaUtenti.push(puntatoresmart<utente>());
     }
-
     endInsertRows();
     return true;
 }
@@ -258,7 +256,6 @@ bool tablemodel::insertRows(int position, int rows, const QModelIndex &index){
 bool tablemodel::removeRows(int position, int rows, const QModelIndex &index){
     Q_UNUSED(index);
     beginRemoveRows(QModelIndex(), position, position + rows - 1);
-
     for (int row = 0; row < rows; ++row) {
         listaUtenti.remove(position);
     }
