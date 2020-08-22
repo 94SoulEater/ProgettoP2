@@ -17,7 +17,6 @@
 
 
 
-
 class menudatiutente : public QDialog{
     Q_OBJECT
 public:
@@ -25,10 +24,10 @@ public:
 
     QFormLayout *formLayout;
     QVBoxLayout *maindatiLayout;
-    QHBoxLayout *bottoniLayout, *labelLayout, *aggiungiAnnullaMenuButtonLayout, *fuoriLayout;
-    QPushButton *aggiungiMenuButton, *annullaMenuButton, *cancellaMenuButton;
+    QHBoxLayout *bottoniLayout, *labelLayout, *aggiungiAnnullaMenuButtonLayout, *fuoriLayout, *vnLayout;
+    QPushButton *aggiungiMenuButton, *annullaMenuButton, *cancellaMenuButton, *hideButton;
     QComboBox *tipoUtenteMenuComboBox, *laureaMenuComboBox;
-    QLabel *codiceFiscaleLabel, *nomeLabel, *cognomeLabel, *dataNascitaLabel, *tipoUtenteLabel, *annifuoricorsoLabel, *fuoricorsoLabel, *viaLabel, *numeroCivicoLabel;
+    QLabel *codiceFiscaleLabel, *nomeLabel, *cognomeLabel, *dataNascitaLabel, *tipoUtenteLabel, *annifuoricorsoLabel, *fuoricorsoLabel, *viaLabel, *numeroCivicoLabel, *emailLabel,*telefonoLabel, *capLabel, *regioneLabel, *comuneLabel, *tipoLabel, *anniServizioLabel, *laureaLabel,*corsoLabel,*matricolaLabel,*annocorsoLabel, *dataIscrizioneLabel;
     QLineEdit *codiceFiscaleLineEdit, *nomeLineEdit, *cognomeLineEdit, *dataNascitaLineEdit, *emailLineEdit, *telefonoLineEdit, *capLineEdit, *regioneLineEdit, *comuneLineEdit, *viaLineEdit, *numeroCivicoLineEdit, *annocorsoLineEdit, *corsoLineEdit, *anniServizioLineEdit, *tipoLineEdit, *matricolaLineEdit;
     QDateEdit * dataNascitaEdit, *dataIscrizioneEdit;
     QCheckBox *checkBox;
@@ -36,6 +35,7 @@ public:
 
 private slots:
     void clear();
+    void showRow(QString);
 };
 
 #endif // MENUDATIUTENTE_H
