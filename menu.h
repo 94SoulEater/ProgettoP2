@@ -18,6 +18,7 @@
 #include <QFormLayout>
 #include <QtWidgets>
 #include <QLineEdit>
+#include <algorithm>
 
 class menu : public QWidget
 {

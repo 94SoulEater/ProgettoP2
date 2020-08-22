@@ -203,10 +203,16 @@ void menu::modificaUtente(const QModelIndex &index){
 //Rimuove l'utente selezionato quando viene premuto il bottone
 void menu::rimuoviUtente(){
     QItemSelectionModel *selectionModel = utentiTableView->selectionModel();
-    QModelIndexList indexes = selectionModel->selectedRows();
-    foreach (QModelIndex index, indexes) {
-        int row = modelloProxy->mapToSource(index).row();
-        modelloProxy->removeRows(row, 1, QModelIndex());
+    QList<int> rows;
+    foreach (QModelIndex index, selectionModel->selectedRows()){
+        rows.append(modelloProxy->mapToSource(index).row());
+    }
+    //Ordina la lista di righe in ordine decrescende, così da
+    //non modificare gli indici successivi a quello rimosso e
+    //non saper più che elemento rimuovere (Solo per rimozioni multiple)
+    std::sort(rows.rbegin(), rows.rend());
+    foreach(int row, rows){
+        modelloProxy->sourceModel()->removeRows(row, 1, QModelIndex());
     }
 }
 

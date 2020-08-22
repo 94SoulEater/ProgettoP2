@@ -28,11 +28,11 @@ void tablemodel::aggiungiUtenti(){
     provaIns1->addRicerca(provaRic2);
     ricerca provaRic3("C. De Francesco, C. E. Palazzi, D. Ronzani","Fast Message Broadcasting in Vehicular Networks: Model Analysis and Performance Evaluation", "https://ieeexplore.ieee.org/document/9088960", "IEEE Communications Letters", 1, 4, 2020);
     provaIns5->addRicerca(provaRic3);
-    listaUtenti.push(puntatoresmart<utente>(provaIns1));
-    listaUtenti.push(puntatoresmart<utente>(provaIns2));
-    listaUtenti.push(puntatoresmart<utente>(provaIns3));
-    listaUtenti.push(puntatoresmart<utente>(provaIns4));
-    listaUtenti.push(puntatoresmart<utente>(provaIns5));
+    listaUtenti.push(puntatoresmart<utente>(provaIns1)); //Ranzato
+    listaUtenti.push(puntatoresmart<utente>(provaIns2)); //Gualtieri
+    listaUtenti.push(puntatoresmart<utente>(provaIns3)); //Trentini
+    listaUtenti.push(puntatoresmart<utente>(provaIns4)); //Baresi
+    listaUtenti.push(puntatoresmart<utente>(provaIns5)); //Palazzi
 }
 
 tablemodel::tablemodel(QObject *parent)
@@ -51,61 +51,50 @@ int tablemodel::columnCount(const QModelIndex&) const{
 QVariant tablemodel::data(const QModelIndex &index, int role) const{
     if (!index.isValid()) return QVariant();
     if (role == Qt::DisplayRole) {
-        contenitore<puntatoresmart<utente>>::iteratore_const it = listaUtenti.begin();
+        utente* utenteTemp = listaUtenti.value(index.row()).operator->();
         switch(index.column()){
         case 0:
-            for(int i=0; i<index.row(); i++) ++it;
-            return QString::fromStdString((*(*it)).getCodiceFiscale());
+            return QString::fromStdString(utenteTemp->getCodiceFiscale());
         case 1:{
-            for(int i=0; i<index.row(); i++) ++it;
-            studente* tmp = dynamic_cast<studente*>((*it).operator ->());
+            studente* tmp = dynamic_cast<studente*>(utenteTemp);
             if(tmp){
                 return QString::number(tmp->getMatricola());
             }
             return QVariant();
         }
         case 2:
-            for(int i=0; i<index.row(); i++) ++it;
-            return QString::fromStdString((*(*it)).getNome());
+            return QString::fromStdString(utenteTemp->getNome());
         case 3:
-            for(int i=0; i<index.row(); i++) ++it;
-            return QString::fromStdString((*(*it)).getCognome());
+            return QString::fromStdString(utenteTemp->getCognome());
         case 4:
-            for(int i=0; i<index.row(); i++) ++it;
-            return QString((*(*it)).getDataNascita().toString());
+            return QString(utenteTemp->getDataNascita().toString());
         case 5:
-            for(int i=0; i<index.row(); i++) ++it;
-            return QString::fromStdString((*(*it)).getTelefono());
+            return QString::fromStdString(utenteTemp->getTelefono());
         case 6:
-            for(int i=0; i<index.row(); i++) ++it;
-            return QString::fromStdString((*(*it)).getEmail());
+            return QString::fromStdString(utenteTemp->getEmail());
         case 7:{
-            for(int i=0; i<index.row(); i++) ++it;
-            studente* tmp = dynamic_cast<studente*>((*it).operator ->());
+            studente* tmp = dynamic_cast<studente*>(utenteTemp);
             if(tmp){
                 return QString::fromStdString(tmp->getCorso());
             }
             return QVariant();
         }
         case 8:{
-            for(int i=0; i<index.row(); i++) ++it;
-            studente* tmp = dynamic_cast<studente*>((*it).operator ->());
+            studente* tmp = dynamic_cast<studente*>(utenteTemp);
             if(tmp){
                 return QString::fromStdString(tmp->getLaurea());
             }
             return QVariant();
         }
         case 9:{
-            for(int i=0; i<index.row(); i++) ++it;
-            studente* tmp = dynamic_cast<studente*>((*it).operator ->());
+            studente* tmp = dynamic_cast<studente*>(utenteTemp);
             if(tmp){
                 return QString::number(tmp->getAnnoCorso());
             }
             return QVariant();
         }
         case 10:{
-            for(int i=0; i<index.row(); i++) ++it;
-            studente* tmp = dynamic_cast<studente*>((*it).operator ->());
+            studente* tmp = dynamic_cast<studente*>(utenteTemp);
             if(tmp){
                 if(tmp->getFuoricorso()) return QString::number(tmp->getAnniFuoriCorso());
                 else return QString::fromStdString("Regolare");
@@ -113,19 +102,16 @@ QVariant tablemodel::data(const QModelIndex &index, int role) const{
             return QVariant();
         }
         case 11:
-            for(int i=0; i<index.row(); i++) ++it;
-            return QString::fromStdString(utente::fromTipoUtente((*(*it)).getTipoUtente()));
+            return QString::fromStdString(utente::fromTipoUtente(utenteTemp->getTipoUtente()));
         case 12:{
-            for(int i=0; i<index.row(); i++) ++it;
-            professore* tmp = dynamic_cast<professore*>((*it).operator ->());
+            professore* tmp = dynamic_cast<professore*>(utenteTemp);
             if(tmp){
                 return QString::fromStdString(tmp->getTipo());
             }
             return QVariant();
         }
         case 13:{
-            for(int i=0; i<index.row(); i++) ++it;
-            professore* tmp = dynamic_cast<professore*>((*it).operator ->());
+            professore* tmp = dynamic_cast<professore*>(utenteTemp);
             if(tmp){
                 return QString::number(tmp->getAnniServizio());
             }

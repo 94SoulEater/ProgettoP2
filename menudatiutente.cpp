@@ -128,7 +128,6 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     anniServizioLineEdit->setValidator(new QIntValidator());
     formLayout->addRow(tr("Anni di Servizio:"), anniServizioLineEdit);
 */
-    setLayout(formLayout);
 
 
     //aggiungi, annulla e cancella

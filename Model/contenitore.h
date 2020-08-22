@@ -66,6 +66,7 @@ public:
    void clear();
    bool contains(const T&) const;
    T& value(int _pos);
+   const T& value(int _pos) const;
    void remove(int _pos);
    void remove(const T& t);
    void replace(int _pos, const T&);
@@ -176,6 +177,13 @@ bool contenitore<T>::contains(const T& t) const{
 template<class T>
 T& contenitore<T>::value(int _pos){
     iteratore it = begin();
+    for(int i=0; i<_pos; i++) ++it;
+    return *it;
+}
+
+template<class T>
+const T& contenitore<T>::value(int _pos) const{
+    iteratore_const it = begin();
     for(int i=0; i<_pos; i++) ++it;
     return *it;
 }
