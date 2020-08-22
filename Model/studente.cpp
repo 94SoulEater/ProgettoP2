@@ -26,6 +26,13 @@ string studente::getLaurea() const{
     }
 }
 
+void studente::setLaurea(const string &value){
+    if(value == "Triennale") laurea = triennale;
+    if(value == "Magistrale") laurea = magistrale;
+    if(value == "Diploma Specializzazione") laurea = diplSpecializzazione;
+    if(value == "Dottorato Ricerca") laurea = dottRicerca;
+}
+
 void studente::setLaurea(const TipoLaurea &value){
     laurea = value;
 }

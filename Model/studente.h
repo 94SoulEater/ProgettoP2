@@ -24,6 +24,7 @@ public:
     void setMatricola(int value);
     string getLaurea() const;
     void setLaurea(const TipoLaurea &value);
+    void setLaurea(const string &value);
     string getCorso() const;
     void setCorso(const string &value);
     int getAnnoCorso() const;

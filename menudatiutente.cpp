@@ -84,24 +84,24 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     formLayout->addRow(tr("Anno corso:"), annocorsoLineEdit);
 
     //iscrizione
-     dataIscrizioneEdit = new QDateEdit();
-      dataIscrizioneEdit->setCalendarPopup(true);
-     formLayout->addRow(tr("Data di Iscrizione:"), dataIscrizioneEdit);
+    dataIscrizioneEdit = new QDateEdit();
+    dataIscrizioneEdit->setCalendarPopup(true);
+    formLayout->addRow(tr("Data di Iscrizione:"), dataIscrizioneEdit);
 
-     //fuoricorso e annifuoricorso
-     checkBox = new QCheckBox();
-     spinBox = new QSpinBox();
-     fuoricorsoLabel = new QLabel("Fuori Corso:");
-     annifuoricorsoLabel = new QLabel("Anni Fuori Corso:");
+    //fuoricorso e annifuoricorso
+    checkBox = new QCheckBox();
+    spinBox = new QSpinBox();
+    fuoricorsoLabel = new QLabel("Fuori Corso:");
+    annifuoricorsoLabel = new QLabel("Anni Fuori Corso:");
 
-      fuoriLayout = new QHBoxLayout();
-      fuoriLayout->addWidget(fuoricorsoLabel);
-     fuoriLayout->addWidget(checkBox);
-     fuoriLayout->addWidget(annifuoricorsoLabel);
-      fuoriLayout->addWidget( spinBox);
+    fuoriLayout = new QHBoxLayout();
+    fuoriLayout->addWidget(fuoricorsoLabel);
+    fuoriLayout->addWidget(checkBox);
+    fuoriLayout->addWidget(annifuoricorsoLabel);
+    fuoriLayout->addWidget( spinBox);
 
-      maindatiLayout->addLayout(formLayout);
-      maindatiLayout->addLayout(fuoriLayout);
+    maindatiLayout->addLayout(formLayout);
+    maindatiLayout->addLayout(fuoriLayout);
 
 
     /*
@@ -128,8 +128,6 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     bottoniLayout->addWidget( cancellaMenuButton);
     bottoniLayout->addWidget(annullaMenuButton);
 
-
-    maindatiLayout->addLayout(formLayout);
     maindatiLayout->addLayout(bottoniLayout);
 
     connect(annullaMenuButton,SIGNAL(clicked()),this,SLOT(reject()));
@@ -156,7 +154,7 @@ void menudatiutente::clear(){
     annocorsoLineEdit->clear();
     dataIscrizioneEdit->clear();
     spinBox->clear();
-   // tipoLineEdit->clear();
+    // tipoLineEdit->clear();
     //anniServizioLineEdit->clear();
 
 }

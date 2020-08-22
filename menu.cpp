@@ -17,7 +17,7 @@ menu::menu(tablemodel *_model, QWidget *parent)
     mainLayout->addLayout(aggiungiRimuoviButtonsLayout);
 
     //Apre nuova finestra per inserimento dati utente
-    connect(aggiungiButton, SIGNAL(clicked()), this, SLOT(aggiungiExec()));
+    connect(aggiungiButton, SIGNAL(clicked()), this, SLOT(aggiungiUtente()));
     //Rimuove l'utente selezionato
     connect(rimuoviButton, SIGNAL(clicked()), this, SLOT(rimuoviUtente()));
 
@@ -45,6 +45,7 @@ menu::menu(tablemodel *_model, QWidget *parent)
     utentiTableView = new QTableView();
     utentiTableView->setModel(modelloProxy);
     utentiTableView->setSortingEnabled(true);
+    utentiTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     //Fa in modo che sizeHint() mostra tutte le colonne della tabella senza scrolling
     utentiTableView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
     //Seleziona una riga al posto di una singola cella
@@ -56,6 +57,9 @@ menu::menu(tablemodel *_model, QWidget *parent)
 
     //Quando viene selezionata una riga viene sbloccato il pulsante di rimozione, altrimenti viene bloccato
     connect(utentiTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornaAzioni(QItemSelection,QItemSelection)));
+
+    //TEST
+    connect(utentiTableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(modificaUtente(QModelIndex)));
 
     //Modalità Visualizzazione
     visualizzazioneLayout = new QHBoxLayout();
@@ -125,10 +129,9 @@ void menu::tipoUtenteComboBoxChanged(const QString &_string){
 }
 
 //Nuova finestra aggiunta cliente
-void menu::aggiungiExec(){
+void menu::aggiungiUtente(){
     menudatiutente aggiungi;
     if (aggiungi.exec()) {
-
         /*
         QString codiceFiscale = aggiungi.codiceFiscaleLineEdit->text();
         QString nome = aggiungi.nomeLineEdit->text();
@@ -137,6 +140,52 @@ void menu::aggiungiExec(){
         std::cout<<codiceFiscale.toStdString()<<" "<<nome.toStdString()<<" "<<cognome.toStdString()<<" "<<dataNascita.toStdString()<<std::endl;
         */
         // emit sendDetails(codiceFiscale, nome, cognome, dataNascita, tipoUtente);
+    }
+}
+
+void menu::modificaUtente(const QModelIndex &index){
+    QString nome;
+    QString cognome;
+    QString codiceFiscale;
+    QString telefono;
+    QString email;
+    QDate dataNascita;
+    QString regione;
+    QString comune;
+    QString via;
+    QString cap;
+    QString numeroCivico;
+    int row = modelloProxy->mapToSource(index).row();
+
+    QModelIndex codiceFiscaleIndex = modelloProxy->sourceModel()->index(row, 0, QModelIndex());
+    codiceFiscale = modelloProxy->sourceModel()->data(codiceFiscaleIndex, Qt::DisplayRole).toString();
+
+    QModelIndex nomeIndex = modelloProxy->sourceModel()->index(row, 2, QModelIndex());
+    nome = modelloProxy->sourceModel()->data(nomeIndex, Qt::DisplayRole).toString();
+
+    QModelIndex cognomeIndex = modelloProxy->sourceModel()->index(row, 3, QModelIndex());
+    cognome = modelloProxy->sourceModel()->data(cognomeIndex, Qt::DisplayRole).toString();
+
+    QModelIndex dataNascitaIndex = modelloProxy->sourceModel()->index(row, 4, QModelIndex());
+    dataNascita = QDate::fromString(modelloProxy->sourceModel()->data(dataNascitaIndex, Qt::DisplayRole).toString());
+
+    QModelIndex telefonoIndex = modelloProxy->sourceModel()->index(row, 5, QModelIndex());
+    telefono = modelloProxy->sourceModel()->data(telefonoIndex, Qt::DisplayRole).toString();
+
+    QModelIndex emailIndex = modelloProxy->sourceModel()->index(row, 6, QModelIndex());
+    email = modelloProxy->sourceModel()->data(emailIndex, Qt::DisplayRole).toString();
+
+    menudatiutente modifica;
+    modifica.setWindowTitle(tr("Modifica utente"));
+    modifica.nomeLineEdit->setText(nome);
+    modifica.cognomeLineEdit->setText(cognome);
+    modifica.codiceFiscaleLineEdit->setText(codiceFiscale);
+    modifica.dataNascitaEdit->setDate(dataNascita);
+    modifica.telefonoLineEdit->setText(telefono);
+    modifica.emailLineEdit->setText(email);
+
+    if (modifica.exec()) {
+        //...
     }
 }
 

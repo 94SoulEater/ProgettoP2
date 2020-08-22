@@ -28,9 +28,10 @@ public:
 
 private slots:
     void tipoUtenteComboBoxChanged(const QString&);
-    void rimuoviUtente();
     void aggiornaAzioni(const QItemSelection &selected , const QItemSelection &deselected);
-    void aggiungiExec();
+    void aggiungiUtente();
+    void modificaUtente(const QModelIndex &index);
+    void rimuoviUtente();
     void aggiornaFiltro();
     void aggiornaColonnaRicerca(const QString&);
 

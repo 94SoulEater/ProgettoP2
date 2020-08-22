@@ -3,11 +3,11 @@
 using std::cout; using std::endl;
 
 void tablemodel::aggiungiUtenti(){
-    professore* provaIns1 = new professore("Francesco", "Ranzato", "FRTCSL03L49F205V", "3190231829", "ranzato@gmail.com", 31, 1, 1976, "Veneto", "Padova", "San Giacomo", "31000",  "91", "Ordinario", 21);
-    tutor* provaIns2 = new tutor("Luca", "Gualtieri","LRCCRC05T15C351I", "3202222686", "gualtieri.l@gmail.com", 10, 2, 1999, "Veneto", "Caselle d'altivole", "San Francesco", "31044", "21", 1193422, triennale, "Informatica", 2, false, 0, 10, 11, 2018);
-    studente* provaIns3 = new studente("Andrea", "Trentini", "LFNSLV07L17D612W", "3492947120", "a.trentini@hotmail.it", 21, 12, 1998, "Toscana", "Firenze", "San Torriceno", "30200", "9", 1183920, magistrale, "Psicologia", 3, false, 0, 20, 8, 2017);
-    studente* provaIns4 = new studente("Isidoro", "Baresi", "NBLTCL06B60C351K", "3294019283", "isibar97@protonmail.com", 9, 4, 1997, "Veneto", "Padova", "Sant Andrea", "31000", "21H", 1172121, triennale, "Informatica", 3, true, 1, 16, 7, 2016);
-    professore* provaIns5 = new professore("Claudio", "Palazzi","CPPFBA03C27H501Y", "3201521939", "cpalazzi@gmail.com", 18, 10, 1980, "Veneto", "Caerano di san marco", "San Marco", "31031", "xx-Bis", "Ordinario", 10);
+    professore* provaIns1 = new professore("Francesco", "Ranzato", "FRTCSL03L49F205V", "+393190231829", "ranzato@gmail.com", 31, 1, 1976, "Veneto", "Padova", "San Giacomo", "31000",  "91", "Ordinario", 21);
+    tutor* provaIns2 = new tutor("Luca", "Gualtieri","LRCCRC05T15C351I", "+393202222686", "gualtieri.l@gmail.com", 10, 2, 1999, "Veneto", "Caselle d'altivole", "San Francesco", "31044", "21", 1193422, triennale, "Informatica", 2, false, 0, 10, 11, 2018);
+    studente* provaIns3 = new studente("Andrea", "Trentini", "LFNSLV07L17D612W", "+393492947120", "a.trentini@hotmail.it", 21, 12, 1998, "Toscana", "Firenze", "San Torriceno", "30200", "9", 1183920, magistrale, "Psicologia", 3, false, 0, 20, 8, 2017);
+    studente* provaIns4 = new studente("Isidoro", "Baresi", "NBLTCL06B60C351K", "+393294019283", "isibar97@protonmail.com", 9, 4, 1997, "Veneto", "Padova", "Sant Andrea", "31000", "21H", 1172121, triennale, "Informatica", 3, true, 1, 16, 7, 2016);
+    professore* provaIns5 = new professore("Claudio", "Palazzi","CPPFBA03C27H501Y", "+393201521939", "cpalazzi@gmail.com", 18, 10, 1980, "Veneto", "Caerano di san marco", "San Marco", "31031", "xx-Bis", "Ordinario", 10);
     lezione provaLez1("Programmazione ad oggetti", "SC1167 - Informatica", "Lum250", 12);
     lezione provaLez2("Verifica del software", "SC1176 - LM Informatica", "P200", 12);
     lezione provaLez3("Sistemi Operativi", "SC1167 - Informatica", "P200", 10);
@@ -207,6 +207,44 @@ bool tablemodel::setData(const QModelIndex &index, const QVariant &value, int ro
             break;
         case 6:
             tmp->setEmail(value.toString().toStdString());
+            break;
+        case 7:
+            if(dynamic_cast<studente*>(tmp.operator->())){
+                dynamic_cast<studente*>(tmp.operator->())->setCorso(value.toString().toStdString());
+            }
+            break;
+        case 8:
+            if(dynamic_cast<studente*>(tmp.operator->())){
+                dynamic_cast<studente*>(tmp.operator->())->setLaurea(value.toString().toStdString());
+            }
+            break;
+        case 9:
+            if(dynamic_cast<studente*>(tmp.operator->())){
+                dynamic_cast<studente*>(tmp.operator->())->setAnnoCorso(value.toInt());
+            }
+            break;
+        case 10:
+            if(dynamic_cast<studente*>(tmp.operator->())){
+                if(value.toInt()){
+                    dynamic_cast<studente*>(tmp.operator->())->setFuoricorso(true);
+                    dynamic_cast<studente*>(tmp.operator->())->setAnniFuoriCorso(value.toInt());
+                }else{
+                    dynamic_cast<studente*>(tmp.operator->())->setFuoricorso(false);
+                    dynamic_cast<studente*>(tmp.operator->())->setAnniFuoriCorso(0);
+                }
+            }
+            break;
+        case 11:
+            break;
+        case 12:
+            if(dynamic_cast<professore*>(tmp.operator->())){
+                dynamic_cast<professore*>(tmp.operator->())->setTipo(value.toString().toStdString());
+            }
+            break;
+        case 13:
+            if(dynamic_cast<professore*>(tmp.operator->())){
+                dynamic_cast<professore*>(tmp.operator->())->setAnniServizio(value.toInt());
+            }
             break;
         default:
             return false;
