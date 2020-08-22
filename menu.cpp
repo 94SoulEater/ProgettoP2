@@ -106,12 +106,11 @@ menu::menu(tablemodel *_model, QWidget *parent)
 void menu::setupColonneTableView(tipoutente _tipoutente){
     utentiTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     if(_tipoutente != Studente) utentiTableView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+    utentiTableView->horizontalHeader()->setSectionResizeMode(4, QHeaderView::ResizeToContents);
+    utentiTableView->horizontalHeader()->setSectionResizeMode(5, QHeaderView::ResizeToContents);
     if(_tipoutente != Tutor){
         utentiTableView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
-        utentiTableView->horizontalHeader()->setSectionResizeMode(5, QHeaderView::ResizeToContents);
-        return;
     }else{
-        utentiTableView->horizontalHeader()->setSectionResizeMode(4, QHeaderView::ResizeToContents);
         utentiTableView->horizontalHeader()->setSectionResizeMode(6, QHeaderView::ResizeToContents);
     }
 }

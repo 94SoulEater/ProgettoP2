@@ -51,3 +51,4 @@ HEADERS += \
     Model/puntatoresmart.h \
     proxymodel.h \
     menudatiutente.h
+
