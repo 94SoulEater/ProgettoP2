@@ -11,7 +11,7 @@ menu::menu(tablemodel *_model, QWidget *parent)
     aggiungiRimuoviButtonsLayout = new QHBoxLayout();
     aggiungiButton= new QPushButton("Aggiungi utente");
     rimuoviButton= new QPushButton("Rimuovi utente");
-    modificaButton= new QPushButton("Visualizza utente");
+    modificaButton= new QPushButton("Visualizza dettagli utente");
     rimuoviButton->setEnabled(false);
     modificaButton->setEnabled(false);
     aggiungiRimuoviButtonsLayout->addWidget(aggiungiButton);
