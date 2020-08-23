@@ -1,9 +1,5 @@
 #include "Model/insegnante.h"
 
-tipoutente insegnante::getTipoUtente() const{
-    return Insegnante;
-}
-
 contenitore<lezione> insegnante::getLezioni() const{
     return lezioni;
 }

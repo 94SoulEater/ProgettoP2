@@ -1,10 +1,6 @@
 #include "Model/utente.h"
 using std::string;
 
-tipoutente utente::getTipoUtente() const{
-    return Utente;
-}
-
 string utente::fromTipoUtente(const tipoutente &_tipoUtente){
     switch(_tipoUtente){
     case Utente:

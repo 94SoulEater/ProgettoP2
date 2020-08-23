@@ -29,7 +29,7 @@ public:
     utente(string="", string="", string="", string="", string="", int=1, int=1, int=1970, string="", string="", string="", string="", string="");
     virtual ~utente() = default;
     virtual utente* clone() const = 0;
-    virtual tipoutente getTipoUtente() const;
+    virtual tipoutente getTipoUtente() const = 0;
     static string fromTipoUtente(const tipoutente &_tipoUtente);
     static tipoutente toTipoUtente(const string &_tipoUtente);
     string getNumeroCivico() const;
