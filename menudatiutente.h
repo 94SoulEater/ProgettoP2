@@ -13,9 +13,11 @@
 #include <QDateEdit>
 #include <QCheckBox>
 #include <QSpinBox>
+#include <QTableView>
 #include "menuricerca.h"
 #include "menulezione.h"
-
+#include "lezionitablemodel.h"
+#include "ricerchetablemodel.h"
 
 
 class menudatiutente : public QDialog{
@@ -23,18 +25,20 @@ class menudatiutente : public QDialog{
 public:
     menudatiutente(QWidget *parent = nullptr);
 
-    QFormLayout *formLayout;
+    QFormLayout *formLayoutUtente, *formLayoutProf, *formLayoutStudente;
     QVBoxLayout *maindatiLayout;
-    QHBoxLayout *bottoniLayout, *labelLayout, *aggiungiAnnullaMenuButtonLayout, *fuoriLayout, *vnLayout;
-    QPushButton * aggiungiMenuButton, *annullaMenuButton, *cancellaMenuButton, *ricercaButton, *lezioneButton, *lezioneEliminaButton, *ricercaEliminaButton;
+    QHBoxLayout *aggRimuoviLezioneLayout, *aggRimuoviRicercaLayout, *lezTableLayout, *ricTableLayout, *bottoniLayout, *labelLayout, *aggiungiAnnullaMenuButtonLayout, *fuoriLayout, *vnLayout;
+    QPushButton * aggiungiMenuButton, *annullaMenuButton, *cancellaMenuButton, *ricercaAggiungiButton, *lezioneAggiungiButton, *lezioneEliminaButton, *ricercaEliminaButton;
     QComboBox *tipoUtenteMenuComboBox, *laureaMenuComboBox;
     QLabel *codiceFiscaleLabel, *nomeLabel, *cognomeLabel, *dataNascitaLabel, *tipoUtenteLabel, *annifuoricorsoLabel, *fuoricorsoLabel, *viaLabel, *numeroCivicoLabel, *emailLabel,*telefonoLabel, *capLabel, *regioneLabel, *comuneLabel, *tipoLabel, *anniServizioLabel, *laureaLabel,*corsoLabel,*matricolaLabel,*annocorsoLabel, *dataIscrizioneLabel, *ricercaLabel, *lezioneLabel;
     QLineEdit *codiceFiscaleLineEdit, *nomeLineEdit, *cognomeLineEdit, *dataNascitaLineEdit, *emailLineEdit, *telefonoLineEdit, *capLineEdit, *regioneLineEdit, *comuneLineEdit, *viaLineEdit, *numeroCivicoLineEdit, *annocorsoLineEdit, *corsoLineEdit, *anniServizioLineEdit, *tipoLineEdit, *matricolaLineEdit;
     QDateEdit * dataNascitaEdit, *dataIscrizioneEdit, * dataPubblicazioneEdit;
     QCheckBox *checkBox;
     QSpinBox *spinBox;
-    QLabel *titoloLabel, *autoriLabel, *linkLabel, *rivistaLabel, *dataPubblicazioneLabel, *materiaLabel, *corsoLezLabel, *creditiLabel, *stanzaLabel, *orarioLabel, *lezioneEliminaLabel, *ricercaEliminaLabel;
-    QLineEdit *titoloLineEdit, *autoriLineEdit, *rivistaLineEdit, *linkLineEdit, *materiaLineEdit, *corsoLezLineEdit, *creditiLineEdit, *stanzaLineEdit, *orarioLineEdit;
+    QLabel  *lezioneEliminaLabel, *ricercaEliminaLabel;
+    lezionitablemodel *modelloLezioni;
+    ricerchetablemodel *modelloRicerche;
+    QTableView *lezioniTableView, *ricercheTableView;
 
 private slots:
     void clear();

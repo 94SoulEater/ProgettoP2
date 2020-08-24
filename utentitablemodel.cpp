@@ -1,8 +1,8 @@
-#include "tablemodel.h"
+#include "utentitablemodel.h"
 
 using std::cout; using std::endl;
 
-void tablemodel::aggiungiUtenti(){
+void utentitablemodel::aggiungiUtenti(){
     professore* provaIns1 = new professore("Francesco", "Ranzato", "FRTCSL03L49F205V", "+393190231829", "ranzato@gmail.com", 31, 1, 1976, "Veneto", "Padova", "San Giacomo", "31000",  "91", "Ordinario", 21);
     tutor* provaIns2 = new tutor("Luca", "Gualtieri","LRCCRC05T15C351I", "+393202222686", "gualtieri.l@gmail.com", 10, 2, 1999, "Veneto", "Caselle d'altivole", "San Francesco", "31044", "21", 1193422, triennale, "Informatica", 2, false, 0, 10, 11, 2018);
     studente* provaIns3 = new studente("Andrea", "Trentini", "LFNSLV07L17D612W", "+393492947120", "a.trentini@hotmail.it", 21, 12, 1998, "Toscana", "Firenze", "San Torriceno", "30200", "9", 1183920, magistrale, "Psicologia", 3, false, 0, 20, 8, 2017);
@@ -22,11 +22,11 @@ void tablemodel::aggiungiUtenti(){
     provaIns1->addLezione(provaLez1);
     provaIns1->addLezione(provaLez2);
     provaIns5->addLezione(provaLez3);
-    ricerca provaRic1("G. Filè and F. Ranzato", "Improving abstract interpretations by systematic lifting to the powerset", "https://www.math.unipd.it/~ranzato/papers/ilps94.pdf", "The MIT Press", 1, 1, 1994);
+    ricerca provaRic1("G. Filè and F. Ranzato", "Improving abstract interpretations by systematic lifting to the powerset", "https://www.math.unipd.it/~ranzato/papers/ilps94.pdf", "The MIT Press", 1994);
     provaIns1->addRicerca(provaRic1);
-    ricerca provaRic2("A. Cortesi, R. Giacobazzi, G. Filé, C. Palamidessi, and F. Ranzato", "Complementation in abstract interpretation", "https://www.math.unipd.it/~ranzato/papers/sas95.pdf", "Springer-Verlag", 1, 1, 1995);
+    ricerca provaRic2("A. Cortesi, R. Giacobazzi, G. Filé, C. Palamidessi, and F. Ranzato", "Complementation in abstract interpretation", "https://www.math.unipd.it/~ranzato/papers/sas95.pdf", "Springer-Verlag", 1995);
     provaIns1->addRicerca(provaRic2);
-    ricerca provaRic3("C. De Francesco, C. E. Palazzi, D. Ronzani","Fast Message Broadcasting in Vehicular Networks: Model Analysis and Performance Evaluation", "https://ieeexplore.ieee.org/document/9088960", "IEEE Communications Letters", 1, 4, 2020);
+    ricerca provaRic3("C. De Francesco, C. E. Palazzi, D. Ronzani","Fast Message Broadcasting in Vehicular Networks: Model Analysis and Performance Evaluation", "https://ieeexplore.ieee.org/document/9088960", "IEEE Communications Letters", 2020);
     provaIns5->addRicerca(provaRic3);
     listaUtenti.push(puntatoresmart<utente>(provaIns1)); //Ranzato
     listaUtenti.push(puntatoresmart<utente>(provaIns2)); //Gualtieri
@@ -35,20 +35,20 @@ void tablemodel::aggiungiUtenti(){
     listaUtenti.push(puntatoresmart<utente>(provaIns5)); //Palazzi
 }
 
-tablemodel::tablemodel(QObject *parent)
+utentitablemodel::utentitablemodel(QObject *parent)
     : QAbstractTableModel(parent), listaUtenti(){
     aggiungiUtenti();
 }
 
-int tablemodel::rowCount(const QModelIndex&) const{
+int utentitablemodel::rowCount(const QModelIndex&) const{
     return listaUtenti.size();
 }
 
-int tablemodel::columnCount(const QModelIndex&) const{
+int utentitablemodel::columnCount(const QModelIndex&) const{
     return 14;
 }
 
-QVariant tablemodel::data(const QModelIndex &index, int role) const{
+QVariant utentitablemodel::data(const QModelIndex &index, int role) const{
     if (!index.isValid()) return QVariant();
     if (role == Qt::DisplayRole) {
         utente* utenteTemp = listaUtenti.value(index.row()).operator->();
@@ -124,7 +124,7 @@ QVariant tablemodel::data(const QModelIndex &index, int role) const{
     return QVariant();
 }
 
-QVariant tablemodel::headerData(int section, Qt::Orientation orientation, int role) const{
+QVariant utentitablemodel::headerData(int section, Qt::Orientation orientation, int role) const{
     if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
         switch (section) {
         case 0:
@@ -160,12 +160,12 @@ QVariant tablemodel::headerData(int section, Qt::Orientation orientation, int ro
     return QVariant();
 }
 
-Qt::ItemFlags tablemodel::flags(const QModelIndex &index) const{
+Qt::ItemFlags utentitablemodel::flags(const QModelIndex &index) const{
     if (!index.isValid())return Qt::ItemIsEnabled;
     return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
 }
 
-bool tablemodel::setData(const QModelIndex &index, const QVariant &value, int role){
+bool utentitablemodel::setData(const QModelIndex &index, const QVariant &value, int role){
     if (index.isValid() && role == Qt::EditRole) {
         int row = index.row();
         puntatoresmart<utente> tmp = listaUtenti.value(row);
@@ -239,11 +239,10 @@ bool tablemodel::setData(const QModelIndex &index, const QVariant &value, int ro
         emit(dataChanged(index, index));
         return true;
     }
-
     return false;
 }
 
-bool tablemodel::insertRows(int position, int rows, const QModelIndex &index){
+bool utentitablemodel::insertRows(int position, int rows, const QModelIndex &index){
     Q_UNUSED(index);
     beginInsertRows(QModelIndex(), position, position + rows - 1);
     for (int row = 0; row < rows; ++row) {
@@ -253,7 +252,7 @@ bool tablemodel::insertRows(int position, int rows, const QModelIndex &index){
     return true;
 }
 
-bool tablemodel::removeRows(int position, int rows, const QModelIndex &index){
+bool utentitablemodel::removeRows(int position, int rows, const QModelIndex &index){
     Q_UNUSED(index);
     beginRemoveRows(QModelIndex(), position, position + rows - 1);
     for (int row = 0; row < rows; ++row) {

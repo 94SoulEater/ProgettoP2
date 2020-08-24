@@ -12,14 +12,14 @@ private:
     string titolo;
     string link;
     string rivistaPubblicazione;
-    QDate dataPubblicazione;
+    int annoPubblicazione;
 public:
-    ricerca(string="", string="", string="", string="", int=1, int=1, int=1970);
+    ricerca(string="", string="", string="", string="", int=1970);
     ~ricerca() = default;
     bool operator==(const ricerca&)const;
     bool operator!=(const ricerca&)const;
-    QDate getDataPubblicazione() const;
-    void setDataPubblicazione(const QDate &value);
+    int getAnnoPubblicazione() const;
+    void setAnnoPubblicazione(int value);
     string getRivistaPubblicazione() const;
     void setRivistaPubblicazione(const string &value);
     string getLink() const;

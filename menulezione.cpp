@@ -22,7 +22,7 @@ menulezione::menulezione(QWidget *parent) : QDialog(parent)
     //crediti
     creditiLabel=new QLabel("Crediti:");
     creditiLineEdit = new QLineEdit();
-    creditiLineEdit->setValidator(new QIntValidator());
+    creditiLineEdit->setValidator(new QIntValidator(this));
     formLayout->addRow(creditiLabel, creditiLineEdit);
 
     //stanza
@@ -36,14 +36,14 @@ menulezione::menulezione(QWidget *parent) : QDialog(parent)
     formLayout->addRow(orarioLabel, orarioLineEdit);
 
 
-     maindatiLayout->addLayout(formLayout);
+    maindatiLayout->addLayout(formLayout);
 
     //bottoni
     aggiungiLezioneButton= new QPushButton("Aggiungi Lezione");
     annullaLezioneButton= new QPushButton("Annulla inserimento");
 
     bottoniLezioneLayout = new QHBoxLayout();
-     bottoniLezioneLayout->addWidget(aggiungiLezioneButton);
+    bottoniLezioneLayout->addWidget(aggiungiLezioneButton);
     bottoniLezioneLayout->addWidget(annullaLezioneButton);
 
     maindatiLayout->addLayout(bottoniLezioneLayout);
@@ -51,5 +51,5 @@ menulezione::menulezione(QWidget *parent) : QDialog(parent)
     connect(annullaLezioneButton,SIGNAL(clicked()),this,SLOT(reject()));
     connect(aggiungiLezioneButton, SIGNAL(clicked()), this, SLOT(accept()));
 
-     setLayout(maindatiLayout);
+    setLayout(maindatiLayout);
 }

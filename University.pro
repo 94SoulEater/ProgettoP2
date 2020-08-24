@@ -33,11 +33,13 @@ SOURCES += \
     Model/professore.cpp \
     Model/ricerca.cpp \
     Model/tutor.cpp \
-    tablemodel.cpp \
     proxymodel.cpp \
     menudatiutente.cpp \
     menuricerca.cpp \
-    menulezione.cpp
+    menulezione.cpp \
+    utentitablemodel.cpp \
+    lezionitablemodel.cpp \
+    ricerchetablemodel.cpp
 
 HEADERS += \
     Model/insegnante.h \
@@ -49,10 +51,12 @@ HEADERS += \
     Model/tutor.h \
     Model/contenitore.h \
     menu.h \
-    tablemodel.h \
     Model/puntatoresmart.h \
     proxymodel.h \
     menudatiutente.h \
     menuricerca.h \
-    menulezione.h
+    menulezione.h \
+    utentitablemodel.h \
+    lezionitablemodel.h \
+    ricerchetablemodel.h
 

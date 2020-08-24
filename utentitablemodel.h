@@ -1,5 +1,5 @@
-#ifndef TABLEMODEL_H
-#define TABLEMODEL_H
+#ifndef UTENTITABLEMODEL_H
+#define UTENTITABLEMODEL_H
 
 #include "Model/contenitore.h"
 #include "Model/puntatoresmart.h"
@@ -13,11 +13,11 @@
 #include <QModelIndex>
 #include <iostream>
 
-class tablemodel : public QAbstractTableModel{
+class utentitablemodel : public QAbstractTableModel{
     Q_OBJECT
 public:
-    tablemodel(QObject *parent = nullptr);
-    tablemodel(contenitore<puntatoresmart<utente>> _listaUtenti, QObject *parent = nullptr);
+    utentitablemodel(QObject *parent = nullptr);
+    utentitablemodel(contenitore<puntatoresmart<utente>> _listaUtenti, QObject *parent = nullptr);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
@@ -31,4 +31,4 @@ private:
     void aggiungiUtenti();
 };
 
-#endif // TABLEMODEL_H
+#endif // UTENTITABLEMODEL_H

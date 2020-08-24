@@ -29,10 +29,10 @@ menuricerca::menuricerca(QWidget *parent) : QDialog(parent)
     formLayout->addRow(rivistaLabel, rivistaLineEdit);
 
     //data di pubblicazione
-     dataPubblicazioneLabel=new QLabel("Data di Pubblicazione:");
-    dataPubblicazioneEdit = new QDateEdit();
-    dataPubblicazioneEdit->setCalendarPopup(true);
-    formLayout->addRow(dataPubblicazioneLabel, dataPubblicazioneEdit);
+    dataPubblicazioneLabel=new QLabel("Data di Pubblicazione:");
+    dataPubblicazioneLineEdit = new QLineEdit();
+    dataPubblicazioneLineEdit->setValidator(new QIntValidator(this));
+    formLayout->addRow(dataPubblicazioneLabel, dataPubblicazioneLineEdit);
 
 
     maindatiLayout->addLayout(formLayout);
@@ -42,7 +42,7 @@ menuricerca::menuricerca(QWidget *parent) : QDialog(parent)
     annullaRicercaButton= new QPushButton("Annulla inserimento");
 
     bottoniRicercaLayout = new QHBoxLayout();
-     bottoniRicercaLayout->addWidget(aggiungiRicercaButton);
+    bottoniRicercaLayout->addWidget(aggiungiRicercaButton);
     bottoniRicercaLayout->addWidget(annullaRicercaButton);
 
     maindatiLayout->addLayout(bottoniRicercaLayout);
@@ -50,5 +50,5 @@ menuricerca::menuricerca(QWidget *parent) : QDialog(parent)
     connect(annullaRicercaButton,SIGNAL(clicked()),this,SLOT(reject()));
     connect(aggiungiRicercaButton, SIGNAL(clicked()), this, SLOT(accept()));
 
-     setLayout(maindatiLayout);
+    setLayout(maindatiLayout);
 }

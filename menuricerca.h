@@ -22,8 +22,7 @@ public:
     QVBoxLayout *maindatiLayout;
     QHBoxLayout *bottoniRicercaLayout;
     QLabel *titoloLabel, *autoriLabel, *linkLabel, *rivistaLabel, *dataPubblicazioneLabel;
-    QLineEdit *titoloLineEdit, *autoriLineEdit, *rivistaLineEdit, *linkLineEdit;
-     QDateEdit * dataPubblicazioneEdit;
+    QLineEdit *dataPubblicazioneLineEdit, *titoloLineEdit, *autoriLineEdit, *rivistaLineEdit, *linkLineEdit;
      QPushButton *aggiungiRicercaButton, *annullaRicercaButton;
 };
 

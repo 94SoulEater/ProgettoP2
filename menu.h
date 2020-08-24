@@ -1,7 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "tablemodel.h"
+#include "utentitablemodel.h"
 #include "proxymodel.h"
 #include "menudatiutente.h"
 #include <QWidget>
@@ -24,7 +24,7 @@ class menu : public QWidget
 {
     Q_OBJECT
 public:
-    menu(tablemodel *_model, QWidget *parent = nullptr);
+    menu(utentitablemodel *_model, QWidget *parent = nullptr);
     ~menu();
 
 private slots:

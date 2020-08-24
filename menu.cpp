@@ -1,6 +1,6 @@
 #include "menu.h"
 
-menu::menu(tablemodel *_model, QWidget *parent)
+menu::menu(utentitablemodel *_model, QWidget *parent)
     : QWidget(parent){
     mainLayout = new QVBoxLayout(this);
 
