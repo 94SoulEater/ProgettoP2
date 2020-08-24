@@ -152,9 +152,6 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     ricercaAggiungiButton= new QPushButton("Aggiungi Ricerca");
     aggRimuoviRicercaLayout->addWidget(ricercaAggiungiButton);
 
-    ricercaModificaButton = new QPushButton("Modifica Ricerca");
-    aggRimuoviRicercaLayout->addWidget(ricercaModificaButton);
-
     ricercaEliminaButton= new QPushButton("Elimina");
     aggRimuoviRicercaLayout->addWidget(ricercaEliminaButton);
 
@@ -176,10 +173,6 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     //Apre nuova finestra per inserimento ricerca
     connect(ricercaAggiungiButton, SIGNAL(clicked()), this, SLOT(aggiungiRicerca()));
 
-    //Modifica ricerca
-    connect(ricercheTableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(modificaRicerca(QModelIndex)));
-    connect(ricercaModificaButton, SIGNAL(clicked()), this, SLOT(modificaRicerca()));
-
     maindatiLayout->addLayout(aggRimuoviRicercaLayout);
     maindatiLayout->addLayout(ricTableLayout);
 
@@ -192,11 +185,6 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     //Apre nuova finestra per inserimento ricerca
     connect(lezioneAggiungiButton, SIGNAL(clicked()), this, SLOT(aggiungiLezione()));
-
-    lezioneModificaButton= new QPushButton("Modifica Lezione");
-    aggRimuoviLezioneLayout->addWidget(lezioneModificaButton);
-
-    connect(lezioneModificaButton, SIGNAL(clicked()), this, SLOT(modificaLezione()));
 
     lezioneEliminaButton= new QPushButton("Elimina Lezione");
     aggRimuoviLezioneLayout->addWidget(lezioneEliminaButton);
@@ -214,8 +202,6 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     //Seleziona una riga al posto di una singola cella
     lezioniTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     lezTableLayout->addWidget(lezioniTableView);
-
-    connect(lezioniTableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(modificaLezione(QModelIndex)));
 
     maindatiLayout->addLayout(aggRimuoviLezioneLayout);
     maindatiLayout->addLayout(lezTableLayout);
@@ -392,113 +378,6 @@ void menudatiutente::aggiungiRicerca(){
     }
 }
 
-void menudatiutente::modificaLezione(const QModelIndex &index){
-    QString materia;
-    int crediti;
-    QString corso;
-    QString stanza;
-    int row;
-
-    if(!index.isValid()){
-        //Se sono selezionate più righe modifica la prima
-        QModelIndexList indexes = lezioniTableView->selectionModel()->selectedRows();
-        row = indexes.at(0).row();
-    }else{
-        row = index.row();
-    }
-    QModelIndex materiaIndex = modelloLezioni->index(row, 0, QModelIndex());
-    materia = modelloLezioni->data(materiaIndex, Qt::DisplayRole).toString();
-    QModelIndex corsoIndex = modelloLezioni->index(row, 1, QModelIndex());
-    corso = modelloLezioni->data(corsoIndex, Qt::DisplayRole).toString();
-    QModelIndex stanzaIndex = modelloLezioni->index(row, 2, QModelIndex());
-    stanza = modelloLezioni->data(stanzaIndex, Qt::DisplayRole).toString();
-    QModelIndex creditiIndex = modelloLezioni->index(row, 3, QModelIndex());
-    crediti = modelloLezioni->data(creditiIndex, Qt::DisplayRole).toInt();
-    menulezione modifica;
-    modifica.setWindowTitle(tr("Modifica lezione"));
-    modifica.materiaLineEdit->setText(materia);
-    modifica.corsoLineEdit->setText(corso);
-    modifica.stanzaLineEdit->setText(stanza);
-    modifica.creditiLineEdit->setText(QString::number(crediti));
-
-    if (modifica.exec()) {
-        materia = modifica.materiaLineEdit->text();
-        crediti = modifica.creditiLineEdit->text().toInt();
-        corso = modifica.corsoLineEdit->text();
-        stanza = modifica.stanzaLineEdit->text();
-
-        lezione lez(materia.toStdString(), corso.toStdString(), stanza.toStdString(), crediti);
-        if (!modelloLezioni->contains(lez)) {
-            QModelIndex index = modelloLezioni->index(row, 0, QModelIndex());
-            modelloLezioni->setData(index, materia, Qt::EditRole);
-            index = modelloLezioni->index(row, 1, QModelIndex());
-            modelloLezioni->setData(index, corso, Qt::EditRole);
-            index = modelloLezioni->index(row, 2, QModelIndex());
-            modelloLezioni->setData(index, stanza, Qt::EditRole);
-            index = modelloLezioni->index(row, 3, QModelIndex());
-            modelloLezioni->setData(index, crediti, Qt::EditRole);
-            //index = table->index(0, 1, QModelIndex());
-            //modelloLezioni->setData(index, orari, Qt::EditRole);
-        }
-    }
-
-}
-void menudatiutente::modificaRicerca(const QModelIndex &index){
-    QString autori;
-    QString titolo;
-    QString link;
-    QString rivista;
-    int anno;
-    int row;
-    if(!index.isValid()){
-        //Se sono selezionate più righe modifica la prima
-        QModelIndexList indexes = ricercheTableView->selectionModel()->selectedRows();
-        row = indexes.at(0).row();
-    }else{
-        row = index.row();
-    }
-    QModelIndex autoriIndex = modelloRicerche->index(row, 0, QModelIndex());
-    autori = modelloRicerche->data(autoriIndex, Qt::DisplayRole).toString();
-    QModelIndex titoloIndex = modelloRicerche->index(row, 1, QModelIndex());
-    titolo = modelloRicerche->data(titoloIndex, Qt::DisplayRole).toString();
-    QModelIndex linkIndex = modelloRicerche->index(row, 2, QModelIndex());
-    link = modelloRicerche->data(linkIndex, Qt::DisplayRole).toString();
-    QModelIndex rivistaIndex = modelloRicerche->index(row, 3, QModelIndex());
-    rivista = modelloRicerche->data(rivistaIndex, Qt::DisplayRole).toString();
-    QModelIndex annoIndex = modelloRicerche->index(row, 4, QModelIndex());
-    anno = modelloRicerche->data(annoIndex, Qt::DisplayRole).toInt();
-
-    menuricerca modifica;
-    modifica.setWindowTitle(tr("Modifica ricerca"));
-    modifica.autoriLineEdit->setText(autori);
-    modifica.titoloLineEdit->setText(titolo);
-    modifica.linkLineEdit->setText(link);
-    modifica.rivistaLineEdit->setText(rivista);
-    modifica.dataPubblicazioneLineEdit->setText(QString::number(anno));
-
-    if (modifica.exec()) {
-        autori = modifica.autoriLineEdit->text();
-        titolo = modifica.titoloLineEdit->text();
-        link = modifica.linkLineEdit->text();
-        rivista = modifica.rivistaLineEdit->text();
-        anno = modifica.dataPubblicazioneLineEdit->text().toInt();
-
-        ricerca ric(autori.toStdString(), titolo.toStdString(), link.toStdString(), rivista.toStdString(), anno);
-        if (!modelloRicerche->contains(ric)) {
-            QModelIndex index = modelloRicerche->index(row, 0, QModelIndex());
-            modelloRicerche->setData(index, autori, Qt::EditRole);
-            index = modelloRicerche->index(row, 1, QModelIndex());
-            modelloRicerche->setData(index, titolo, Qt::EditRole);
-            index = modelloRicerche->index(row, 2, QModelIndex());
-            modelloRicerche->setData(index, link, Qt::EditRole);
-            index = modelloRicerche->index(row, 3, QModelIndex());
-            modelloRicerche->setData(index, rivista, Qt::EditRole);
-            index = modelloRicerche->index(row, 4, QModelIndex());
-            modelloRicerche->setData(index, anno, Qt::EditRole);
-        }
-    }
-}
-
 void menudatiutente::eliminaLezione(){
     QItemSelectionModel *selectionModel = lezioniTableView->selectionModel();
     QList<int> rows;
@@ -528,4 +407,5 @@ void menudatiutente::eliminaRicerca(){
         modelloRicerche->removeRows(row, 1, QModelIndex());
     }
 }
+
 

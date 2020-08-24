@@ -36,6 +36,7 @@ QVariant lezionitablemodel::data(const QModelIndex &index, int role) const{
         case 3: //Crediti
             return QString::number(lezioneTemp.getCrediti());
         case 4: //Orari
+
             //return QString(utenteTemp->getDataNascita().toString());
         default:
             return QVariant();
