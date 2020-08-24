@@ -26,6 +26,8 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
     bool insertRows(int position, int rows, const QModelIndex &parent);
     bool removeRows(int row, int count, const QModelIndex &parent);
+    bool contains(const puntatoresmart<utente>& _utente);
+    void aggiungiUtente(puntatoresmart<utente> _utente);
 private:
     contenitore<puntatoresmart<utente>> listaUtenti;
     void aggiungiUtenti();

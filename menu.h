@@ -24,7 +24,7 @@ class menu : public QWidget
 {
     Q_OBJECT
 public:
-    menu(utentitablemodel *_model, QWidget *parent = nullptr);
+    menu(QWidget *parent = nullptr);
     ~menu();
 
 private slots:
@@ -45,6 +45,7 @@ private:
     QComboBox *colonnaRicercaComboBox, *tipoUtenteComboBox;
     QTableView *utentiTableView;
     proxymodel *modelloProxy;
+    utentitablemodel *modelloTabellaUtenti;
 
     void addCLose();
     void setupColonneTableView(tipoutente _tipoutente);

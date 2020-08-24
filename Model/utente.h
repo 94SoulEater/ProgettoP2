@@ -11,7 +11,6 @@ using std::ostream;
 enum tipoutente{Utente=0, Studente=1, Professore=2, Insegnante=3, Tutor=4};
 
 class utente{
-    friend ostream& operator <<(ostream&,const utente&);
 private:
     string nome;
     string cognome;
@@ -32,6 +31,7 @@ public:
     virtual tipoutente getTipoUtente() const = 0;
     static string fromTipoUtente(const tipoutente &_tipoUtente);
     static tipoutente toTipoUtente(const string &_tipoUtente);
+    virtual bool equals(utente* x) const = 0;
     string getNumeroCivico() const;
     void setNumeroCivico(const string &value);
     string getCap() const;
@@ -54,7 +54,6 @@ public:
     void setCognome(const string &value);
     string getNome() const;
     void setNome(const string &value);
-
 };
 
 

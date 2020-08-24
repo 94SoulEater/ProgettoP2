@@ -53,7 +53,7 @@ T* puntatoresmart<T>::operator->() const{
 
 template <class T>
 bool puntatoresmart<T>::operator==(const puntatoresmart& x) const{
-    return *puntatore == *(x.puntatore);
+    return puntatore->equals(x.puntatore);
 }
 
 #endif // PUNTATORESMART_H

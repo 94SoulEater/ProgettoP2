@@ -10,3 +10,11 @@ tipoutente tutor::getTipoUtente() const{
 tutor* tutor::clone() const{
     return new tutor(*this);
 }
+
+bool tutor::equals(utente* x) const{
+    if(!dynamic_cast<tutor*>(x))return false;
+    tutor* y = dynamic_cast<tutor*>(x);
+    bool user = (getNome() == x->getNome() && getCognome() == x->getCognome() && getCodiceFiscale() == x->getCodiceFiscale() && getTelefono() == x->getTelefono() && getEmail() == x->getEmail() && getRegione() == x->getRegione() && getComune() == x->getComune() && getVia() ==x->getVia() && getNumeroCivico() == x->getNumeroCivico() && getCap() == x->getCap() && getDataNascita().day() == x->getDataNascita().day() && getDataNascita().month() == x->getDataNascita().month() && getDataNascita().year() == x->getDataNascita().year());
+    bool tuto = (getLezioni() == y->getLezioni());
+    return (user && tuto);
+}

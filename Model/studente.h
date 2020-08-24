@@ -20,6 +20,7 @@ public:
     ~studente() = default;
     virtual studente* clone() const override;
     tipoutente getTipoUtente() const;
+    virtual bool equals(utente* y) const override;
     int getMatricola() const;
     void setMatricola(int value);
     string getLaurea() const;

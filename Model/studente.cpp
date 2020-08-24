@@ -85,3 +85,11 @@ studente::studente(string _nome, string _cognome, string _codiceFiscale, string 
 studente* studente::clone() const{
     return new studente(*this);
 }
+
+bool studente::equals(utente* x) const{
+    if(!dynamic_cast<studente*>(x))return false;
+    studente* y = dynamic_cast<studente*>(x);
+    bool user = (getNome() == x->getNome() && getCognome() == x->getCognome() && getCodiceFiscale() == x->getCodiceFiscale() && getTelefono() == x->getTelefono() && getEmail() == x->getEmail() && getRegione() == x->getRegione() && getComune() == x->getComune() && getVia() ==x->getVia() && getNumeroCivico() == x->getNumeroCivico() && getCap() == x->getCap() && getDataNascita().day() == x->getDataNascita().day() && getDataNascita().month() == x->getDataNascita().month() && getDataNascita().year() == x->getDataNascita().year());
+    bool student = (getMatricola() == y->getMatricola() && getLaurea() == y->getLaurea() && getCorso() == y->getCorso() && getAnnoCorso() == y->getAnnoCorso() && getFuoricorso() == y->getFuoricorso() && getAnniFuoriCorso() == y->getAnniFuoriCorso() && getDataIscrizione().day() == y->getDataIscrizione().day() && getDataIscrizione().month() == y->getDataIscrizione().month() && getDataIscrizione().year() == y->getDataIscrizione().year());
+    return (user && student);
+}

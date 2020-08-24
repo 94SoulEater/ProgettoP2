@@ -1,6 +1,6 @@
 #include "menu.h"
 
-menu::menu(utentitablemodel *_model, QWidget *parent)
+menu::menu(QWidget *parent)
     : QWidget(parent){
     mainLayout = new QVBoxLayout(this);
 
@@ -45,8 +45,9 @@ menu::menu(utentitablemodel *_model, QWidget *parent)
     connect(colonnaRicercaComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(aggiornaColonnaRicerca(QString)));
 
     //Lista Utenti
+    modelloTabellaUtenti = new utentitablemodel(this);
     modelloProxy = new proxymodel(this);
-    modelloProxy->setSourceModel(_model);
+    modelloProxy->setSourceModel(modelloTabellaUtenti);
     utentiTableView = new QTableView();
     utentiTableView->setModel(modelloProxy);
     utentiTableView->setSortingEnabled(true);
@@ -136,14 +137,57 @@ void menu::tipoUtenteComboBoxChanged(const QString &_string){
 void menu::aggiungiUtente(){
     menudatiutente aggiungi;
     if (aggiungi.exec()) {
-        /*
         QString codiceFiscale = aggiungi.codiceFiscaleLineEdit->text();
         QString nome = aggiungi.nomeLineEdit->text();
         QString cognome = aggiungi.cognomeLineEdit->text();
-        QString dataNascita = aggiungi.dataNascitaLineEdit->text();
-        std::cout<<codiceFiscale.toStdString()<<" "<<nome.toStdString()<<" "<<cognome.toStdString()<<" "<<dataNascita.toStdString()<<std::endl;
-        */
-        // emit sendDetails(codiceFiscale, nome, cognome, dataNascita, tipoUtente);
+        QDate dataNascita = aggiungi.dataNascitaEdit->date();
+        QString telefono = aggiungi.telefonoLineEdit->text();
+        QString email = aggiungi.emailLineEdit->text();
+        QString regione = aggiungi.regioneLineEdit->text();
+        QString comune = aggiungi.comuneLineEdit->text();
+        QString via = aggiungi.viaLineEdit->text();
+        QString cap = aggiungi.capLineEdit->text();
+        QString numeroCivico = aggiungi.numeroCivicoLineEdit->text();
+        QString tipoUtente = aggiungi.tipoUtenteMenuComboBox->currentText();
+        puntatoresmart<utente> utemp;
+        if(tipoUtente == "Studente" || tipoUtente == "Tutor"){
+            int matricola = aggiungi.matricolaLineEdit->text().toInt();
+            //tipolaurea direttamente sotto
+            QString corso = aggiungi.corsoLineEdit->text();
+            int annoCorso = aggiungi.annocorsoLineEdit->text().toInt();
+            bool fuoriCorso = aggiungi.checkBox->checkState();
+            int anniFuoriCorso;
+            if(fuoriCorso) anniFuoriCorso = aggiungi.annifuoricorsoLabel->text().toInt();
+            else anniFuoriCorso = 0;
+            QDate dataIscrizione = aggiungi.dataIscrizioneEdit->date();
+            if(tipoUtente == "Studente"){
+                utemp = new studente(nome.toStdString(), cognome.toStdString(), codiceFiscale.toStdString(), telefono.toStdString(), email.toStdString(), dataNascita.day(), dataNascita.month(), dataNascita.year(), regione.toStdString(), comune.toStdString(), via.toStdString(), cap.toStdString(), numeroCivico.toStdString(), matricola, triennale, corso.toStdString(), annoCorso, fuoriCorso, anniFuoriCorso, dataIscrizione.day(), dataIscrizione.month(), dataIscrizione.year());
+                dynamic_cast<studente*>(utemp.operator ->())->setLaurea(aggiungi.laureaMenuComboBox->currentText().toStdString());
+            }
+        }
+        if(tipoUtente == "Professore"){
+            QString tipo = aggiungi.tipoLineEdit->text();
+            int anniServizio = aggiungi.anniServizioLineEdit->text().toInt();
+            utemp = new professore(nome.toStdString(), cognome.toStdString(), codiceFiscale.toStdString(), telefono.toStdString(), email.toStdString(), dataNascita.day(), dataNascita.month(), dataNascita.year(), regione.toStdString(), comune.toStdString(), via.toStdString(), cap.toStdString(), numeroCivico.toStdString(), tipo.toStdString(), anniServizio);
+        }
+        if (!(modelloTabellaUtenti->contains(utemp))) {
+            modelloTabellaUtenti->aggiungiUtente(utemp);
+            /*
+            modelloProxy->sourceModel()->setData(index, codiceFiscale, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 2, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, nome, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 3, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, cognome, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 4, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, dataNascita, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 5, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, telefono, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 6, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, email, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 5, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, telefono, Qt::EditRole);
+            */
+        }
     }
 }
 
@@ -159,6 +203,7 @@ void menu::modificaUtente(const QModelIndex &index){
     QString via;
     QString cap;
     QString numeroCivico;
+    QString tipoUtente;
     int row;
 
     if(!index.isValid()){

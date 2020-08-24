@@ -2,6 +2,12 @@
 
 using std::cout; using std::endl;
 
+void utentitablemodel::aggiungiUtente(puntatoresmart<utente> _utente){
+    beginInsertRows(QModelIndex(), 0, 0);
+    listaUtenti.push(_utente);
+    endInsertRows();
+}
+
 void utentitablemodel::aggiungiUtenti(){
     professore* provaIns1 = new professore("Francesco", "Ranzato", "FRTCSL03L49F205V", "+393190231829", "ranzato@gmail.com", 31, 1, 1976, "Veneto", "Padova", "San Giacomo", "31000",  "91", "Ordinario", 21);
     tutor* provaIns2 = new tutor("Luca", "Gualtieri","LRCCRC05T15C351I", "+393202222686", "gualtieri.l@gmail.com", 10, 2, 1999, "Veneto", "Caselle d'altivole", "San Francesco", "31044", "21", 1193422, triennale, "Informatica", 2, false, 0, 10, 11, 2018);
@@ -40,6 +46,10 @@ utentitablemodel::utentitablemodel(QObject *parent)
     aggiungiUtenti();
 }
 
+bool utentitablemodel::contains(const puntatoresmart<utente>& _utente){
+    return listaUtenti.contains(_utente);
+}
+
 int utentitablemodel::rowCount(const QModelIndex&) const{
     return listaUtenti.size();
 }
@@ -67,7 +77,7 @@ QVariant utentitablemodel::data(const QModelIndex &index, int role) const{
         case 3: //Cognome
             return QString::fromStdString(utenteTemp->getCognome());
         case 4: //Data di nascita
-            return QString(utenteTemp->getDataNascita().toString());
+            return QString(utenteTemp->getDataNascita().toString(Qt::RFC2822Date));
         case 5: //Numero di telefono
             return QString::fromStdString(utenteTemp->getTelefono());
         case 6: //Email
@@ -186,7 +196,7 @@ bool utentitablemodel::setData(const QModelIndex &index, const QVariant &value, 
             tmp->setCognome(value.toString().toStdString());
             break;
         case 4: //Data di nascita
-            tmp->setDataNascita(QDate::fromString(value.toString()));
+            tmp->setDataNascita(QDate::fromString(value.toString(),  Qt::RFC2822Date));
             break;
         case 5: //Numero di telefono
             tmp->setTelefono(value.toString().toStdString());

@@ -20,9 +20,7 @@ using std::cout; using std::endl; using Qt::DayOfWeek;
 
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
-    utentitablemodel modello;
-    menu w(&modello);
+    menu w;
     w.show();
-
     return a.exec();
 }

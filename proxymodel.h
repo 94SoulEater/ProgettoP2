@@ -3,6 +3,7 @@
 
 #include "Model/contenitore.h"
 #include "Model/utente.h"
+#include "Model/puntatoresmart.h"
 #include <QSortFilterProxyModel>
 
 class proxymodel : public QSortFilterProxyModel{

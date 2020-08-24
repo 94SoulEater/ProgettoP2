@@ -295,12 +295,14 @@ void menudatiutente::showRow(QString combo){
         ricercaAggiungiButton->setVisible(false);
         ricercaEliminaButton->setVisible(false);
         ricercheTableView->setVisible(false);
+        ricercaModificaButton->setVisible(false);
     }
     if(combo=="Tutor" || combo =="Professore"){
         //lezione
         lezioneAggiungiButton->setVisible(true);
         lezioneEliminaButton->setVisible(true);
         lezioniTableView->setVisible(true);
+        lezioneModificaButton->setVisible(true);
     }else{
         lezioneAggiungiButton->setVisible(false);
         lezioneEliminaButton->setVisible(false);
@@ -332,6 +334,7 @@ void menudatiutente::showRow(QString combo){
         ricercaAggiungiButton->setVisible(true);
         ricercaEliminaButton->setVisible(true);
         ricercheTableView->setVisible(true);
+        ricercaModificaButton->setVisible(true);
     }
     resize(sizeHint());
 }
