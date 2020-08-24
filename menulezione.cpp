@@ -30,13 +30,32 @@ menulezione::menulezione(QWidget *parent) : QDialog(parent)
     stanzaLineEdit = new QLineEdit();
     formLayout->addRow(stanzaLabel, stanzaLineEdit);
 
-    //orario (?)(Vettore)
+    //combo
+    comboLayout = new QHBoxLayout();
+    combo=new QComboBox();
+    eliminaOrarioButton=new QPushButton("Elimina Orario");
+    comboLayout->addWidget(combo);
+    comboLayout ->addWidget(eliminaOrarioButton);
+    combo->setVisible(false);
+    eliminaOrarioButton->setVisible(false);
+
+     connect(eliminaOrarioButton,SIGNAL(clicked()),this,SLOT(rimuoviDaCombo()));
+
+    //orario
+    orarioLayout = new QHBoxLayout();
     orarioLabel=new QLabel("Orario Lezione:");
     orarioLineEdit = new QLineEdit();
-    formLayout->addRow(orarioLabel, orarioLineEdit);
+    aggiungiOrarioButton=new QPushButton("Aggiungi Orario");
 
+   orarioLayout ->addWidget(orarioLabel);
+    orarioLayout ->addWidget(orarioLineEdit);
+    orarioLayout ->addWidget(aggiungiOrarioButton);
+
+    connect(aggiungiOrarioButton,SIGNAL(clicked()),this,SLOT(aggiungiCombo()));
 
     maindatiLayout->addLayout(formLayout);
+    maindatiLayout->addLayout(comboLayout);
+    maindatiLayout->addLayout(orarioLayout);
 
     //bottoni
     aggiungiLezioneButton= new QPushButton("Aggiungi Lezione");
@@ -52,4 +71,17 @@ menulezione::menulezione(QWidget *parent) : QDialog(parent)
     connect(aggiungiLezioneButton, SIGNAL(clicked()), this, SLOT(accept()));
 
     setLayout(maindatiLayout);
+}
+
+void menulezione::aggiungiCombo()
+{
+    combo->setVisible(true);
+    eliminaOrarioButton->setVisible(true);
+    combo->addItem(orarioLineEdit->text());
+    orarioLineEdit->clear();
+}
+
+void menulezione::rimuoviDaCombo()
+{
+    combo->removeItem(combo->currentIndex());
 }

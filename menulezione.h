@@ -10,6 +10,7 @@
 #include <QFormLayout>
 #include <QPushButton>
 #include <QtWidgets>
+#include <QComboBox>
 
 class menulezione: public QDialog
 {
@@ -19,10 +20,15 @@ public:
 
     QFormLayout *formLayout;
     QVBoxLayout *maindatiLayout;
-    QHBoxLayout *bottoniLezioneLayout;
+    QHBoxLayout *bottoniLezioneLayout, *orarioLayout, *comboLayout;
     QLabel *materiaLabel, *corsoLabel, *creditiLabel, *stanzaLabel, *orarioLabel;
     QLineEdit *materiaLineEdit, *corsoLineEdit, *creditiLineEdit, *stanzaLineEdit, *orarioLineEdit;
-     QPushButton *aggiungiLezioneButton, *annullaLezioneButton;
+     QPushButton *aggiungiLezioneButton, *annullaLezioneButton, *aggiungiOrarioButton, *eliminaOrarioButton;
+     QComboBox *combo;
+
+public slots:
+    void aggiungiCombo();
+    void rimuoviDaCombo();
 };
 
 #endif // MENULEZIONE_H
