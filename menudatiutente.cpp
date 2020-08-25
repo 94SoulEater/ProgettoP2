@@ -153,9 +153,11 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     aggRimuoviRicercaLayout->addWidget(ricercaAggiungiButton);
 
     ricercaModificaButton = new QPushButton("Modifica Ricerca");
+    ricercaModificaButton->setEnabled(false);
     aggRimuoviRicercaLayout->addWidget(ricercaModificaButton);
 
     ricercaEliminaButton= new QPushButton("Elimina");
+    ricercaEliminaButton->setEnabled(false);
     aggRimuoviRicercaLayout->addWidget(ricercaEliminaButton);
 
     ricTableLayout = new QHBoxLayout();
@@ -168,6 +170,8 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     //Seleziona una riga al posto di una singola cella
     ricercheTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ricTableLayout->addWidget(ricercheTableView);
+
+
 
 
     //elimina ricerca
@@ -193,17 +197,23 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     //Apre nuova finestra per inserimento ricerca
     connect(lezioneAggiungiButton, SIGNAL(clicked()), this, SLOT(aggiungiLezione()));
 
+
     lezioneModificaButton= new QPushButton("Modifica Lezione");
+    lezioneModificaButton->setEnabled(false);
     aggRimuoviLezioneLayout->addWidget(lezioneModificaButton);
 
     connect(lezioneModificaButton, SIGNAL(clicked()), this, SLOT(modificaLezione()));
 
 
     lezioneEliminaButton= new QPushButton("Elimina Lezione");
+    lezioneEliminaButton->setEnabled(false);
     aggRimuoviLezioneLayout->addWidget(lezioneEliminaButton);
 
     //elimina lezione
     connect(lezioneEliminaButton, SIGNAL(clicked()), this, SLOT(eliminaLezione()));
+
+    //inizialmente disabilitati
+
 
     lezTableLayout = new QHBoxLayout();
     modelloLezioni = new lezionitablemodel(this);
@@ -347,6 +357,8 @@ void menudatiutente::modificaLezione(const QModelIndex &index){
     int crediti;
     QString corso;
     QString stanza;
+
+
     int row;
 
     if(!index.isValid()){
@@ -371,11 +383,13 @@ void menudatiutente::modificaLezione(const QModelIndex &index){
     modifica.stanzaLineEdit->setText(stanza);
     modifica.creditiLineEdit->setText(QString::number(crediti));
 
+
     if (modifica.exec()) {
         materia = modifica.materiaLineEdit->text();
         crediti = modifica.creditiLineEdit->text().toInt();
         corso = modifica.corsoLineEdit->text();
         stanza = modifica.stanzaLineEdit->text();
+
 
         lezione lez(materia.toStdString(), corso.toStdString(), stanza.toStdString(), crediti);
         if (!modelloLezioni->contains(lez)) {
@@ -387,6 +401,7 @@ void menudatiutente::modificaLezione(const QModelIndex &index){
             modelloLezioni->setData(index, stanza, Qt::EditRole);
             index = modelloLezioni->index(row, 3, QModelIndex());
             modelloLezioni->setData(index, crediti, Qt::EditRole);
+
             //index = table->index(0, 1, QModelIndex());
             //modelloLezioni->setData(index, orari, Qt::EditRole);
         }
@@ -403,7 +418,7 @@ void menudatiutente::modificaRicerca(const QModelIndex &index){
     if(!index.isValid()){
         //Se sono selezionate più righe modifica la prima
         QModelIndexList indexes = ricercheTableView->selectionModel()->selectedRows();
-        row = indexes.at(0).row();
+     row = indexes.at(0).row();
     }else{
         row = index.row();
     }
@@ -456,6 +471,7 @@ void menudatiutente::aggiungiLezione(){
         int crediti = aggiungiLezione.creditiLineEdit->text().toInt();
         QString corso = aggiungiLezione.corsoLineEdit->text();
         QString stanza = aggiungiLezione.stanzaLineEdit->text();
+       // QString orario = aggiungiLezione.combo->currentText();
 
         lezione lez(materia.toStdString(), corso.toStdString(), stanza.toStdString(), crediti);
         if (!modelloLezioni->contains(lez)) {
@@ -469,8 +485,8 @@ void menudatiutente::aggiungiLezione(){
             modelloLezioni->setData(index, stanza, Qt::EditRole);
             index = modelloLezioni->index(0, 3, QModelIndex());
             modelloLezioni->setData(index, crediti, Qt::EditRole);
-            //index = table->index(0, 1, QModelIndex());
-            //modelloLezioni->setData(index, orari, Qt::EditRole);
+         //   index = modelloLezioni->index(0, 4, QModelIndex());
+         //   modelloLezioni->setData(index, orario, Qt::EditRole);
         }
     }
 }
@@ -532,4 +548,19 @@ void menudatiutente::eliminaRicerca(){
     }
 }
 
-
+//Disabilita il pulsante di rimozione utente se nessuna riga è selezionata
+void menudatiutente::aggiornadatiAzioni(const QItemSelection &selected , const QItemSelection &deselected){
+    Q_UNUSED(deselected);
+    QModelIndexList indexes = selected.indexes();
+    if (!indexes.isEmpty()) {
+        ricercaEliminaButton->setEnabled(true);
+        ricercaModificaButton->setEnabled(true);
+        lezioneEliminaButton->setEnabled(true);
+        lezioneModificaButton->setEnabled(true);
+    } else {
+        ricercaEliminaButton->setEnabled(false);
+        ricercaModificaButton->setEnabled(false);
+        lezioneEliminaButton->setEnabled(false);
+        lezioneModificaButton->setEnabled(false);
+    }
+}

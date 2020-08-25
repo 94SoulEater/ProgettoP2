@@ -16,8 +16,8 @@ struct giornoLezione{
     bool operator!=(const giornoLezione &_lez)const{
         return (oraInizio!=_lez.oraInizio || oraFine != _lez.oraFine || giornoSettimana != _lez.giornoSettimana);
     }
-    QTime oraInizio;
-    QTime oraFine;
+    string oraInizio;
+    string oraFine;
     DayOfWeek giornoSettimana;
 };
 
@@ -43,8 +43,8 @@ public:
     int getCrediti() const;
     void setCrediti(int value);
     contenitore<giornoLezione> getGiorniLezione() const;
-    void addGiornoLezione(QTime, QTime, DayOfWeek);
-    void removeGiornoLezione(QTime, QTime, DayOfWeek);
+    void addGiornoLezione(string, string, DayOfWeek);
+    void removeGiornoLezione(string, string, DayOfWeek);
 };
 
 #endif // LEZIONE_H

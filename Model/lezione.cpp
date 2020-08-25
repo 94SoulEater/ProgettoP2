@@ -36,12 +36,12 @@ contenitore<giornoLezione> lezione::getGiorniLezione() const{
     return giorniLezione;
 }
 
-void lezione::addGiornoLezione(QTime _inizio, QTime _fine, DayOfWeek _giorno){
+void lezione::addGiornoLezione(string _inizio, string _fine, DayOfWeek _giorno){
     giornoLezione g = {_inizio, _fine, _giorno};
     giorniLezione.push(g);
 }
 
-void lezione::removeGiornoLezione(QTime _inizio, QTime _fine, DayOfWeek _giorno){
+void lezione::removeGiornoLezione(string _inizio, string _fine, DayOfWeek _giorno){
     giornoLezione g = {_inizio, _fine, _giorno};
     giorniLezione.remove(g);
 }

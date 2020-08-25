@@ -4,12 +4,13 @@
 #include "Model/contenitore.h"
 #include "Model/puntatoresmart.h"
 #include "Model/utente.h"
-#include "Model/professore.h" //
-#include "Model/tutor.h" //
-#include "Model/lezione.h" //
-#include "Model/ricerca.h" //
+#include "Model/professore.h"
+#include "Model/tutor.h"
+#include "Model/lezione.h"
+#include "Model/ricerca.h"
+#include "Model/insegnante.h"
 #include "QAbstractTableModel"
-#include <QTime> //
+#include <QTime>
 #include <QModelIndex>
 #include <iostream>
 
@@ -29,6 +30,7 @@ public:
     bool contains(const puntatoresmart<utente>& _utente);
     void aggiungiUtente(puntatoresmart<utente> _utente);
     contenitore<ricerca> getListaRicerche(int row);
+    contenitore<lezione> getListaLezione(int row);
 private:
     contenitore<puntatoresmart<utente>> listaUtenti;
     void aggiungiUtenti();

@@ -6,12 +6,15 @@ lezionitablemodel::lezionitablemodel(QObject *parent)
 
 lezionitablemodel::lezionitablemodel(contenitore<lezione> _listaLezioni, QObject *parent)
     : QAbstractTableModel(parent){
-    setListaLezioni(_listaLezioni);
+
+   setListaLezioni(_listaLezioni);
 }
 
 void lezionitablemodel::setListaLezioni(contenitore<lezione> _listaLezioni){
-    if(&listaLezioni) delete &listaLezioni;
+     beginInsertRows(QModelIndex(), 0, _listaLezioni.size()-1);
     listaLezioni = _listaLezioni;
+    endInsertRows();
+
 }
 
 int lezionitablemodel::rowCount(const QModelIndex&) const{
@@ -35,9 +38,8 @@ QVariant lezionitablemodel::data(const QModelIndex &index, int role) const{
             return QString::fromStdString(lezioneTemp.getStanza());
         case 3: //Crediti
             return QString::number(lezioneTemp.getCrediti());
-        case 4: //Orari
-
-            //return QString(utenteTemp->getDataNascita().toString());
+        case 4: //Orario
+          //  return QString::fromStdString(lezioneTemp.getGiorniLezione());
         default:
             return QVariant();
         }
@@ -63,8 +65,9 @@ bool lezionitablemodel::setData(const QModelIndex &index, const QVariant &value,
         case 3: //Crediti
             tmp.setCrediti(value.toInt());
             break;
-        case 4: //Orari
+       case 4: //Orario
             break;
+
         }
         listaLezioni.replace(row, tmp);
         emit(dataChanged(index, index));
@@ -85,7 +88,7 @@ QVariant lezionitablemodel::headerData(int section, Qt::Orientation orientation,
         case 3:
             return QString("Crediti");
         case 4:
-            return QString("Orari");
+           return QString("Orario");
         }
     }
     return QVariant();
@@ -116,4 +119,15 @@ bool lezionitablemodel::removeRows(int position, int rows, const QModelIndex &in
 
 bool lezionitablemodel::contains(const lezione& _lez){
     return listaLezioni.contains(_lez);
+}
+
+contenitore<giornoLezione> lezionitablemodel::getListaGiornoLezione(int row)
+{
+/*
+   puntatoresmart<lezione> tmp= listaLezioni.value(row);
+    if(dynamic_cast<lezione*>(tmp.operator->())){
+       return dynamic_cast<lezione*>(tmp.operator->())->getGiorniLezione();
+    }
+    return contenitore<giornoLezione>();
+*/
 }

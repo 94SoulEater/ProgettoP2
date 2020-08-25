@@ -17,14 +17,12 @@ void utentitablemodel::aggiungiUtenti(){
     lezione provaLez1("Programmazione ad oggetti", "SC1167 - Informatica", "Lum250", 12);
     lezione provaLez2("Verifica del software", "SC1176 - LM Informatica", "P200", 12);
     lezione provaLez3("Sistemi Operativi", "SC1167 - Informatica", "P200", 10);
-    QTime oraInizio(12, 30), oraFine(14, 30);
-    provaLez1.addGiornoLezione(oraInizio, oraFine, Qt::Monday);
-    provaLez2.addGiornoLezione(oraInizio, oraFine, Qt::Tuesday);
-    provaLez3.addGiornoLezione(oraInizio, oraFine, Qt::Wednesday);
-    oraInizio = QTime(14, 30), oraFine = QTime(16, 30);
-    provaLez1.addGiornoLezione(oraInizio, oraFine, Qt::Thursday);
-    provaLez2.addGiornoLezione(oraInizio, oraFine, Qt::Wednesday);
-    provaLez3.addGiornoLezione(oraInizio, oraFine, Qt::Monday);
+    provaLez1.addGiornoLezione("12,30", "14,30", Qt::Monday);
+    provaLez2.addGiornoLezione("12,30", "14,30", Qt::Tuesday);
+    provaLez3.addGiornoLezione("12,30", "14,30", Qt::Wednesday);
+    provaLez1.addGiornoLezione("14,30", "16,30", Qt::Thursday);
+    provaLez2.addGiornoLezione("14,30", "16,30", Qt::Wednesday);
+    provaLez3.addGiornoLezione("14,30", "16,30", Qt::Monday);
     provaIns1->addLezione(provaLez1);
     provaIns1->addLezione(provaLez2);
     provaIns5->addLezione(provaLez3);
@@ -327,4 +325,13 @@ contenitore<ricerca> utentitablemodel::getListaRicerche(int row){
         return dynamic_cast<professore*>(tmp.operator->())->getRicerche();
     }
     return contenitore<ricerca>();
+}
+
+contenitore<lezione> utentitablemodel::getListaLezione(int row)
+{
+    puntatoresmart<utente> tmp = listaUtenti.value(row);
+    if(dynamic_cast<insegnante*>(tmp.operator->())){
+        return dynamic_cast<insegnante*>(tmp.operator->())->getLezioni();
+    }
+    return contenitore<lezione>();
 }

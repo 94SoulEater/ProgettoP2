@@ -1,9 +1,18 @@
 #ifndef LEZIONITABLEMODEL_H
 #define LEZIONITABLEMODEL_H
 
-#include "Model/lezione.h"
 #include "Model/contenitore.h"
-#include <QAbstractTableModel>
+#include "Model/puntatoresmart.h"
+#include "Model/utente.h"
+#include "Model/professore.h"
+#include "Model/tutor.h"
+#include "Model/lezione.h"
+#include "Model/ricerca.h"
+#include "Model/insegnante.h"
+#include "QAbstractTableModel"
+#include <QTime>
+#include <QModelIndex>
+#include <iostream>
 
 class lezionitablemodel : public QAbstractTableModel{
     Q_OBJECT
@@ -20,6 +29,7 @@ public:
     void setListaLezioni(contenitore<lezione> _listaLezioni);
     lezionitablemodel(contenitore<lezione> _listaLezioni, QObject *parent = nullptr);
     bool contains(const lezione& _lez);
+    contenitore<giornoLezione> getListaGiornoLezione(int row);
 private:
     contenitore<lezione> listaLezioni;
 };

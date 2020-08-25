@@ -314,7 +314,11 @@ void menu::modificaUtente(const QModelIndex &index){
         modifica.tipoLineEdit->setText(tipoProfessore);
         modifica.anniServizioLineEdit->setText(anniServizio);
         modifica.modelloRicerche->setListaRicerche(modelloTabellaUtenti->getListaRicerche(row));
+
+
         modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
+       modifica.modelloLezioni->setListaLezioni(modelloTabellaUtenti->getListaLezione(row));
+         modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
     }
     modifica.showRow(tipoUtente);
 

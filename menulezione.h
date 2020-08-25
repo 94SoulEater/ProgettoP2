@@ -21,8 +21,8 @@ public:
     QFormLayout *formLayout;
     QVBoxLayout *maindatiLayout;
     QHBoxLayout *bottoniLezioneLayout, *orarioLayout, *comboLayout;
-    QLabel *materiaLabel, *corsoLabel, *creditiLabel, *stanzaLabel, *orarioLabel;
-    QLineEdit *materiaLineEdit, *corsoLineEdit, *creditiLineEdit, *stanzaLineEdit, *orarioLineEdit;
+    QLabel *materiaLabel, *corsoLabel, *creditiLabel, *stanzaLabel, *orarioInizioLabel, *orarioFineLabel, *orarioGiornoLabel;
+    QLineEdit *materiaLineEdit, *corsoLineEdit, *creditiLineEdit, *stanzaLineEdit, *orarioInizioLineEdit,  *orarioFineLineEdit,  *orarioGiornoLineEdit;
      QPushButton *aggiungiLezioneButton, *annullaLezioneButton, *aggiungiOrarioButton, *eliminaOrarioButton;
      QComboBox *combo;
 
