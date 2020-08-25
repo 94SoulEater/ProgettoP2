@@ -385,6 +385,7 @@ void menudatiutente::modificaLezione(const QModelIndex &index){
 
 
     if (modifica.exec()) {
+
         materia = modifica.materiaLineEdit->text();
         crediti = modifica.creditiLineEdit->text().toInt();
         corso = modifica.corsoLineEdit->text();
@@ -442,6 +443,7 @@ void menudatiutente::modificaRicerca(const QModelIndex &index){
     modifica.dataPubblicazioneLineEdit->setText(QString::number(anno));
 
     if (modifica.exec()) {
+
         autori = modifica.autoriLineEdit->text();
         titolo = modifica.titoloLineEdit->text();
         link = modifica.linkLineEdit->text();
@@ -466,7 +468,11 @@ void menudatiutente::modificaRicerca(const QModelIndex &index){
 
 void menudatiutente::aggiungiLezione(){
     menulezione aggiungiLezione;
+
     if (aggiungiLezione.exec()) {
+
+        lezioneEliminaButton->setEnabled(true);
+        lezioneModificaButton->setEnabled(true);
         QString materia = aggiungiLezione.materiaLineEdit->text();
         int crediti = aggiungiLezione.creditiLineEdit->text().toInt();
         QString corso = aggiungiLezione.corsoLineEdit->text();
@@ -494,6 +500,8 @@ void menudatiutente::aggiungiLezione(){
 void menudatiutente::aggiungiRicerca(){
     menuricerca aggiungiRicerca;
     if (aggiungiRicerca.exec()) {
+        ricercaEliminaButton->setEnabled(true);
+        ricercaModificaButton->setEnabled(true);
         QString autori = aggiungiRicerca.autoriLineEdit->text();
         int anno = aggiungiRicerca.dataPubblicazioneLineEdit->text().toInt();
         QString titolo = aggiungiRicerca.titoloLineEdit->text();
