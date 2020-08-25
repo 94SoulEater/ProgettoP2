@@ -232,6 +232,10 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     connect(lezioniTableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(modificaLezione(QModelIndex)));
 
+    //connessione disabilitare modifica
+     connect(lezioniTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornalezioneAzioni(QItemSelection,QItemSelection)));
+     connect(ricercheTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornaricercaAzioni(QItemSelection,QItemSelection)));
+
     //aggiungi, annulla e cancella
     bottoniLayout = new QHBoxLayout();
 
@@ -419,7 +423,7 @@ void menudatiutente::modificaRicerca(const QModelIndex &index){
     if(!index.isValid()){
         //Se sono selezionate più righe modifica la prima
         QModelIndexList indexes = ricercheTableView->selectionModel()->selectedRows();
-     row = indexes.at(0).row();
+        row = indexes.at(0).row();
     }else{
         row = index.row();
     }
@@ -470,9 +474,6 @@ void menudatiutente::aggiungiLezione(){
     menulezione aggiungiLezione;
 
     if (aggiungiLezione.exec()) {
-
-        lezioneEliminaButton->setEnabled(true);
-        lezioneModificaButton->setEnabled(true);
         QString materia = aggiungiLezione.materiaLineEdit->text();
         int crediti = aggiungiLezione.creditiLineEdit->text().toInt();
         QString corso = aggiungiLezione.corsoLineEdit->text();
@@ -500,8 +501,7 @@ void menudatiutente::aggiungiLezione(){
 void menudatiutente::aggiungiRicerca(){
     menuricerca aggiungiRicerca;
     if (aggiungiRicerca.exec()) {
-        ricercaEliminaButton->setEnabled(true);
-        ricercaModificaButton->setEnabled(true);
+
         QString autori = aggiungiRicerca.autoriLineEdit->text();
         int anno = aggiungiRicerca.dataPubblicazioneLineEdit->text().toInt();
         QString titolo = aggiungiRicerca.titoloLineEdit->text();
@@ -557,18 +557,29 @@ void menudatiutente::eliminaRicerca(){
 }
 
 //Disabilita il pulsante di rimozione utente se nessuna riga è selezionata
-void menudatiutente::aggiornadatiAzioni(const QItemSelection &selected , const QItemSelection &deselected){
+void menudatiutente::aggiornalezioneAzioni(const QItemSelection &selected , const QItemSelection &deselected){
+    Q_UNUSED(deselected);
+    QModelIndexList indexes = selected.indexes();
+    if (!indexes.isEmpty()) {
+        lezioneEliminaButton->setEnabled(true);
+        lezioneModificaButton->setEnabled(true);
+    } else {
+        lezioneEliminaButton->setEnabled(false);
+        lezioneModificaButton->setEnabled(false);
+    }
+
+}
+
+void menudatiutente::aggiornaricercaAzioni(const QItemSelection &selected, const QItemSelection &deselected)
+{
     Q_UNUSED(deselected);
     QModelIndexList indexes = selected.indexes();
     if (!indexes.isEmpty()) {
         ricercaEliminaButton->setEnabled(true);
         ricercaModificaButton->setEnabled(true);
-        lezioneEliminaButton->setEnabled(true);
-        lezioneModificaButton->setEnabled(true);
     } else {
         ricercaEliminaButton->setEnabled(false);
         ricercaModificaButton->setEnabled(false);
-        lezioneEliminaButton->setEnabled(false);
-        lezioneModificaButton->setEnabled(false);
     }
 }
+

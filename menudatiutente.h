@@ -51,7 +51,8 @@ private slots:
     void eliminaRicerca();
     void modificaLezione(const QModelIndex &index = QModelIndex());
     void modificaRicerca(const QModelIndex &index = QModelIndex());
-     void aggiornadatiAzioni(const QItemSelection &selected , const QItemSelection &deselected);
+    void aggiornalezioneAzioni(const QItemSelection &selected , const QItemSelection &deselected);
+    void aggiornaricercaAzioni(const QItemSelection &selected , const QItemSelection &deselected);
 };
 
 #endif // MENUDATIUTENTE_H
