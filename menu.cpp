@@ -204,7 +204,15 @@ void menu::modificaUtente(const QModelIndex &index){
     QString cap;
     QString numeroCivico;
     QString tipoUtente;
+    QString matricola;
+    QString laurea;
+    QString corso;
+    QString annoCorso;
+    QString anniFuoriCorso;
+    QDate dataIscrizione;
+
     int row;
+    menudatiutente modifica;
 
     if(!index.isValid()){
         //Se sono selezionate più righe modifica la prima
@@ -213,6 +221,10 @@ void menu::modificaUtente(const QModelIndex &index){
     }else{
         row = modelloProxy->mapToSource(index).row();
     }
+
+    QModelIndex tipoUtenteIndex = modelloProxy->sourceModel()->index(row, 11, QModelIndex());
+    tipoUtente = modelloProxy->sourceModel()->data(tipoUtenteIndex, Qt::DisplayRole).toString();
+
     QModelIndex codiceFiscaleIndex = modelloProxy->sourceModel()->index(row, 0, QModelIndex());
     codiceFiscale = modelloProxy->sourceModel()->data(codiceFiscaleIndex, Qt::DisplayRole).toString();
 
@@ -223,7 +235,7 @@ void menu::modificaUtente(const QModelIndex &index){
     cognome = modelloProxy->sourceModel()->data(cognomeIndex, Qt::DisplayRole).toString();
 
     QModelIndex dataNascitaIndex = modelloProxy->sourceModel()->index(row, 4, QModelIndex());
-    dataNascita = QDate::fromString(modelloProxy->sourceModel()->data(dataNascitaIndex, Qt::DisplayRole).toString());
+    dataNascita = QDate::fromString(modelloProxy->sourceModel()->data(dataNascitaIndex, Qt::DisplayRole).toString(),  Qt::RFC2822Date);
 
     QModelIndex telefonoIndex = modelloProxy->sourceModel()->index(row, 5, QModelIndex());
     telefono = modelloProxy->sourceModel()->data(telefonoIndex, Qt::DisplayRole).toString();
@@ -231,17 +243,97 @@ void menu::modificaUtente(const QModelIndex &index){
     QModelIndex emailIndex = modelloProxy->sourceModel()->index(row, 6, QModelIndex());
     email = modelloProxy->sourceModel()->data(emailIndex, Qt::DisplayRole).toString();
 
-    menudatiutente modifica;
+    QModelIndex regioneIndex = modelloProxy->sourceModel()->index(row, 14, QModelIndex());
+    regione = modelloProxy->sourceModel()->data(regioneIndex, Qt::DisplayRole).toString();
+
+    QModelIndex comuneIndex = modelloProxy->sourceModel()->index(row, 16, QModelIndex());
+    comune = modelloProxy->sourceModel()->data(comuneIndex, Qt::DisplayRole).toString();
+
+    QModelIndex viaIndex = modelloProxy->sourceModel()->index(row, 17, QModelIndex());
+    via = modelloProxy->sourceModel()->data(viaIndex, Qt::DisplayRole).toString();
+
+    QModelIndex capIndex = modelloProxy->sourceModel()->index(row, 15, QModelIndex());
+    cap = modelloProxy->sourceModel()->data(capIndex, Qt::DisplayRole).toString();
+
+    QModelIndex numeroCivicoIndex = modelloProxy->sourceModel()->index(row, 18, QModelIndex());
+    numeroCivico = modelloProxy->sourceModel()->data(numeroCivicoIndex, Qt::DisplayRole).toString();
+
+    if(tipoUtente == "Studente" || tipoUtente == "Tutor"){
+
+        QModelIndex matricolaIndex = modelloProxy->sourceModel()->index(row, 1, QModelIndex());
+        matricola = modelloProxy->sourceModel()->data(matricolaIndex, Qt::DisplayRole).toString();
+
+        QModelIndex corsoIndex = modelloProxy->sourceModel()->index(row, 7, QModelIndex());
+        corso = modelloProxy->sourceModel()->data(corsoIndex, Qt::DisplayRole).toString();
+
+        QModelIndex laureaIndex = modelloProxy->sourceModel()->index(row, 8, QModelIndex());
+        laurea = modelloProxy->sourceModel()->data(laureaIndex, Qt::DisplayRole).toString();
+
+        QModelIndex annoCorsoIndex = modelloProxy->sourceModel()->index(row, 9, QModelIndex());
+        annoCorso = modelloProxy->sourceModel()->data(annoCorsoIndex, Qt::DisplayRole).toString();
+
+        QModelIndex anniFuoriCorsoIndex = modelloProxy->sourceModel()->index(row, 10, QModelIndex());
+        anniFuoriCorso = modelloProxy->sourceModel()->data(anniFuoriCorsoIndex, Qt::DisplayRole).toString();
+
+        QModelIndex dataIscrizioneIndex = modelloProxy->sourceModel()->index(row, 19, QModelIndex());
+        dataIscrizione = QDate::fromString(modelloProxy->sourceModel()->data(dataIscrizioneIndex, Qt::DisplayRole).toString(), Qt::RFC2822Date);
+
+        modifica.matricolaLineEdit->setText(matricola);
+        modifica.corsoLineEdit->setText(corso);
+        modifica.annocorsoLineEdit->setText(annoCorso);
+        modifica.dataIscrizioneEdit->setDate(dataIscrizione);
+        if(anniFuoriCorso == "Regolare"){
+            modifica.checkBox->setChecked(false);
+            modifica.spinBox->setValue(0);
+        }else{
+            modifica.checkBox->setChecked(true);
+            modifica.spinBox->setValue(anniFuoriCorso.toInt());
+        }
+        if(laurea == "Triennale") laurea = "1";
+        if(laurea == "Magistrale") laurea = "2";
+        if(laurea == "Diploma Specializzazione") laurea = "3";
+        if(laurea == "Dottorato Ricerca") laurea = "4";
+
+        modifica.laureaMenuComboBox->setCurrentIndex(laurea.toInt());
+
+        if(tipoUtente =="Studente"){
+            modifica.tipoUtenteMenuComboBox->setCurrentIndex(0);
+        }else{
+            modifica.tipoUtenteMenuComboBox->setCurrentIndex(2);
+        }
+    }else if(tipoUtente == "Professore"){
+        QString tipoProfessore;
+        QString anniServizio;
+
+        QModelIndex tipoProfessoreIndex = modelloProxy->sourceModel()->index(row, 12, QModelIndex());
+        tipoProfessore = modelloProxy->sourceModel()->data(tipoProfessoreIndex, Qt::DisplayRole).toString();
+
+        QModelIndex anniServizioIndex = modelloProxy->sourceModel()->index(row, 13, QModelIndex());
+        anniServizio = modelloProxy->sourceModel()->data(anniServizioIndex, Qt::DisplayRole).toString();
+
+        modifica.tipoLineEdit->setText(tipoProfessore);
+        modifica.anniServizioLineEdit->setText(anniServizio);
+        modifica.modelloRicerche->setListaRicerche(modelloTabellaUtenti->getListaRicerche(row));
+        modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
+    }
+    modifica.showRow(tipoUtente);
+
     modifica.setWindowTitle(tr("Modifica utente"));
+    modifica.aggiungiMenuButton->setText("Modifica");
     modifica.nomeLineEdit->setText(nome);
     modifica.cognomeLineEdit->setText(cognome);
     modifica.codiceFiscaleLineEdit->setText(codiceFiscale);
     modifica.dataNascitaEdit->setDate(dataNascita);
     modifica.telefonoLineEdit->setText(telefono);
     modifica.emailLineEdit->setText(email);
+    modifica.regioneLineEdit->setText(regione);
+    modifica.comuneLineEdit->setText(comune);
+    modifica.capLineEdit->setText(cap);
+    modifica.viaLineEdit->setText(via);
+    modifica.numeroCivicoLineEdit->setText(numeroCivico);
 
     if (modifica.exec()) {
-        //...
+
     }
 }
 

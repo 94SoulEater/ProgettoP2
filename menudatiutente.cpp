@@ -177,8 +177,8 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     connect(ricercaAggiungiButton, SIGNAL(clicked()), this, SLOT(aggiungiRicerca()));
 
     //Modifica ricerca
-        connect(ricercheTableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(modificaRicerca(QModelIndex)));
-        connect(ricercaModificaButton, SIGNAL(clicked()), this, SLOT(modificaRicerca()));
+    connect(ricercheTableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(modificaRicerca(QModelIndex)));
+    connect(ricercaModificaButton, SIGNAL(clicked()), this, SLOT(modificaRicerca()));
 
     maindatiLayout->addLayout(aggRimuoviRicercaLayout);
     maindatiLayout->addLayout(ricTableLayout);
@@ -214,6 +214,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     //Seleziona una riga al posto di una singola cella
     lezioniTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    lezioniTableView->setItemDelegateForColumn(4, new comboboxdelegate(this));
     lezTableLayout->addWidget(lezioniTableView);
 
     maindatiLayout->addLayout(aggRimuoviLezioneLayout);
@@ -307,6 +308,7 @@ void menudatiutente::showRow(QString combo){
     }else{
         lezioneAggiungiButton->setVisible(false);
         lezioneEliminaButton->setVisible(false);
+        lezioneModificaButton->setVisible(false);
         lezioniTableView->setVisible(false);
     }
     if(combo=="Professore"){

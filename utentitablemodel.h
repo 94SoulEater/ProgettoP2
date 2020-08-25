@@ -28,6 +28,7 @@ public:
     bool removeRows(int row, int count, const QModelIndex &parent);
     bool contains(const puntatoresmart<utente>& _utente);
     void aggiungiUtente(puntatoresmart<utente> _utente);
+    contenitore<ricerca> getListaRicerche(int row);
 private:
     contenitore<puntatoresmart<utente>> listaUtenti;
     void aggiungiUtenti();

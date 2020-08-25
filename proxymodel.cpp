@@ -44,6 +44,12 @@ bool proxymodel::isColonnaNascosta(int _col){
 void proxymodel::setFiltroColonne(tipoutente _tipoUtente){
     filtroTipoUtente = _tipoUtente;
     colonneNascoste.clear();
+    colonneNascoste.push(14); //Indirizzo nascosto
+    colonneNascoste.push(15); //per tutti gli utenti
+    colonneNascoste.push(16); //occupa troppo spazio
+    colonneNascoste.push(17);
+    colonneNascoste.push(18);
+    colonneNascoste.push(19);
     if(_tipoUtente != Studente && _tipoUtente != Tutor){
         colonneNascoste.push(1); //Matricola
         colonneNascoste.push(7); //Corso

@@ -5,8 +5,9 @@ ricerchetablemodel::ricerchetablemodel(QObject *parent)
 }
 
 void ricerchetablemodel::setListaRicerche(contenitore<ricerca> _listaRicerche){
-    if(&listaRicerche) delete &listaRicerche;
+    beginInsertRows(QModelIndex(), 0, _listaRicerche.size()-1);
     listaRicerche = _listaRicerche;
+    endInsertRows();
 }
 
 ricerchetablemodel::ricerchetablemodel(contenitore<ricerca> _listaRicerche, QObject *parent)

@@ -39,7 +39,8 @@ SOURCES += \
     menulezione.cpp \
     utentitablemodel.cpp \
     lezionitablemodel.cpp \
-    ricerchetablemodel.cpp
+    ricerchetablemodel.cpp \
+    comboboxdelegate.cpp
 
 HEADERS += \
     Model/insegnante.h \
@@ -58,5 +59,6 @@ HEADERS += \
     menulezione.h \
     utentitablemodel.h \
     lezionitablemodel.h \
-    ricerchetablemodel.h
+    ricerchetablemodel.h \
+    comboboxdelegate.h
 

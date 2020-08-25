@@ -55,7 +55,7 @@ int utentitablemodel::rowCount(const QModelIndex&) const{
 }
 
 int utentitablemodel::columnCount(const QModelIndex&) const{
-    return 14;
+    return 19;
 }
 
 QVariant utentitablemodel::data(const QModelIndex &index, int role) const{
@@ -127,6 +127,23 @@ QVariant utentitablemodel::data(const QModelIndex &index, int role) const{
             }
             return QVariant();
         }
+        case 14: //Regione
+            return QString::fromStdString(utenteTemp->getRegione());
+        case 15: //Cap
+            return QString::fromStdString(utenteTemp->getCap());
+        case 16: //Comune
+            return QString::fromStdString(utenteTemp->getComune());
+        case 17: //Via
+            return QString::fromStdString(utenteTemp->getVia());
+        case 18: //Numerocivico
+            return QString::fromStdString(utenteTemp->getNumeroCivico());
+        case 19:{ //Data Iscrizione
+            studente* tmp = dynamic_cast<studente*>(utenteTemp);
+            if(tmp){
+                return QString(tmp->getDataIscrizione().toString(Qt::RFC2822Date));
+            }
+            return QVariant();
+        }
         default:
             return QVariant();
         }
@@ -165,6 +182,18 @@ QVariant utentitablemodel::headerData(int section, Qt::Orientation orientation, 
             return QString("Tipo Professore");
         case 13:
             return QString("Anni di servizio");
+        case 14:
+            return QString("Regione");
+        case 15:
+            return QString("Cap");
+        case 16:
+            return QString("Comune");
+        case 17:
+            return QString("Via");
+        case 18:
+            return QString("Numero Civico");
+        case 19:
+            return QString("Data Iscrizione");
         }
     }
     return QVariant();
@@ -242,6 +271,26 @@ bool utentitablemodel::setData(const QModelIndex &index, const QVariant &value, 
                 dynamic_cast<professore*>(tmp.operator->())->setAnniServizio(value.toInt());
             }
             break;
+        case 14: //Regione
+            tmp->setRegione(value.toString().toStdString());
+            break;
+        case 15: //Cap
+            tmp->setCap(value.toString().toStdString());
+            break;
+        case 16: //Comune
+            tmp->setComune(value.toString().toStdString());
+            break;
+        case 17: //Via
+            tmp->setVia(value.toString().toStdString());
+            break;
+        case 18: //Numero civico
+            tmp->setNumeroCivico(value.toString().toStdString());
+            break;
+        case 19: //Data iscrizione
+            if(dynamic_cast<studente*>(tmp.operator->())){
+                dynamic_cast<studente*>(tmp.operator->())->setDataIscrizione(QDate::fromString(value.toString(),  Qt::RFC2822Date));
+            }
+            break;
         default:
             return false;
         }
@@ -272,3 +321,10 @@ bool utentitablemodel::removeRows(int position, int rows, const QModelIndex &ind
     return true;
 }
 
+contenitore<ricerca> utentitablemodel::getListaRicerche(int row){
+    puntatoresmart<utente> tmp = listaUtenti.value(row);
+    if(dynamic_cast<professore*>(tmp.operator->())){
+        return dynamic_cast<professore*>(tmp.operator->())->getRicerche();
+    }
+    return contenitore<ricerca>();
+}

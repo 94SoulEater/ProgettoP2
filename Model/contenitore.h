@@ -60,6 +60,7 @@ public:
 
    bool operator==(const contenitore&)const;
    bool operator!=(const contenitore&)const;
+   contenitore& operator=(const contenitore&);
 
    void push(const T&);
    int size() const;
@@ -135,6 +136,15 @@ bool contenitore<T>::operator ==(const contenitore& _con)const{
 template<class T>
 bool contenitore<T>::operator !=(const contenitore& _con)const{
     return !(*this == _con);
+}
+
+template<class T>
+contenitore<T>& contenitore<T>::operator=(const contenitore& _con){
+    if(this != &_con){
+        if(head) delete head;
+        head = copia(_con.head);
+    }
+    return *this;
 }
 
 
