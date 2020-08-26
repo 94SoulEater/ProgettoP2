@@ -382,6 +382,7 @@ void menudatiutente::modificaLezione(const QModelIndex &index){
     crediti = modelloLezioni->data(creditiIndex, Qt::DisplayRole).toInt();
     menulezione modifica;
     modifica.setWindowTitle(tr("Modifica lezione"));
+     modifica.aggiungiLezioneButton->setText("Modifica");
     modifica.materiaLineEdit->setText(materia);
     modifica.corsoLineEdit->setText(corso);
     modifica.stanzaLineEdit->setText(stanza);
@@ -440,6 +441,7 @@ void menudatiutente::modificaRicerca(const QModelIndex &index){
 
     menuricerca modifica;
     modifica.setWindowTitle(tr("Modifica ricerca"));
+    modifica.aggiungiRicercaButton->setText("Modifica");
     modifica.autoriLineEdit->setText(autori);
     modifica.titoloLineEdit->setText(titolo);
     modifica.linkLineEdit->setText(link);

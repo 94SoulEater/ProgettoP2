@@ -192,6 +192,7 @@ void menu::aggiungiUtente(){
 }
 
 void menu::modificaUtente(const QModelIndex &index){
+
     QString nome;
     QString cognome;
     QString codiceFiscale;
@@ -339,7 +340,6 @@ void menu::modificaUtente(const QModelIndex &index){
     modifica.numeroCivicoLineEdit->setText(numeroCivico);
 
     if (modifica.exec()) {
-
     }
 }
 
