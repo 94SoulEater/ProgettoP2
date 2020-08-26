@@ -340,8 +340,60 @@ void menu::modificaUtente(const QModelIndex &index){
     modifica.numeroCivicoLineEdit->setText(numeroCivico);
 
     if (modifica.exec()) {
+        rimuoviUtente();
+        QString codiceFiscale = modifica.codiceFiscaleLineEdit->text();
+        QString nome = modifica.nomeLineEdit->text();
+        QString cognome = modifica.cognomeLineEdit->text();
+        QDate dataNascita = modifica.dataNascitaEdit->date();
+        QString telefono = modifica.telefonoLineEdit->text();
+        QString email = modifica.emailLineEdit->text();
+        QString regione = modifica.regioneLineEdit->text();
+        QString comune = modifica.comuneLineEdit->text();
+        QString via = modifica.viaLineEdit->text();
+        QString cap = modifica.capLineEdit->text();
+        QString numeroCivico = modifica.numeroCivicoLineEdit->text();
+        QString tipoUtente = modifica.tipoUtenteMenuComboBox->currentText();
+        puntatoresmart<utente> utemp;
+        if(tipoUtente == "Studente" || tipoUtente == "Tutor"){
+            int matricola = modifica.matricolaLineEdit->text().toInt();
+            //tipolaurea direttamente sotto
+            QString corso = modifica.corsoLineEdit->text();
+            int annoCorso = modifica.annocorsoLineEdit->text().toInt();
+            bool fuoriCorso = modifica.checkBox->checkState();
+            int anniFuoriCorso;
+            if(fuoriCorso) anniFuoriCorso = modifica.annifuoricorsoLabel->text().toInt();
+            else anniFuoriCorso = 0;
+            QDate dataIscrizione = modifica.dataIscrizioneEdit->date();
+            if(tipoUtente == "Studente"){
+                utemp = new studente(nome.toStdString(), cognome.toStdString(), codiceFiscale.toStdString(), telefono.toStdString(), email.toStdString(), dataNascita.day(), dataNascita.month(), dataNascita.year(), regione.toStdString(), comune.toStdString(), via.toStdString(), cap.toStdString(), numeroCivico.toStdString(), matricola, triennale, corso.toStdString(), annoCorso, fuoriCorso, anniFuoriCorso, dataIscrizione.day(), dataIscrizione.month(), dataIscrizione.year());
+                dynamic_cast<studente*>(utemp.operator ->())->setLaurea(modifica.laureaMenuComboBox->currentText().toStdString());
+            }
+        }
+        if(tipoUtente == "Professore"){
+            QString tipo = modifica.tipoLineEdit->text();
+            int anniServizio = modifica.anniServizioLineEdit->text().toInt();
+            utemp = new professore(nome.toStdString(), cognome.toStdString(), codiceFiscale.toStdString(), telefono.toStdString(), email.toStdString(), dataNascita.day(), dataNascita.month(), dataNascita.year(), regione.toStdString(), comune.toStdString(), via.toStdString(), cap.toStdString(), numeroCivico.toStdString(), tipo.toStdString(), anniServizio);
+        }
+        if (!(modelloTabellaUtenti->contains(utemp))) {
+            modelloTabellaUtenti->aggiungiUtente(utemp);
+            /*
+            modelloProxy->sourceModel()->setData(index, codiceFiscale, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 2, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, nome, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 3, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, cognome, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 4, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, dataNascita, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 5, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, telefono, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 6, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, email, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 5, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, telefono, Qt::EditRole);
+            */
+        }
     }
-}
+    }
 
 //Rimuove l'utente selezionato quando viene premuto il bottone
 void menu::rimuoviUtente(){
