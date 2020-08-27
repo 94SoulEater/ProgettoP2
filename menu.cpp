@@ -290,10 +290,10 @@ void menu::modificaUtente(const QModelIndex &index){
             modifica.checkBox->setChecked(true);
             modifica.spinBox->setValue(anniFuoriCorso.toInt());
         }
-        if(laurea == "Triennale") laurea = "1";
-        if(laurea == "Magistrale") laurea = "2";
-        if(laurea == "Diploma Specializzazione") laurea = "3";
-        if(laurea == "Dottorato Ricerca") laurea = "4";
+        if(laurea == "Triennale") laurea = "0";
+        if(laurea == "Magistrale") laurea = "1";
+        if(laurea == "Diploma Specializzazione") laurea = "2";
+        if(laurea == "Dottorato Ricerca") laurea = "3";
 
         modifica.laureaMenuComboBox->setCurrentIndex(laurea.toInt());
 
@@ -393,7 +393,7 @@ void menu::modificaUtente(const QModelIndex &index){
             */
         }
     }
-    }
+}
 
 //Rimuove l'utente selezionato quando viene premuto il bottone
 void menu::rimuoviUtente(){
