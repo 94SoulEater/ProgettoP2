@@ -10,7 +10,7 @@ void utentitablemodel::aggiungiUtente(const puntatoresmart<utente> &_utente){
 
 void utentitablemodel::modificaUtente(int _row,const puntatoresmart<utente> &_utente){
     listaUtenti.replace(_row, _utente);
-    //emit dataChanged(QModelIndex(0, 0,), QModelIndex(rowCount(), 19));
+    emit dataChanged(QAbstractTableModel::createIndex(_row, 0), QAbstractTableModel::createIndex(_row, 19));
 }
 
 void utentitablemodel::aggiungiUtenti(){
