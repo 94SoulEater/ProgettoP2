@@ -19,6 +19,7 @@ public:
     string getTipo() const;
     void setTipo(const string &value);
     contenitore<ricerca> getRicerche() const;
+    void setRicerche(const contenitore<ricerca> &_listaRicerche);
     void addRicerca(const ricerca &_ric);
     void removeRicerca(const ricerca &_ric);
     int getAnniServizio() const;

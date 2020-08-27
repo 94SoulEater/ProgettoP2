@@ -30,6 +30,7 @@ public:
     lezionitablemodel(contenitore<lezione> _listaLezioni, QObject *parent = nullptr);
     bool contains(const lezione& _lez);
     contenitore<giornoLezione> getListaGiornoLezione(int row);
+    contenitore<lezione>& getListaLezioni();
 private:
     contenitore<lezione> listaLezioni;
 };

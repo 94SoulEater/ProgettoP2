@@ -10,6 +10,10 @@ void ricerchetablemodel::setListaRicerche(contenitore<ricerca> _listaRicerche){
     endInsertRows();
 }
 
+contenitore<ricerca>& ricerchetablemodel::getListaRicerche(){
+    return listaRicerche;
+}
+
 ricerchetablemodel::ricerchetablemodel(contenitore<ricerca> _listaRicerche, QObject *parent)
     : QAbstractTableModel(parent){
     setListaRicerche(_listaRicerche);
