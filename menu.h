@@ -19,6 +19,7 @@
 #include <QtWidgets>
 #include <QLineEdit>
 #include <algorithm>
+#include <stdexcept>
 
 class menu : public QWidget
 {
@@ -46,7 +47,6 @@ private:
     QTableView *utentiTableView;
     proxymodel *modelloProxy;
     utentitablemodel *modelloTabellaUtenti;
-
     void addCLose();
     void setupColonneTableView(tipoutente _tipoutente);
     utente* creaUtenteTemp(const menudatiutente &_menu)const;

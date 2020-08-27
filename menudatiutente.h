@@ -19,6 +19,7 @@
 #include "lezionitablemodel.h"
 #include "ricerchetablemodel.h"
 #include "comboboxdelegate.h"
+#include <stdexcept>
 
 
 class menudatiutente : public QDialog{
@@ -44,6 +45,7 @@ public:
 
 public slots:
     void showRow(QString);
+    void accept();
 private slots:
     void clear();
     void aggiungiLezione();

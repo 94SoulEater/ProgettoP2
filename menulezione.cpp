@@ -41,16 +41,26 @@ menulezione::menulezione(QWidget *parent) : QDialog(parent)
 
     connect(eliminaOrarioButton,SIGNAL(clicked()),this,SLOT(rimuoviDaCombo()));
 
-    //orario
+    //orari
+
+    QRegularExpression rx1("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
+    QValidator *validator1 = new QRegularExpressionValidator(rx1, this);
     orarioLayout = new QHBoxLayout();
     orarioInizioLabel=new QLabel("Orario inizio:");
     orarioInizioLineEdit = new QLineEdit();
-    orarioInizioLineEdit->setInputMask("99:99;");
+    orarioInizioLineEdit->setValidator(validator1);
     orarioFineLabel=new QLabel("Orario fine:");
     orarioFineLineEdit = new QLineEdit();
-    orarioFineLineEdit->setInputMask("99:99;");
+    orarioFineLineEdit->setValidator(validator1);
     orarioGiornoLabel=new QLabel("Giorno:");
-    orarioGiornoLineEdit = new QLineEdit();
+    orarioGiornoCombo = new QComboBox();
+    orarioGiornoCombo->addItem("Lunedì");
+    orarioGiornoCombo->addItem("Martedì");
+    orarioGiornoCombo->addItem("Mercoledì");
+    orarioGiornoCombo->addItem("Giovedì");
+    orarioGiornoCombo->addItem("Venerdì");
+    orarioGiornoCombo->addItem("Sabato");
+    orarioGiornoCombo->addItem("Domenica");
     aggiungiOrarioButton=new QPushButton("Aggiungi Orario");
 
     orarioLayout ->addWidget(orarioInizioLabel);
@@ -58,7 +68,7 @@ menulezione::menulezione(QWidget *parent) : QDialog(parent)
     orarioLayout ->addWidget(orarioFineLabel);
     orarioLayout ->addWidget(orarioFineLineEdit);
     orarioLayout ->addWidget(orarioGiornoLabel);
-    orarioLayout ->addWidget(orarioGiornoLineEdit);
+    orarioLayout ->addWidget(orarioGiornoCombo);
     orarioLayout ->addWidget(aggiungiOrarioButton);
 
     connect(aggiungiOrarioButton,SIGNAL(clicked()),this,SLOT(aggiungiCombo()));
@@ -87,14 +97,16 @@ void menulezione::aggiungiCombo()
 {
     combo->setVisible(true);
     eliminaOrarioButton->setVisible(true);
-    QString orario=orarioInizioLineEdit->text()+" - "+orarioFineLineEdit->text()+"  "+orarioGiornoLineEdit->text();
+    QString orario=orarioInizioLineEdit->text()+" - "+orarioFineLineEdit->text()+"  "+orarioGiornoCombo->currentText();
     combo->addItem(orario);
     orarioInizioLineEdit->clear();
     orarioFineLineEdit->clear();
-    orarioGiornoLineEdit->clear();
 }
+
 
 void menulezione::rimuoviDaCombo()
 {
     combo->removeItem(combo->currentIndex());
 }
+
+

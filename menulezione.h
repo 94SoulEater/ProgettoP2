@@ -22,9 +22,9 @@ public:
     QVBoxLayout *maindatiLayout;
     QHBoxLayout *bottoniLezioneLayout, *orarioLayout, *comboLayout;
     QLabel *materiaLabel, *corsoLabel, *creditiLabel, *stanzaLabel, *orarioInizioLabel, *orarioFineLabel, *orarioGiornoLabel;
-    QLineEdit *materiaLineEdit, *corsoLineEdit, *creditiLineEdit, *stanzaLineEdit, *orarioInizioLineEdit,  *orarioFineLineEdit,  *orarioGiornoLineEdit;
+    QLineEdit *materiaLineEdit, *corsoLineEdit, *creditiLineEdit, *stanzaLineEdit, *orarioInizioLineEdit,  *orarioFineLineEdit;
      QPushButton *aggiungiLezioneButton, *annullaLezioneButton, *aggiungiOrarioButton, *eliminaOrarioButton;
-     QComboBox *combo;
+     QComboBox *combo, *orarioGiornoCombo;
 
 public slots:
     void aggiungiCombo();

@@ -357,6 +357,18 @@ void menudatiutente::showRow(QString combo){
     resize(sizeHint());
 }
 
+void menudatiutente::accept()
+{
+    if(nomeLineEdit->text().isEmpty() )
+       throw new std::runtime_error("Errore: manca il campo nome");
+    //else if(cognomeLineEdit->text().isEmpty())
+      //  throw new std::domain_error("Errore: manca il campo cognome");
+  //  else if(codiceFiscaleLineEdit->text().isEmpty())
+    //     throw new std::domain_error("Errore: manca il campo codice fiscale");
+         else
+       QDialog::accept();
+}
+
 void menudatiutente::modificaLezione(const QModelIndex &index){
     QString materia;
     int crediti;
@@ -595,4 +607,9 @@ void menudatiutente::aggiornaricercaAzioni(const QItemSelection &selected, const
         ricercaModificaButton->setEnabled(false);
     }
 }
+
+
+
+
+
 

@@ -410,6 +410,8 @@ void menu::aggiornaColonnaRicerca(const QString& _colonna){
 
 menu::~menu(){
 }
+
+
 /*Aggiunge barra menu
 void menu::addCLose(){
     QMenuBar* menubar=new QMenuBar(this);
