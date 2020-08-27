@@ -30,7 +30,7 @@ public:
     void setListaLezioni(contenitore<lezione> _listaLezioni);
     lezionitablemodel(contenitore<lezione> _listaLezioni, QObject *parent = nullptr);
     bool contains(const lezione& _lez);
-    contenitore<lezione>& getListaLezioni();
+    contenitore<giornoLezione> getListaGiornoLezione(int row);
 private:
     contenitore<lezione> listaLezioni;
 };

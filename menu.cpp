@@ -342,7 +342,6 @@ void menu::modificaUtente(const QModelIndex &index){
     modifica.numeroCivicoLineEdit->setText(numeroCivico);
 
     if (modifica.exec()) {
-
         puntatoresmart<utente> utemp = creaUtenteTemp(modifica);
         if (!(modelloTabellaUtenti->contains(utemp))){
             modelloTabellaUtenti->modificaUtente(row, utemp);
