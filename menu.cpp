@@ -133,32 +133,6 @@ void menu::tipoUtenteComboBoxChanged(const QString &_string){
     setupColonneTableView(utente::toTipoUtente(_string.toStdString()));
 }
 
-//Nuova finestra aggiunta cliente
-void menu::aggiungiUtente(){
-    menudatiutente aggiungi;
-    if (aggiungi.exec()) {
-        puntatoresmart<utente> utemp = creaUtenteTemp(aggiungi);
-        if (!(modelloTabellaUtenti->contains(utemp))) {
-            modelloTabellaUtenti->aggiungiUtente(utemp);
-            /*
-            modelloProxy->sourceModel()->setData(index, codiceFiscale, Qt::EditRole);
-            index = modelloProxy->sourceModel()->index(0, 2, QModelIndex());
-            modelloProxy->sourceModel()->setData(index, nome, Qt::EditRole);
-            index = modelloProxy->sourceModel()->index(0, 3, QModelIndex());
-            modelloProxy->sourceModel()->setData(index, cognome, Qt::EditRole);
-            index = modelloProxy->sourceModel()->index(0, 4, QModelIndex());
-            modelloProxy->sourceModel()->setData(index, dataNascita, Qt::EditRole);
-            index = modelloProxy->sourceModel()->index(0, 5, QModelIndex());
-            modelloProxy->sourceModel()->setData(index, telefono, Qt::EditRole);
-            index = modelloProxy->sourceModel()->index(0, 6, QModelIndex());
-            modelloProxy->sourceModel()->setData(index, email, Qt::EditRole);
-            index = modelloProxy->sourceModel()->index(0, 5, QModelIndex());
-            modelloProxy->sourceModel()->setData(index, telefono, Qt::EditRole);
-            */
-        }
-    }
-}
-
 puntatoresmart<utente>& menu::creaUtenteTemp(const menudatiutente &_menu)const{
     QString codiceFiscale = _menu.codiceFiscaleLineEdit->text();
     QString nome = _menu.nomeLineEdit->text();
@@ -200,6 +174,32 @@ puntatoresmart<utente>& menu::creaUtenteTemp(const menudatiutente &_menu)const{
         dynamic_cast<insegnante*>(utemp.operator ->())->setLezioni(_menu.modelloLezioni->getListaLezioni());
     }
     return utemp;
+}
+
+//Nuova finestra aggiunta cliente
+void menu::aggiungiUtente(){
+    menudatiutente aggiungi;
+    if (aggiungi.exec()) {
+        puntatoresmart<utente> utemp = creaUtenteTemp(aggiungi);
+        if (!(modelloTabellaUtenti->contains(utemp))) {
+            modelloTabellaUtenti->aggiungiUtente(utemp);
+            /*
+            modelloProxy->sourceModel()->setData(index, codiceFiscale, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 2, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, nome, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 3, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, cognome, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 4, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, dataNascita, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 5, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, telefono, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 6, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, email, Qt::EditRole);
+            index = modelloProxy->sourceModel()->index(0, 5, QModelIndex());
+            modelloProxy->sourceModel()->setData(index, telefono, Qt::EditRole);
+            */
+        }
+    }
 }
 
 void menu::modificaUtente(const QModelIndex &index){
@@ -300,10 +300,10 @@ void menu::modificaUtente(const QModelIndex &index){
             modifica.checkBox->setChecked(true);
             modifica.spinBox->setValue(anniFuoriCorso.toInt());
         }
-        if(laurea == "Triennale") laurea = "1";
-        if(laurea == "Magistrale") laurea = "2";
-        if(laurea == "Diploma Specializzazione") laurea = "3";
-        if(laurea == "Dottorato Ricerca") laurea = "4";
+        if(laurea == "Triennale") laurea = "0";
+        if(laurea == "Magistrale") laurea = "1";
+        if(laurea == "Diploma Specializzazione") laurea = "2";
+        if(laurea == "Dottorato Ricerca") laurea = "3";
 
         modifica.laureaMenuComboBox->setCurrentIndex(laurea.toInt());
 
