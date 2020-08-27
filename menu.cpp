@@ -137,39 +137,7 @@ void menu::tipoUtenteComboBoxChanged(const QString &_string){
 void menu::aggiungiUtente(){
     menudatiutente aggiungi;
     if (aggiungi.exec()) {
-        QString codiceFiscale = aggiungi.codiceFiscaleLineEdit->text();
-        QString nome = aggiungi.nomeLineEdit->text();
-        QString cognome = aggiungi.cognomeLineEdit->text();
-        QDate dataNascita = aggiungi.dataNascitaEdit->date();
-        QString telefono = aggiungi.telefonoLineEdit->text();
-        QString email = aggiungi.emailLineEdit->text();
-        QString regione = aggiungi.regioneLineEdit->text();
-        QString comune = aggiungi.comuneLineEdit->text();
-        QString via = aggiungi.viaLineEdit->text();
-        QString cap = aggiungi.capLineEdit->text();
-        QString numeroCivico = aggiungi.numeroCivicoLineEdit->text();
-        QString tipoUtente = aggiungi.tipoUtenteMenuComboBox->currentText();
-        puntatoresmart<utente> utemp;
-        if(tipoUtente == "Studente" || tipoUtente == "Tutor"){
-            int matricola = aggiungi.matricolaLineEdit->text().toInt();
-            //tipolaurea direttamente sotto
-            QString corso = aggiungi.corsoLineEdit->text();
-            int annoCorso = aggiungi.annocorsoLineEdit->text().toInt();
-            bool fuoriCorso = aggiungi.checkBox->checkState();
-            int anniFuoriCorso;
-            if(fuoriCorso) anniFuoriCorso = aggiungi.annifuoricorsoLabel->text().toInt();
-            else anniFuoriCorso = 0;
-            QDate dataIscrizione = aggiungi.dataIscrizioneEdit->date();
-            if(tipoUtente == "Studente"){
-                utemp = new studente(nome.toStdString(), cognome.toStdString(), codiceFiscale.toStdString(), telefono.toStdString(), email.toStdString(), dataNascita.day(), dataNascita.month(), dataNascita.year(), regione.toStdString(), comune.toStdString(), via.toStdString(), cap.toStdString(), numeroCivico.toStdString(), matricola, triennale, corso.toStdString(), annoCorso, fuoriCorso, anniFuoriCorso, dataIscrizione.day(), dataIscrizione.month(), dataIscrizione.year());
-                dynamic_cast<studente*>(utemp.operator ->())->setLaurea(aggiungi.laureaMenuComboBox->currentText().toStdString());
-            }
-        }
-        if(tipoUtente == "Professore"){
-            QString tipo = aggiungi.tipoLineEdit->text();
-            int anniServizio = aggiungi.anniServizioLineEdit->text().toInt();
-            utemp = new professore(nome.toStdString(), cognome.toStdString(), codiceFiscale.toStdString(), telefono.toStdString(), email.toStdString(), dataNascita.day(), dataNascita.month(), dataNascita.year(), regione.toStdString(), comune.toStdString(), via.toStdString(), cap.toStdString(), numeroCivico.toStdString(), tipo.toStdString(), anniServizio);
-        }
+        puntatoresmart<utente> utemp = creaUtenteTemp(aggiungi);
         if (!(modelloTabellaUtenti->contains(utemp))) {
             modelloTabellaUtenti->aggiungiUtente(utemp);
             /*
@@ -189,6 +157,49 @@ void menu::aggiungiUtente(){
             */
         }
     }
+}
+
+puntatoresmart<utente>& menu::creaUtenteTemp(const menudatiutente &_menu)const{
+    QString codiceFiscale = _menu.codiceFiscaleLineEdit->text();
+    QString nome = _menu.nomeLineEdit->text();
+    QString cognome = _menu.cognomeLineEdit->text();
+    QDate dataNascita = _menu.dataNascitaEdit->date();
+    QString telefono = _menu.telefonoLineEdit->text();
+    QString email = _menu.emailLineEdit->text();
+    QString regione = _menu.regioneLineEdit->text();
+    QString comune = _menu.comuneLineEdit->text();
+    QString via = _menu.viaLineEdit->text();
+    QString cap = _menu.capLineEdit->text();
+    QString numeroCivico = _menu.numeroCivicoLineEdit->text();
+    QString tipoUtente = _menu.tipoUtenteMenuComboBox->currentText();
+    puntatoresmart<utente> utemp;
+    if(tipoUtente == "Studente" || tipoUtente == "Tutor"){
+        int matricola = _menu.matricolaLineEdit->text().toInt();
+        //tipolaurea direttamente sotto
+        QString corso = _menu.corsoLineEdit->text();
+        int annoCorso = _menu.annocorsoLineEdit->text().toInt();
+        bool fuoriCorso = _menu.checkBox->checkState();
+        int anniFuoriCorso;
+        if(fuoriCorso) anniFuoriCorso = _menu.annifuoricorsoLabel->text().toInt();
+        else anniFuoriCorso = 0;
+        QDate dataIscrizione = _menu.dataIscrizioneEdit->date();
+        if(tipoUtente == "Studente"){
+            utemp = new studente(nome.toStdString(), cognome.toStdString(), codiceFiscale.toStdString(), telefono.toStdString(), email.toStdString(), dataNascita.day(), dataNascita.month(), dataNascita.year(), regione.toStdString(), comune.toStdString(), via.toStdString(), cap.toStdString(), numeroCivico.toStdString(), matricola, triennale, corso.toStdString(), annoCorso, fuoriCorso, anniFuoriCorso, dataIscrizione.day(), dataIscrizione.month(), dataIscrizione.year());
+            dynamic_cast<studente*>(utemp.operator ->())->setLaurea(_menu.laureaMenuComboBox->currentText().toStdString());
+        }else{
+            utemp = new tutor(nome.toStdString(), cognome.toStdString(), codiceFiscale.toStdString(), telefono.toStdString(), email.toStdString(), dataNascita.day(), dataNascita.month(), dataNascita.year(), regione.toStdString(), comune.toStdString(), via.toStdString(), cap.toStdString(), numeroCivico.toStdString(), matricola, triennale, corso.toStdString(), annoCorso, fuoriCorso, anniFuoriCorso, dataIscrizione.day(), dataIscrizione.month(), dataIscrizione.year());
+        }
+    }
+    if(tipoUtente == "Professore"){
+        QString tipo = _menu.tipoLineEdit->text();
+        int anniServizio = _menu.anniServizioLineEdit->text().toInt();
+        utemp = new professore(nome.toStdString(), cognome.toStdString(), codiceFiscale.toStdString(), telefono.toStdString(), email.toStdString(), dataNascita.day(), dataNascita.month(), dataNascita.year(), regione.toStdString(), comune.toStdString(), via.toStdString(), cap.toStdString(), numeroCivico.toStdString(), tipo.toStdString(), anniServizio);
+        dynamic_cast<professore*>(utemp.operator ->())->setRicerche(_menu.modelloRicerche->getListaRicerche());
+    }
+    if(tipoUtente == "Professore" || tipoUtente == "Tutor"){
+        dynamic_cast<insegnante*>(utemp.operator ->())->setLezioni(_menu.modelloLezioni->getListaLezioni());
+    }
+    return utemp;
 }
 
 void menu::modificaUtente(const QModelIndex &index){
@@ -314,21 +325,19 @@ void menu::modificaUtente(const QModelIndex &index){
         modifica.tipoLineEdit->setText(tipoProfessore);
         modifica.anniServizioLineEdit->setText(anniServizio);
         modifica.modelloRicerche->setListaRicerche(modelloTabellaUtenti->getListaRicerche(row));
-
-
         modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
+    }
+    if(tipoUtente == "Professore" || tipoUtente == "Tutor"){
         modifica.modelloLezioni->setListaLezioni(modelloTabellaUtenti->getListaLezione(row));
-        modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
         if(modifica.modelloLezioni->rowCount()>0){
             for(int i=0; i<modifica.modelloLezioni->rowCount(); i++){
                 modifica.lezioniTableView->openPersistentEditor(modifica.modelloLezioni->index(i, 4));
             }
         }
-
-
     }
     modifica.showRow(tipoUtente);
 
+    modifica.tipoUtenteMenuComboBox->setEnabled(false);
     modifica.setWindowTitle(tr("Modifica utente"));
     modifica.aggiungiMenuButton->setText("Modifica");
     modifica.nomeLineEdit->setText(nome);
@@ -344,6 +353,7 @@ void menu::modificaUtente(const QModelIndex &index){
     modifica.numeroCivicoLineEdit->setText(numeroCivico);
 
     if (modifica.exec()) {
+<<<<<<< HEAD
 <<<<<<< HEAD
         rimuoviUtente();
         QString codiceFiscale = modifica.codiceFiscaleLineEdit->text();
@@ -400,6 +410,12 @@ void menu::modificaUtente(const QModelIndex &index){
 =======
 
 >>>>>>> 3ea6c3ecfb7c5083bf5c22cbe085e13bc5bc300f
+=======
+        puntatoresmart<utente> utemp = creaUtenteTemp(modifica);
+        if (!(modelloTabellaUtenti->contains(utemp))){
+            modelloTabellaUtenti->modificaUtente(row, utemp);
+        }
+>>>>>>> 9b48d3955f681822026b70f4efcce6ad32078901
     }
 }
 

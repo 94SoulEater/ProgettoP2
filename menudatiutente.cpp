@@ -362,7 +362,7 @@ void menudatiutente::modificaLezione(const QModelIndex &index){
     int crediti;
     QString corso;
     QString stanza;
-
+    QStringList orari;
 
     int row;
 
@@ -381,6 +381,9 @@ void menudatiutente::modificaLezione(const QModelIndex &index){
     stanza = modelloLezioni->data(stanzaIndex, Qt::DisplayRole).toString();
     QModelIndex creditiIndex = modelloLezioni->index(row, 3, QModelIndex());
     crediti = modelloLezioni->data(creditiIndex, Qt::DisplayRole).toInt();
+    QModelIndex orariIndex = modelloLezioni->index(row, 4, QModelIndex());
+    orari = modelloLezioni->data(orariIndex, Qt::DisplayRole).toStringList();
+
     menulezione modifica;
     modifica.setWindowTitle(tr("Modifica lezione"));
     modifica.aggiungiLezioneButton->setText("Modifica");
@@ -388,7 +391,9 @@ void menudatiutente::modificaLezione(const QModelIndex &index){
     modifica.corsoLineEdit->setText(corso);
     modifica.stanzaLineEdit->setText(stanza);
     modifica.creditiLineEdit->setText(QString::number(crediti));
-
+    modifica.combo->setVisible(true);
+    modifica.eliminaOrarioButton->setVisible(true);
+    modifica.combo->addItems(orari);
 
     if (modifica.exec()) {
 
@@ -396,7 +401,10 @@ void menudatiutente::modificaLezione(const QModelIndex &index){
         crediti = modifica.creditiLineEdit->text().toInt();
         corso = modifica.corsoLineEdit->text();
         stanza = modifica.stanzaLineEdit->text();
-
+        orari.clear();
+        for(int i=0; i<modifica.combo->count(); i++){
+            orari<<modifica.combo->itemText(i);
+        }
 
         lezione lez(materia.toStdString(), corso.toStdString(), stanza.toStdString(), crediti);
         if (!modelloLezioni->contains(lez)) {
@@ -408,9 +416,8 @@ void menudatiutente::modificaLezione(const QModelIndex &index){
             modelloLezioni->setData(index, stanza, Qt::EditRole);
             index = modelloLezioni->index(row, 3, QModelIndex());
             modelloLezioni->setData(index, crediti, Qt::EditRole);
-
-            //index = table->index(0, 1, QModelIndex());
-            //modelloLezioni->setData(index, orari, Qt::EditRole);
+            index = modelloLezioni->index(row, 4, QModelIndex());
+            modelloLezioni->setData(index, orari, Qt::EditRole);
         }
     }
 
@@ -481,8 +488,10 @@ void menudatiutente::aggiungiLezione(){
         int crediti = aggiungiLezione.creditiLineEdit->text().toInt();
         QString corso = aggiungiLezione.corsoLineEdit->text();
         QString stanza = aggiungiLezione.stanzaLineEdit->text();
-        // QString orario = aggiungiLezione.combo->currentText();
-
+        QStringList orario;
+        for(int i=0; i<aggiungiLezione.combo->count(); i++){
+            orario<<aggiungiLezione.combo->itemText(i);
+        }
         lezione lez(materia.toStdString(), corso.toStdString(), stanza.toStdString(), crediti);
         if (!modelloLezioni->contains(lez)) {
             modelloLezioni->insertRows(0, 1, QModelIndex());
@@ -495,8 +504,8 @@ void menudatiutente::aggiungiLezione(){
             modelloLezioni->setData(index, stanza, Qt::EditRole);
             index = modelloLezioni->index(0, 3, QModelIndex());
             modelloLezioni->setData(index, crediti, Qt::EditRole);
-            //   index = modelloLezioni->index(0, 4, QModelIndex());
-            //   modelloLezioni->setData(index, orario, Qt::EditRole);
+            index = modelloLezioni->index(0, 4, QModelIndex());
+            modelloLezioni->setData(index, orario, Qt::EditRole);
             lezioniTableView->openPersistentEditor(modelloLezioni->index(0,4));
         }
     }
