@@ -38,7 +38,7 @@ menu::menu(QWidget *parent)
     ricercaLayout->addWidget(perLabel);
     ricercaLayout->addWidget(colonnaRicercaComboBox);
     mainLayout->addLayout(ricercaLayout);
-    
+
     //Ricerca per parola nella colonna selezionata
     connect(cercaLineEdit, SIGNAL(textChanged(QString)), this, SLOT(aggiornaFiltro()));
     //Aggiorna colonna selezionata per ricerca di parola
@@ -99,13 +99,13 @@ menu::menu(QWidget *parent)
 
     //Allinea la finestra al centro dello schermo
     setGeometry(
-            QStyle::alignedRect(
-            Qt::LeftToRight,
-            Qt::AlignCenter,
-            size(),
-            qApp->desktop()->availableGeometry()
-        )
-    );
+                QStyle::alignedRect(
+                    Qt::LeftToRight,
+                    Qt::AlignCenter,
+                    size(),
+                    qApp->desktop()->availableGeometry()
+                    )
+                );
 }
 
 //Imposta la dimensione delle colonne adatta al contenuto della tabella
@@ -314,15 +314,16 @@ void menu::modificaUtente(const QModelIndex &index){
         modifica.tipoLineEdit->setText(tipoProfessore);
         modifica.anniServizioLineEdit->setText(anniServizio);
         modifica.modelloRicerche->setListaRicerche(modelloTabellaUtenti->getListaRicerche(row));
+
+
+        modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
+        modifica.modelloLezioni->setListaLezioni(modelloTabellaUtenti->getListaLezione(row));
+        modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
         if(modifica.modelloLezioni->rowCount()>0){
             for(int i=0; i<modifica.modelloLezioni->rowCount(); i++){
                 modifica.lezioniTableView->openPersistentEditor(modifica.modelloLezioni->index(i, 4));
             }
         }
-
-        modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
-       modifica.modelloLezioni->setListaLezioni(modelloTabellaUtenti->getListaLezione(row));
-         modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
 
 
     }

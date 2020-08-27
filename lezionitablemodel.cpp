@@ -11,10 +11,9 @@ lezionitablemodel::lezionitablemodel(contenitore<lezione> _listaLezioni, QObject
 }
 
 void lezionitablemodel::setListaLezioni(contenitore<lezione> _listaLezioni){
-     beginInsertRows(QModelIndex(), 0, _listaLezioni.size()-1);
+    beginInsertRows(QModelIndex(), 0, _listaLezioni.size()-1);
     listaLezioni = _listaLezioni;
     endInsertRows();
-
 }
 
 int lezionitablemodel::rowCount(const QModelIndex&) const{

@@ -239,8 +239,8 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     connect(lezioniTableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(modificaLezione(QModelIndex)));
 
     //connessione disabilitare modifica
-     connect(lezioniTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornalezioneAzioni(QItemSelection,QItemSelection)));
-     connect(ricercheTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornaricercaAzioni(QItemSelection,QItemSelection)));
+    connect(lezioniTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornalezioneAzioni(QItemSelection,QItemSelection)));
+    connect(ricercheTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornaricercaAzioni(QItemSelection,QItemSelection)));
 
     //aggiungi, annulla e cancella
     bottoniLayout = new QHBoxLayout();
@@ -486,7 +486,7 @@ void menudatiutente::aggiungiLezione(){
         int crediti = aggiungiLezione.creditiLineEdit->text().toInt();
         QString corso = aggiungiLezione.corsoLineEdit->text();
         QString stanza = aggiungiLezione.stanzaLineEdit->text();
-       // QString orario = aggiungiLezione.combo->currentText();
+        // QString orario = aggiungiLezione.combo->currentText();
 
         lezione lez(materia.toStdString(), corso.toStdString(), stanza.toStdString(), crediti);
         if (!modelloLezioni->contains(lez)) {
@@ -500,8 +500,8 @@ void menudatiutente::aggiungiLezione(){
             modelloLezioni->setData(index, stanza, Qt::EditRole);
             index = modelloLezioni->index(0, 3, QModelIndex());
             modelloLezioni->setData(index, crediti, Qt::EditRole);
-         //   index = modelloLezioni->index(0, 4, QModelIndex());
-         //   modelloLezioni->setData(index, orario, Qt::EditRole);
+            //   index = modelloLezioni->index(0, 4, QModelIndex());
+            //   modelloLezioni->setData(index, orario, Qt::EditRole);
         }
     }
 }
