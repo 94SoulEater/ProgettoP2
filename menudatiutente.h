@@ -40,6 +40,7 @@ public:
     lezionitablemodel *modelloLezioni;
     ricerchetablemodel *modelloRicerche;
     QTableView *lezioniTableView, *ricercheTableView;
+    comboboxdelegate *oraridelegate;
 
 public slots:
     void showRow(QString);
