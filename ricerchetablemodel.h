@@ -20,7 +20,6 @@ public:
     void setListaRicerche(contenitore<ricerca> _listaRicerche);
     ricerchetablemodel(contenitore<ricerca> _listaRicerche, QObject *parent = nullptr);
     bool contains(const ricerca& _ric);
-    contenitore<ricerca>& getListaRicerche();
 private:
     contenitore<ricerca> listaRicerche;
 };

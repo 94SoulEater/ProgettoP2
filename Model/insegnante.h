@@ -15,7 +15,6 @@ public:
     virtual insegnante* clone() const = 0;
     virtual tipoutente getTipoUtente() const = 0;
     contenitore<lezione> getLezioni() const;
-    void setLezioni(const contenitore<lezione> &_listaLezioni);
     void addLezione(const lezione& _lez);
     void removeLezione(const lezione& _lez);
 };

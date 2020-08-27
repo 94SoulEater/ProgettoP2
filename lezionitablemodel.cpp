@@ -10,10 +10,6 @@ lezionitablemodel::lezionitablemodel(contenitore<lezione> _listaLezioni, QObject
    setListaLezioni(_listaLezioni);
 }
 
-contenitore<lezione>& lezionitablemodel::getListaLezioni(){
-    return listaLezioni;
-}
-
 void lezionitablemodel::setListaLezioni(contenitore<lezione> _listaLezioni){
     beginInsertRows(QModelIndex(), 0, _listaLezioni.size()-1);
     listaLezioni = _listaLezioni;

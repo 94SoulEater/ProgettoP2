@@ -28,10 +28,9 @@ public:
     bool insertRows(int position, int rows, const QModelIndex &parent);
     bool removeRows(int row, int count, const QModelIndex &parent);
     bool contains(const puntatoresmart<utente>& _utente);
-    void aggiungiUtente(const puntatoresmart<utente> &_utente);
+    void aggiungiUtente(puntatoresmart<utente> _utente);
     contenitore<ricerca> getListaRicerche(int row);
     contenitore<lezione> getListaLezione(int row);
-    void modificaUtente(int _row,const puntatoresmart<utente> &_utente);
 private:
     contenitore<puntatoresmart<utente>> listaUtenti;
     void aggiungiUtenti();

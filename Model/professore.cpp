@@ -16,11 +16,6 @@ contenitore<ricerca> professore::getRicerche() const{
     return ricerche;
 }
 
-void professore::setRicerche(const contenitore<ricerca> &_listaRicerche){
-    ricerche.clear();
-    ricerche = _listaRicerche;
-}
-
 void professore::addRicerca(const ricerca &_ric){
     ricerche.push(_ric);
 }

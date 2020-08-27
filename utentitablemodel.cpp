@@ -2,7 +2,7 @@
 
 using std::cout; using std::endl;
 
-void utentitablemodel::aggiungiUtente(const puntatoresmart<utente> &_utente){
+void utentitablemodel::aggiungiUtente(puntatoresmart<utente> _utente){
     beginInsertRows(QModelIndex(), 0, 0);
     listaUtenti.push(_utente);
     endInsertRows();
