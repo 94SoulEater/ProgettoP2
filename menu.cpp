@@ -133,7 +133,7 @@ void menu::tipoUtenteComboBoxChanged(const QString &_string){
     setupColonneTableView(utente::toTipoUtente(_string.toStdString()));
 }
 
-puntatoresmart<utente>& menu::creaUtenteTemp(const menudatiutente &_menu)const{
+utente* menu::creaUtenteTemp(const menudatiutente &_menu)const{
     QString codiceFiscale = _menu.codiceFiscaleLineEdit->text();
     QString nome = _menu.nomeLineEdit->text();
     QString cognome = _menu.cognomeLineEdit->text();
@@ -173,7 +173,7 @@ puntatoresmart<utente>& menu::creaUtenteTemp(const menudatiutente &_menu)const{
     if(tipoUtente == "Professore" || tipoUtente == "Tutor"){
         dynamic_cast<insegnante*>(utemp.operator ->())->setLezioni(_menu.modelloLezioni->getListaLezioni());
     }
-    return utemp;
+    return (*utemp).clone();
 }
 
 //Nuova finestra aggiunta cliente

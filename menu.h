@@ -49,7 +49,7 @@ private:
 
     void addCLose();
     void setupColonneTableView(tipoutente _tipoutente);
-    puntatoresmart<utente>& creaUtenteTemp(const menudatiutente &_menu)const;
+    utente* creaUtenteTemp(const menudatiutente &_menu)const;
 
 };
 

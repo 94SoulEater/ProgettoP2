@@ -220,7 +220,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     oraridelegate = new comboboxdelegate(lezioniTableView);
     lezioniTableView->setModel(modelloLezioni);
     lezioniTableView->setItemDelegateForColumn(4,oraridelegate);
-    //lezioniTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    lezioniTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     lezioniTableView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
     lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     //Seleziona una riga al posto di una singola cella
