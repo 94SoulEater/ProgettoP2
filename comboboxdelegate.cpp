@@ -8,11 +8,9 @@ comboboxdelegate::~comboboxdelegate(){
 
 
 QWidget* comboboxdelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,const QModelIndex &index)const{
-    QStringList values;
-    values << "Enabled" << "Disabled";
-
+    Q_UNUSED(option);
+    Q_UNUSED(index);
     QComboBox* comboBox = new QComboBox(parent);
-    comboBox->addItems(values);
     return comboBox;
 }
 
@@ -20,22 +18,18 @@ QWidget* comboboxdelegate::createEditor(QWidget *parent, const QStyleOptionViewI
 void comboboxdelegate::setEditorData(QWidget *editor, const QModelIndex &index) const{
     QComboBox *cb = qobject_cast<QComboBox *>(editor);
     Q_ASSERT(cb);
-    const QString currentText = index.data(Qt::EditRole).toString();
-    const int cbIndex = cb->findText(currentText);
-    if (cbIndex >= 0)
-       cb->setCurrentIndex(cbIndex);
+    QStringList tmp = index.model()->data(index, Qt::DisplayRole).toStringList();
+    cb->addItems(tmp);
 }
 
-
 void comboboxdelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const{
-    QComboBox *cb = qobject_cast<QComboBox *>(editor);
-    Q_ASSERT(cb);
-    model->setData(index, cb->currentText(), Qt::EditRole);
+    Q_UNUSED(editor);
+    Q_UNUSED(model);
+    Q_UNUSED(index);
 }
 
 void comboboxdelegate::updateEditorGeometry(QWidget *editor,
                                            const QStyleOptionViewItem &option,
-                                           const QModelIndex &/* index */) const
-{
+                                           const QModelIndex &/* index */) const{
     editor->setGeometry(option.rect);
 }

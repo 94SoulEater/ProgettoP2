@@ -220,11 +220,6 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     oraridelegate = new comboboxdelegate(lezioniTableView);
     lezioniTableView->setModel(modelloLezioni);
     lezioniTableView->setItemDelegateForColumn(4,oraridelegate);
-    if(modelloLezioni->rowCount()>0){
-        for(int i=0; i<modelloLezioni->rowCount(); i++){
-            lezioniTableView->openPersistentEditor(modelloLezioni->index(i, 4));
-        }
-    }
     //lezioniTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     lezioniTableView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
     lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -502,6 +497,7 @@ void menudatiutente::aggiungiLezione(){
             modelloLezioni->setData(index, crediti, Qt::EditRole);
             //   index = modelloLezioni->index(0, 4, QModelIndex());
             //   modelloLezioni->setData(index, orario, Qt::EditRole);
+            lezioniTableView->openPersistentEditor(modelloLezioni->index(0,4));
         }
     }
 }

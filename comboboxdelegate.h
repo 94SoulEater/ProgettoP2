@@ -3,6 +3,7 @@
 
 #include <QStyledItemDelegate>
 #include <QComboBox>
+#include <QStringList>
 
 class comboboxdelegate: public QStyledItemDelegate
 {
