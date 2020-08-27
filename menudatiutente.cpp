@@ -214,17 +214,18 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     //inizialmente disabilitati
 
-
     lezTableLayout = new QHBoxLayout();
     modelloLezioni = new lezionitablemodel(this);
     lezioniTableView = new QTableView();
+    oraridelegate = new comboboxdelegate(lezioniTableView);
     lezioniTableView->setModel(modelloLezioni);
-    lezioniTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    lezioniTableView->setItemDelegateForColumn(4,oraridelegate);
+    //lezioniTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     lezioniTableView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
     lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     //Seleziona una riga al posto di una singola cella
     lezioniTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-    lezioniTableView->setItemDelegateForColumn(4, new comboboxdelegate(this));
+
     lezTableLayout->addWidget(lezioniTableView);
 
     maindatiLayout->addLayout(aggRimuoviLezioneLayout);
@@ -233,8 +234,8 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     connect(lezioniTableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(modificaLezione(QModelIndex)));
 
     //connessione disabilitare modifica
-     connect(lezioniTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornalezioneAzioni(QItemSelection,QItemSelection)));
-     connect(ricercheTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornaricercaAzioni(QItemSelection,QItemSelection)));
+    connect(lezioniTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornalezioneAzioni(QItemSelection,QItemSelection)));
+    connect(ricercheTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornaricercaAzioni(QItemSelection,QItemSelection)));
 
     //aggiungi, annulla e cancella
     bottoniLayout = new QHBoxLayout();
@@ -382,7 +383,7 @@ void menudatiutente::modificaLezione(const QModelIndex &index){
     crediti = modelloLezioni->data(creditiIndex, Qt::DisplayRole).toInt();
     menulezione modifica;
     modifica.setWindowTitle(tr("Modifica lezione"));
-     modifica.aggiungiLezioneButton->setText("Modifica");
+    modifica.aggiungiLezioneButton->setText("Modifica");
     modifica.materiaLineEdit->setText(materia);
     modifica.corsoLineEdit->setText(corso);
     modifica.stanzaLineEdit->setText(stanza);
@@ -480,7 +481,7 @@ void menudatiutente::aggiungiLezione(){
         int crediti = aggiungiLezione.creditiLineEdit->text().toInt();
         QString corso = aggiungiLezione.corsoLineEdit->text();
         QString stanza = aggiungiLezione.stanzaLineEdit->text();
-       // QString orario = aggiungiLezione.combo->currentText();
+        // QString orario = aggiungiLezione.combo->currentText();
 
         lezione lez(materia.toStdString(), corso.toStdString(), stanza.toStdString(), crediti);
         if (!modelloLezioni->contains(lez)) {
@@ -494,8 +495,9 @@ void menudatiutente::aggiungiLezione(){
             modelloLezioni->setData(index, stanza, Qt::EditRole);
             index = modelloLezioni->index(0, 3, QModelIndex());
             modelloLezioni->setData(index, crediti, Qt::EditRole);
-         //   index = modelloLezioni->index(0, 4, QModelIndex());
-         //   modelloLezioni->setData(index, orario, Qt::EditRole);
+            //   index = modelloLezioni->index(0, 4, QModelIndex());
+            //   modelloLezioni->setData(index, orario, Qt::EditRole);
+            lezioniTableView->openPersistentEditor(modelloLezioni->index(0,4));
         }
     }
 }

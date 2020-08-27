@@ -38,7 +38,7 @@ menu::menu(QWidget *parent)
     ricercaLayout->addWidget(perLabel);
     ricercaLayout->addWidget(colonnaRicercaComboBox);
     mainLayout->addLayout(ricercaLayout);
-    
+
     //Ricerca per parola nella colonna selezionata
     connect(cercaLineEdit, SIGNAL(textChanged(QString)), this, SLOT(aggiornaFiltro()));
     //Aggiorna colonna selezionata per ricerca di parola
@@ -99,13 +99,13 @@ menu::menu(QWidget *parent)
 
     //Allinea la finestra al centro dello schermo
     setGeometry(
-            QStyle::alignedRect(
-            Qt::LeftToRight,
-            Qt::AlignCenter,
-            size(),
-            qApp->desktop()->availableGeometry()
-        )
-    );
+                QStyle::alignedRect(
+                    Qt::LeftToRight,
+                    Qt::AlignCenter,
+                    size(),
+                    qApp->desktop()->availableGeometry()
+                    )
+                );
 }
 
 //Imposta la dimensione delle colonne adatta al contenuto della tabella
@@ -192,7 +192,6 @@ void menu::aggiungiUtente(){
 }
 
 void menu::modificaUtente(const QModelIndex &index){
-
     QString nome;
     QString cognome;
     QString codiceFiscale;
@@ -318,8 +317,13 @@ void menu::modificaUtente(const QModelIndex &index){
 
 
         modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
-       modifica.modelloLezioni->setListaLezioni(modelloTabellaUtenti->getListaLezione(row));
-         modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
+        modifica.modelloLezioni->setListaLezioni(modelloTabellaUtenti->getListaLezione(row));
+        modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
+        if(modifica.modelloLezioni->rowCount()>0){
+            for(int i=0; i<modifica.modelloLezioni->rowCount(); i++){
+                modifica.lezioniTableView->openPersistentEditor(modifica.modelloLezioni->index(i, 4));
+            }
+        }
 
 
     }
@@ -340,6 +344,7 @@ void menu::modificaUtente(const QModelIndex &index){
     modifica.numeroCivicoLineEdit->setText(numeroCivico);
 
     if (modifica.exec()) {
+<<<<<<< HEAD
         rimuoviUtente();
         QString codiceFiscale = modifica.codiceFiscaleLineEdit->text();
         QString nome = modifica.nomeLineEdit->text();
@@ -392,6 +397,9 @@ void menu::modificaUtente(const QModelIndex &index){
             modelloProxy->sourceModel()->setData(index, telefono, Qt::EditRole);
             */
         }
+=======
+
+>>>>>>> 3ea6c3ecfb7c5083bf5c22cbe085e13bc5bc300f
     }
 }
 

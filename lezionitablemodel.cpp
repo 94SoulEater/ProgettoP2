@@ -11,10 +11,9 @@ lezionitablemodel::lezionitablemodel(contenitore<lezione> _listaLezioni, QObject
 }
 
 void lezionitablemodel::setListaLezioni(contenitore<lezione> _listaLezioni){
-     beginInsertRows(QModelIndex(), 0, _listaLezioni.size()-1);
+    beginInsertRows(QModelIndex(), 0, _listaLezioni.size()-1);
     listaLezioni = _listaLezioni;
     endInsertRows();
-
 }
 
 int lezionitablemodel::rowCount(const QModelIndex&) const{
@@ -38,8 +37,10 @@ QVariant lezionitablemodel::data(const QModelIndex &index, int role) const{
             return QString::fromStdString(lezioneTemp.getStanza());
         case 3: //Crediti
             return QString::number(lezioneTemp.getCrediti());
-        case 4: //Orario
-          //  return QString::fromStdString(lezioneTemp.getGiorniLezione());
+        case 4: {//Orario
+            QStringList temp = lezioneTemp.getGiorniLezioneStringList();
+            return temp;
+        }
         default:
             return QVariant();
         }

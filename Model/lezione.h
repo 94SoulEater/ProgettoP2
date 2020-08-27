@@ -4,6 +4,7 @@
 #include <Qt>
 #include <QTime>
 #include <string>
+#include <iostream>
 #include "Model/contenitore.h"
 
 using std::string;
@@ -34,6 +35,8 @@ public:
     ~lezione() = default;
     bool operator==(const lezione&)const;
     bool operator!=(const lezione&)const;
+    static string fromDayOfWeek(DayOfWeek _day);
+    static DayOfWeek toDayOfWeek(const string &_day);
     string getMateria() const;
     void setMateria(const string &value);
     string getCorsoLaurea() const;
@@ -42,7 +45,9 @@ public:
     void setStanza(const string &value);
     int getCrediti() const;
     void setCrediti(int value);
-    contenitore<giornoLezione> getGiorniLezione() const;
+    contenitore<giornoLezione> getGiorniLezione();
+    QStringList getGiorniLezioneStringList()const;
+    void setGiorniLezione(const QStringList &_orari);
     void addGiornoLezione(string, string, DayOfWeek);
     void removeGiornoLezione(string, string, DayOfWeek);
 };
