@@ -39,7 +39,7 @@ menulezione::menulezione(QWidget *parent) : QDialog(parent)
     combo->setVisible(false);
     eliminaOrarioButton->setVisible(false);
 
-     connect(eliminaOrarioButton,SIGNAL(clicked()),this,SLOT(rimuoviDaCombo()));
+    connect(eliminaOrarioButton,SIGNAL(clicked()),this,SLOT(rimuoviDaCombo()));
 
     //orario
     orarioLayout = new QHBoxLayout();
@@ -53,12 +53,12 @@ menulezione::menulezione(QWidget *parent) : QDialog(parent)
     orarioGiornoLineEdit = new QLineEdit();
     aggiungiOrarioButton=new QPushButton("Aggiungi Orario");
 
-   orarioLayout ->addWidget(orarioInizioLabel);
+    orarioLayout ->addWidget(orarioInizioLabel);
     orarioLayout ->addWidget(orarioInizioLineEdit);
     orarioLayout ->addWidget(orarioFineLabel);
-     orarioLayout ->addWidget(orarioFineLineEdit);
-     orarioLayout ->addWidget(orarioGiornoLabel);
-      orarioLayout ->addWidget(orarioGiornoLineEdit);
+    orarioLayout ->addWidget(orarioFineLineEdit);
+    orarioLayout ->addWidget(orarioGiornoLabel);
+    orarioLayout ->addWidget(orarioGiornoLineEdit);
     orarioLayout ->addWidget(aggiungiOrarioButton);
 
     connect(aggiungiOrarioButton,SIGNAL(clicked()),this,SLOT(aggiungiCombo()));
@@ -87,7 +87,7 @@ void menulezione::aggiungiCombo()
 {
     combo->setVisible(true);
     eliminaOrarioButton->setVisible(true);
-    QString orario=orarioInizioLineEdit->text()+" - "+orarioInizioLineEdit->text()+" - "+orarioGiornoLineEdit->text();
+    QString orario=orarioInizioLineEdit->text()+" - "+orarioFineLineEdit->text()+"  "+orarioGiornoLineEdit->text();
     combo->addItem(orario);
     orarioInizioLineEdit->clear();
     orarioFineLineEdit->clear();

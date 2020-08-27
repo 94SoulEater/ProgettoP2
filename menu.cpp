@@ -314,21 +314,19 @@ void menu::modificaUtente(const QModelIndex &index){
         modifica.tipoLineEdit->setText(tipoProfessore);
         modifica.anniServizioLineEdit->setText(anniServizio);
         modifica.modelloRicerche->setListaRicerche(modelloTabellaUtenti->getListaRicerche(row));
-
-
         modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
+    }
+    if(tipoUtente == "Professore" || tipoUtente == "Tutor"){
         modifica.modelloLezioni->setListaLezioni(modelloTabellaUtenti->getListaLezione(row));
-        modifica.tipoUtenteMenuComboBox->setCurrentIndex(1);
         if(modifica.modelloLezioni->rowCount()>0){
             for(int i=0; i<modifica.modelloLezioni->rowCount(); i++){
                 modifica.lezioniTableView->openPersistentEditor(modifica.modelloLezioni->index(i, 4));
             }
         }
-
-
     }
     modifica.showRow(tipoUtente);
 
+    modifica.tipoUtenteMenuComboBox->setEnabled(false);
     modifica.setWindowTitle(tr("Modifica utente"));
     modifica.aggiungiMenuButton->setText("Modifica");
     modifica.nomeLineEdit->setText(nome);

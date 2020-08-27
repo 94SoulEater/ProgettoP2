@@ -17,6 +17,7 @@ QWidget* comboboxdelegate::createEditor(QWidget *parent, const QStyleOptionViewI
 
 void comboboxdelegate::setEditorData(QWidget *editor, const QModelIndex &index) const{
     QComboBox *cb = qobject_cast<QComboBox *>(editor);
+    cb->clear();
     Q_ASSERT(cb);
     QStringList tmp = index.model()->data(index, Qt::DisplayRole).toStringList();
     cb->addItems(tmp);

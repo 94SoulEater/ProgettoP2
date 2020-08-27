@@ -38,8 +38,7 @@ QVariant lezionitablemodel::data(const QModelIndex &index, int role) const{
         case 3: //Crediti
             return QString::number(lezioneTemp.getCrediti());
         case 4: {//Orario
-            QStringList temp = lezioneTemp.getGiorniLezioneStringList();
-            return temp;
+            return lezioneTemp.getGiorniLezioneStringList();
         }
         default:
             return QVariant();
@@ -67,8 +66,8 @@ bool lezionitablemodel::setData(const QModelIndex &index, const QVariant &value,
             tmp.setCrediti(value.toInt());
             break;
        case 4: //Orario
+            tmp.setGiorniLezione(value.toStringList());
             break;
-
         }
         listaLezioni.replace(row, tmp);
         emit(dataChanged(index, index));

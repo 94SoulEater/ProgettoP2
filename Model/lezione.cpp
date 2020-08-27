@@ -81,7 +81,19 @@ QStringList lezione::getGiorniLezioneStringList()const{
     return temp;
 }
 void lezione::setGiorniLezione(const QStringList &_orari){
-
+    QStringList tmp;
+    QString tmpstring;
+    QRegExp rx("[ ]");
+    giorniLezione.clear();
+    giornoLezione temp;
+    for(QStringList::const_iterator it = _orari.begin(); it!=_orari.end(); ++it){
+        tmpstring = (*it);
+        tmp = tmpstring.split(rx, QString::SkipEmptyParts);
+        temp.oraInizio = tmp[0].toStdString();
+        temp.oraFine = tmp[2].toStdString();
+        temp.giornoSettimana = toDayOfWeek(tmp[3].toStdString());
+        giorniLezione.push(temp);
+    }
 }
 
 void lezione::addGiornoLezione(string _inizio, string _fine, DayOfWeek _giorno){
