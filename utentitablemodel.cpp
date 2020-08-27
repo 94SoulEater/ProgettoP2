@@ -8,11 +8,6 @@ void utentitablemodel::aggiungiUtente(puntatoresmart<utente> _utente){
     endInsertRows();
 }
 
-void utentitablemodel::modificaUtente(int _row,const puntatoresmart<utente> &_utente){
-    listaUtenti.replace(_row, _utente);
-    //emit dataChanged(QModelIndex(0, 0,), QModelIndex(rowCount(), 19));
-}
-
 void utentitablemodel::aggiungiUtenti(){
     professore* provaIns1 = new professore("Francesco", "Ranzato", "FRTCSL03L49F205V", "+393190231829", "ranzato@gmail.com", 31, 1, 1976, "Veneto", "Padova", "San Giacomo", "31000",  "91", "Ordinario", 21);
     tutor* provaIns2 = new tutor("Luca", "Gualtieri","LRCCRC05T15C351I", "+393202222686", "gualtieri.l@gmail.com", 10, 2, 1999, "Veneto", "Caselle d'altivole", "San Francesco", "31044", "21", 1193422, triennale, "Informatica", 2, false, 0, 10, 11, 2018);
