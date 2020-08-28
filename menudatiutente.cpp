@@ -264,48 +264,21 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     bottoniLayout = new QHBoxLayout();
 
     aggiungiMenuButton= new QPushButton("Aggiungi");
-    cancellaMenuButton= new QPushButton("Cancella tutto");
     annullaMenuButton= new QPushButton("Annulla inserimento");
 
     bottoniLayout->addWidget(aggiungiMenuButton);
-    bottoniLayout->addWidget(cancellaMenuButton);
     bottoniLayout->addWidget(annullaMenuButton);
 
     maindatiLayout->addLayout(bottoniLayout);
 
     connect(annullaMenuButton,SIGNAL(clicked()),this,SLOT(reject()));
     connect(aggiungiMenuButton, SIGNAL(clicked()), this, SLOT(accept()));
-    connect(cancellaMenuButton, SIGNAL(clicked()), this, SLOT(clear()));
 
     setLayout(maindatiLayout);
 
     //Inizializza i campi nascosti mettendo l'indice a 0
     showRow("Studente");
     resize(sizeHint());
-}
-
-void menudatiutente::clear(){
-
-    codiceFiscaleLineEdit->clear();
-    nomeLineEdit->clear();
-    cognomeLineEdit->clear();
-    dataNascitaEdit->clear();
-    emailLineEdit->clear();
-    telefonoLineEdit->clear();
-    capLineEdit->clear();
-    regioneLineEdit->clear();
-    comuneLineEdit->clear();
-    viaLineEdit->clear();
-    numeroCivicoLineEdit->clear();
-
-    matricolaLineEdit->clear();
-    corsoLineEdit->clear();
-    annocorsoLineEdit->clear();
-    dataIscrizioneEdit->clear();
-    spinBox->clear();
-
-    tipoLineEdit->clear();
-    anniServizioLineEdit->clear();
 }
 
 void menudatiutente::showRow(QString combo){
