@@ -154,8 +154,10 @@ utente* menu::creaUtenteTemp(const menudatiutente &_menu)const{
         int annoCorso = _menu.annocorsoLineEdit->text().toInt();
         bool fuoriCorso = _menu.checkBox->checkState();
         int anniFuoriCorso;
-        if(fuoriCorso) anniFuoriCorso = _menu.annifuoricorsoLabel->text().toInt();
-        else anniFuoriCorso = 0;
+        if(fuoriCorso) {
+            anniFuoriCorso = _menu.spinBox->value();
+            if(anniFuoriCorso == 0) fuoriCorso = false;
+        }else anniFuoriCorso = 0;
         QDate dataIscrizione = _menu.dataIscrizioneEdit->date();
         if(tipoUtente == "Studente"){
             utemp = new studente(nome.toStdString(), cognome.toStdString(), codiceFiscale.toStdString(), telefono.toStdString(), email.toStdString(), dataNascita.day(), dataNascita.month(), dataNascita.year(), regione.toStdString(), comune.toStdString(), via.toStdString(), cap.toStdString(), numeroCivico.toStdString(), matricola, triennale, corso.toStdString(), annoCorso, fuoriCorso, anniFuoriCorso, dataIscrizione.day(), dataIscrizione.month(), dataIscrizione.year());
