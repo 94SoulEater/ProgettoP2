@@ -22,12 +22,12 @@ void utentitablemodel::aggiungiUtenti(){
     lezione provaLez1("Programmazione ad oggetti", "SC1167 - Informatica", "Lum250", 12);
     lezione provaLez2("Verifica del software", "SC1176 - LM Informatica", "P200", 12);
     lezione provaLez3("Sistemi Operativi", "SC1167 - Informatica", "P200", 10);
-    provaLez1.addGiornoLezione("12,30", "14,30", Qt::Monday);
-    provaLez2.addGiornoLezione("12,30", "14,30", Qt::Tuesday);
-    provaLez3.addGiornoLezione("12,30", "14,30", Qt::Wednesday);
-    provaLez1.addGiornoLezione("14,30", "16,30", Qt::Thursday);
-    provaLez2.addGiornoLezione("14,30", "16,30", Qt::Wednesday);
-    provaLez3.addGiornoLezione("14,30", "16,30", Qt::Monday);
+    provaLez1.addGiornoLezione("12:30", "14:30", Qt::Monday);
+    provaLez2.addGiornoLezione("12:30", "14:30", Qt::Tuesday);
+    provaLez3.addGiornoLezione("12:30", "14:30", Qt::Wednesday);
+    provaLez1.addGiornoLezione("14:30", "16:30", Qt::Thursday);
+    provaLez2.addGiornoLezione("14:30", "16:30", Qt::Wednesday);
+    provaLez3.addGiornoLezione("14:30", "16:30", Qt::Monday);
     provaIns1->addLezione(provaLez1);
     provaIns1->addLezione(provaLez2);
     provaIns5->addLezione(provaLez3);
