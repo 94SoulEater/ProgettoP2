@@ -54,9 +54,10 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     //telefono
     telefonoLabel=new QLabel("Telefono:");
     telefonoLineEdit = new QLineEdit();
-    QRegularExpression rx2("^((00|\\+)39[\\. ]??)??3\d{2}[\\. ]??\\d{6,7}$");
+    QRegularExpression rx2("^((00|\\+)39[\\. ]\?\?)\?\?3\\d{2}[\\. ]\?\?\\d{6,7}$");
     QValidator *validator2 = new QRegularExpressionValidator(rx2, this);
     telefonoLineEdit->setValidator(validator2);
+    telefonoLineEdit->setPlaceholderText("+39 0000000000");
     formLayoutUtente->addWidget(telefonoLabel, 6, 0);
     formLayoutUtente->addWidget(telefonoLineEdit, 6, 1);
 
@@ -188,7 +189,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     ricercheTableView->setModel(modelloRicerche);
     ricercheTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ricercheTableView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-    ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     //Seleziona una riga al posto di una singola cella
     ricercheTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ricTableLayout->addWidget(ricercheTableView);
@@ -378,7 +379,12 @@ void menudatiutente::showRow(QString combo){
         ricercheTableView->setVisible(true);
         ricercaModificaButton->setVisible(true);
     }
-    resize(sizeHint());
+    QApplication::processEvents();
+    lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    setMinimumSize(sizeHint());
+    lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void menudatiutente::accept()

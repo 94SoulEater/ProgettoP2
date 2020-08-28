@@ -49,9 +49,11 @@ menulezione::menulezione(QWidget *parent) : QDialog(parent)
     orarioInizioLabel=new QLabel("Orario inizio:");
     orarioInizioLineEdit = new QLineEdit();
     orarioInizioLineEdit->setValidator(validator1);
+    orarioInizioLineEdit->setPlaceholderText("00:00");
     orarioFineLabel=new QLabel("Orario fine:");
     orarioFineLineEdit = new QLineEdit();
     orarioFineLineEdit->setValidator(validator1);
+    orarioFineLineEdit->setPlaceholderText("00:00");
     orarioGiornoLabel=new QLabel("Giorno:");
     orarioGiornoCombo = new QComboBox();
     orarioGiornoCombo->addItem("Lunedì");
