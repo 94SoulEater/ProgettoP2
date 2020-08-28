@@ -406,7 +406,7 @@ void menudatiutente::accept()
         messageBox.critical(0,"Error","Errore: Non hai inserito il campo telefono!");
         messageBox.setFixedSize(500,200);
     }
-    else if(tipoUtenteMenuComboBox->currentText()=="Studente" || tipoUtenteMenuComboBox->currentText()=="Tutor" && matricolaLineEdit->text().isEmpty()){
+    else if( tipoUtenteMenuComboBox->currentText()!="Professore" && matricolaLineEdit->text().isEmpty()){
         QMessageBox messageBox;
         messageBox.critical(0,"Error","Errore: Non hai inserito il campo matricola!");
         messageBox.setFixedSize(500,200);
