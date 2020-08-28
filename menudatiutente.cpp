@@ -368,10 +368,10 @@ void menudatiutente::showRow(QString combo){
 void menudatiutente::accept()
 {
     if(codiceFiscaleLineEdit->text().isEmpty()){
-           QMessageBox messageBox;
-           messageBox.critical(0,"Error","Errore: Non hai inserito il campo codice fiscale!");
-           messageBox.setFixedSize(500,200);
-       }
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Errore: Non hai inserito il campo codice fiscale!");
+        messageBox.setFixedSize(500,200);
+    }
     else if(nomeLineEdit->text().isEmpty()){
         QMessageBox messageBox;
         messageBox.critical(0,"Error","Errore: Non hai inserito il campo nome!");
@@ -397,8 +397,8 @@ void menudatiutente::accept()
         messageBox.critical(0,"Error","Errore: Non hai inserito il campo matricola!");
         messageBox.setFixedSize(500,200);
     }
-         else
-       QDialog::accept();
+    else
+        QDialog::accept();
 }
 
 void menudatiutente::modificaLezione(const QModelIndex &index){
@@ -451,6 +451,21 @@ void menudatiutente::modificaLezione(const QModelIndex &index){
         }
 
         lezione lez(materia.toStdString(), corso.toStdString(), stanza.toStdString(), crediti);
+        QStringList tmp2;
+        QString tmpstring;
+        QRegExp rx("[ ]");
+        string oraInizio;
+        string oraFine;
+        DayOfWeek giornoSettimana;
+        for(QStringList::const_iterator it = orari.begin(); it!=orari.end(); ++it){
+            tmpstring = (*it);
+            tmp2 = tmpstring.split(rx, QString::SkipEmptyParts);
+            oraInizio = tmp2[0].toStdString();
+            oraFine = tmp2[2].toStdString();
+            giornoSettimana = lezione::toDayOfWeek(tmp2[3].toStdString());
+            lez.addGiornoLezione(oraInizio, oraFine, giornoSettimana);
+        }
+
         if (!modelloLezioni->contains(lez)) {
             QModelIndex index = modelloLezioni->index(row, 0, QModelIndex());
             modelloLezioni->setData(index, materia, Qt::EditRole);

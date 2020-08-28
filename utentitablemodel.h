@@ -12,7 +12,6 @@
 #include "QAbstractTableModel"
 #include <QTime>
 #include <QModelIndex>
-#include <iostream>
 
 class utentitablemodel : public QAbstractTableModel{
     Q_OBJECT

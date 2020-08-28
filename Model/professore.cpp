@@ -49,7 +49,7 @@ professore* professore::clone() const{
 bool professore::equals(utente* x) const{
     if(!dynamic_cast<professore*>(x))return false;
     professore* y = dynamic_cast<professore*>(x);
-    bool user = (getNome() == x->getNome() && getCognome() == x->getCognome() && getCodiceFiscale() == x->getCodiceFiscale() && getTelefono() == x->getTelefono() && getEmail() == x->getEmail() && getRegione() == x->getRegione() && getComune() == x->getComune() && getVia() ==x->getVia() && getNumeroCivico() == x->getNumeroCivico() && getCap() == x->getCap() && getDataNascita().day() == x->getDataNascita().day() && getDataNascita().month() == x->getDataNascita().month() && getDataNascita().year() == x->getDataNascita().year());
+    bool user = (getNome() == x->getNome() && getCognome() == x->getCognome() && getCodiceFiscale() == x->getCodiceFiscale() && getTelefono() == x->getTelefono() && getEmail() == x->getEmail() && getRegione() == x->getRegione() && getComune() == x->getComune() && getVia() ==x->getVia() && getNumeroCivico() == x->getNumeroCivico() && getCap() == x->getCap() && getGiornoNascita() == x->getGiornoNascita() && getMeseNascita() == x->getMeseNascita() && getAnnoNascita() == x->getAnnoNascita());
     bool professor = (getAnniServizio() == y->getAnniServizio() && getTipo() == y->getTipo() && getLezioni() == y->getLezioni() && getRicerche() == y->getRicerche());
     return (user && professor);
 }

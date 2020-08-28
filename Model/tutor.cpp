@@ -14,8 +14,8 @@ tutor* tutor::clone() const{
 bool tutor::equals(utente* x) const{
     if(!dynamic_cast<tutor*>(x))return false;
     tutor* y = dynamic_cast<tutor*>(x);
-    bool user = (getNome() == x->getNome() && getCognome() == x->getCognome() && getCodiceFiscale() == x->getCodiceFiscale() && getTelefono() == x->getTelefono() && getEmail() == x->getEmail() && getRegione() == x->getRegione() && getComune() == x->getComune() && getVia() ==x->getVia() && getNumeroCivico() == x->getNumeroCivico() && getCap() == x->getCap() && getDataNascita().day() == x->getDataNascita().day() && getDataNascita().month() == x->getDataNascita().month() && getDataNascita().year() == x->getDataNascita().year());
-    bool student = (getMatricola() == y->getMatricola() && getLaurea() == y->getLaurea() && getCorso() == y->getCorso() && getAnnoCorso() == y->getAnnoCorso() && getFuoricorso() == y->getFuoricorso() && getAnniFuoriCorso() == y->getAnniFuoriCorso() && getDataIscrizione().day() == y->getDataIscrizione().day() && getDataIscrizione().month() == y->getDataIscrizione().month() && getDataIscrizione().year() == y->getDataIscrizione().year());
+    bool user = (getNome() == x->getNome() && getCognome() == x->getCognome() && getCodiceFiscale() == x->getCodiceFiscale() && getTelefono() == x->getTelefono() && getEmail() == x->getEmail() && getRegione() == x->getRegione() && getComune() == x->getComune() && getVia() ==x->getVia() && getNumeroCivico() == x->getNumeroCivico() && getCap() == x->getCap() && getGiornoNascita() == x->getGiornoNascita() && getMeseNascita() == x->getMeseNascita() && getAnnoNascita() == x->getAnnoNascita());
+    bool student = (getMatricola() == y->getMatricola() && getLaurea() == y->getLaurea() && getCorso() == y->getCorso() && getAnnoCorso() == y->getAnnoCorso() && getFuoricorso() == y->getFuoricorso() && getAnniFuoriCorso() == y->getAnniFuoriCorso() && getGiornoIscrizione() == y->getGiornoIscrizione() && getMeseIscrizione() == y->getMeseIscrizione() && getAnnoIscrizione() == y->getAnnoIscrizione());
     bool tuto = (getLezioni() == y->getLezioni());
     return (user && tuto && student);
 }

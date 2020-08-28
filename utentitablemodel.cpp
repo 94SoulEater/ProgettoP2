@@ -1,7 +1,5 @@
 #include "utentitablemodel.h"
 
-using std::cout; using std::endl;
-
 void utentitablemodel::aggiungiUtente(const puntatoresmart<utente> &_utente){
     beginInsertRows(QModelIndex(), 0, 0);
     listaUtenti.push(_utente);
@@ -22,12 +20,12 @@ void utentitablemodel::aggiungiUtenti(){
     lezione provaLez1("Programmazione ad oggetti", "SC1167 - Informatica", "Lum250", 12);
     lezione provaLez2("Verifica del software", "SC1176 - LM Informatica", "P200", 12);
     lezione provaLez3("Sistemi Operativi", "SC1167 - Informatica", "P200", 10);
-    provaLez1.addGiornoLezione("12:30", "14:30", Qt::Monday);
-    provaLez2.addGiornoLezione("12:30", "14:30", Qt::Tuesday);
-    provaLez3.addGiornoLezione("12:30", "14:30", Qt::Wednesday);
-    provaLez1.addGiornoLezione("14:30", "16:30", Qt::Thursday);
-    provaLez2.addGiornoLezione("14:30", "16:30", Qt::Wednesday);
-    provaLez3.addGiornoLezione("14:30", "16:30", Qt::Monday);
+    provaLez1.addGiornoLezione("12:30", "14:30", Monday);
+    provaLez2.addGiornoLezione("12:30", "14:30", Tuesday);
+    provaLez3.addGiornoLezione("12:30", "14:30", Wednesday);
+    provaLez1.addGiornoLezione("14:30", "16:30", Thursday);
+    provaLez2.addGiornoLezione("14:30", "16:30", Wednesday);
+    provaLez3.addGiornoLezione("14:30", "16:30", Monday);
     provaIns1->addLezione(provaLez1);
     provaIns1->addLezione(provaLez2);
     provaIns5->addLezione(provaLez3);
@@ -80,7 +78,7 @@ QVariant utentitablemodel::data(const QModelIndex &index, int role) const{
         case 3: //Cognome
             return QString::fromStdString(utenteTemp->getCognome());
         case 4: //Data di nascita
-            return QString(utenteTemp->getDataNascita().toString(Qt::RFC2822Date));
+            return (QDate(utenteTemp->getAnnoNascita(), utenteTemp->getMeseNascita(), utenteTemp->getGiornoNascita())).toString(Qt::RFC2822Date);
         case 5: //Numero di telefono
             return QString::fromStdString(utenteTemp->getTelefono());
         case 6: //Email
@@ -143,7 +141,7 @@ QVariant utentitablemodel::data(const QModelIndex &index, int role) const{
         case 19:{ //Data Iscrizione
             studente* tmp = dynamic_cast<studente*>(utenteTemp);
             if(tmp){
-                return QString(tmp->getDataIscrizione().toString(Qt::RFC2822Date));
+                return QDate(tmp->getAnnoIscrizione(), tmp->getMeseIscrizione(), tmp->getGiornoIscrizione()).toString(Qt::RFC2822Date);
             }
             return QVariant();
         }
@@ -227,9 +225,14 @@ bool utentitablemodel::setData(const QModelIndex &index, const QVariant &value, 
         case 3: //Cognome
             tmp->setCognome(value.toString().toStdString());
             break;
-        case 4: //Data di nascita
-            tmp->setDataNascita(QDate::fromString(value.toString(),  Qt::RFC2822Date));
+        case 4:{ //Data di nascita
+            QDate tmpDate;
+            tmpDate.fromString(value.toString(),  Qt::RFC2822Date);
+            tmp->setGiornoNascita(tmpDate.day());
+            tmp->setMeseNascita(tmpDate.month());
+            tmp->setAnnoNascita(tmpDate.year());
             break;
+        }
         case 5: //Numero di telefono
             tmp->setTelefono(value.toString().toStdString());
             break;
@@ -291,8 +294,12 @@ bool utentitablemodel::setData(const QModelIndex &index, const QVariant &value, 
             break;
         case 19: //Data iscrizione
             if(dynamic_cast<studente*>(tmp.operator->())){
-                dynamic_cast<studente*>(tmp.operator->())->setDataIscrizione(QDate::fromString(value.toString(),  Qt::RFC2822Date));
-            }
+                QDate tmpDate;
+                tmpDate.fromString(value.toString(),  Qt::RFC2822Date);
+                dynamic_cast<studente*>(tmp.operator->())->setGiornoIscrizione(tmpDate.day());
+                dynamic_cast<studente*>(tmp.operator->())->setMeseIscrizione(tmpDate.month());
+                dynamic_cast<studente*>(tmp.operator->())->setAnnoIscrizione(tmpDate.year());
+              }
             break;
         default:
             return false;

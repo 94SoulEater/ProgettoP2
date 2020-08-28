@@ -7,7 +7,7 @@ lezionitablemodel::lezionitablemodel(QObject *parent)
 lezionitablemodel::lezionitablemodel(contenitore<lezione> _listaLezioni, QObject *parent)
     : QAbstractTableModel(parent){
 
-   setListaLezioni(_listaLezioni);
+    setListaLezioni(_listaLezioni);
 }
 
 contenitore<lezione>& lezionitablemodel::getListaLezioni(){
@@ -41,14 +41,21 @@ QVariant lezionitablemodel::data(const QModelIndex &index, int role) const{
             return QString::fromStdString(lezioneTemp.getStanza());
         case 3: //Crediti
             return QString::number(lezioneTemp.getCrediti());
-        case 4: {//Orario
-            return lezioneTemp.getGiorniLezioneStringList();
-        }
+        case 4: //Orario
+            return cont2strlist(lezioneTemp.getGiorniLezioneStringCont());
         default:
             return QVariant();
         }
     }
     return QVariant();
+}
+
+QStringList lezionitablemodel::cont2strlist(const contenitore<string>& _tmp){
+    QStringList temp;
+    for(contenitore<string>::iteratore_const it = _tmp.begin(); it != _tmp.end(); ++it){
+        temp << QString::fromStdString(*it);
+    }
+    return temp;
 }
 
 bool lezionitablemodel::setData(const QModelIndex &index, const QVariant &value, int role){
@@ -69,9 +76,24 @@ bool lezionitablemodel::setData(const QModelIndex &index, const QVariant &value,
         case 3: //Crediti
             tmp.setCrediti(value.toInt());
             break;
-       case 4: //Orario
-            tmp.setGiorniLezione(value.toStringList());
-            break;
+        case 4:{ //Orario
+            tmp.clearGiorniLezione();
+            QStringList tmpstrl = value.toStringList();
+            QStringList tmp2;
+            QString tmpstring;
+            QRegExp rx("[ ]");
+            string oraInizio;
+            string oraFine;
+            DayOfWeek giornoSettimana;
+            for(QStringList::const_iterator it = tmpstrl.begin(); it!=tmpstrl.end(); ++it){
+                tmpstring = (*it);
+                tmp2 = tmpstring.split(rx, QString::SkipEmptyParts);
+                oraInizio = tmp2[0].toStdString();
+                oraFine = tmp2[2].toStdString();
+                giornoSettimana = lezione::toDayOfWeek(tmp2[3].toStdString());
+                tmp.addGiornoLezione(oraInizio, oraFine, giornoSettimana);
+            }
+        }
         }
         listaLezioni.replace(row, tmp);
         emit(dataChanged(index, index));
@@ -92,7 +114,7 @@ QVariant lezionitablemodel::headerData(int section, Qt::Orientation orientation,
         case 3:
             return QString("Crediti");
         case 4:
-           return QString("Orario");
+            return QString("Orario");
         }
     }
     return QVariant();

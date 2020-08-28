@@ -1,14 +1,12 @@
 #ifndef LEZIONE_H
 #define LEZIONE_H
 
-#include <Qt>
-#include <QTime>
 #include <string>
-#include <iostream>
 #include "Model/contenitore.h"
 
 using std::string;
-using Qt::DayOfWeek;
+
+enum DayOfWeek{Monday = 1, Tuesday = 2, Wednesday = 3, Thursday = 4, Friday = 5, Saturday = 6, Sunday = 7};
 
 struct giornoLezione{
     bool operator==(const giornoLezione &_lez)const{
@@ -46,10 +44,11 @@ public:
     int getCrediti() const;
     void setCrediti(int value);
     contenitore<giornoLezione> getGiorniLezione();
-    QStringList getGiorniLezioneStringList()const;
-    void setGiorniLezione(const QStringList &_orari);
+    contenitore<string> getGiorniLezioneStringCont()const;
+    void setGiorniLezione(const contenitore<string>&);
     void addGiornoLezione(string, string, DayOfWeek);
     void removeGiornoLezione(string, string, DayOfWeek);
+    void clearGiorniLezione();
 };
 
 #endif // LEZIONE_H

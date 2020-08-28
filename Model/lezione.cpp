@@ -21,6 +21,7 @@ string lezione::fromDayOfWeek(DayOfWeek _day){
     case DayOfWeek::Sunday:
         return "Domenica";
     }
+    throw "DayOfWeek non valido!";
 }
 
 DayOfWeek lezione::toDayOfWeek(const string &_day){
@@ -31,6 +32,7 @@ DayOfWeek lezione::toDayOfWeek(const string &_day){
     if(_day == "Venerdì") return DayOfWeek::Friday;
     if(_day == "Sabato") return DayOfWeek::Saturday;
     if(_day == "Domenica") return DayOfWeek::Sunday;
+    throw "Stringa giorno della settimana non valida!";
 }
 
 void lezione::setMateria(const string &value){
@@ -64,36 +66,22 @@ void lezione::setCrediti(int value){
 contenitore<giornoLezione> lezione::getGiorniLezione(){
     return giorniLezione;
 }
-QStringList lezione::getGiorniLezioneStringList()const{
-    QStringList temp;
-    QString tempstr;
-    QString oraIniz;
-    QString oraFin;
-    QString giornoSett;
+
+contenitore<string> lezione::getGiorniLezioneStringCont()const{
+    contenitore<string> temp;
+    string tempstr;
+    string oraIniz;
+    string oraFin;
+    string giornoSett;
     for(contenitore<giornoLezione>::iteratore_const it = giorniLezione.begin(); it != giorniLezione.end(); ++it){
-        oraIniz = QString::fromStdString((*it).oraInizio);
-        oraFin = QString::fromStdString((*it).oraFine);
-        giornoSett = QString::fromStdString(fromDayOfWeek((*it).giornoSettimana));
+        oraIniz = (*it).oraInizio;
+        oraFin = (*it).oraFine;
+        giornoSett = fromDayOfWeek((*it).giornoSettimana);
         tempstr.append(oraIniz).append(" - ").append(oraFin).append("  ").append(giornoSett);
-        temp << tempstr;
+        temp.push(tempstr);
         tempstr.clear();
     }
     return temp;
-}
-void lezione::setGiorniLezione(const QStringList &_orari){
-    QStringList tmp;
-    QString tmpstring;
-    QRegExp rx("[ ]");
-    giorniLezione.clear();
-    giornoLezione temp;
-    for(QStringList::const_iterator it = _orari.begin(); it!=_orari.end(); ++it){
-        tmpstring = (*it);
-        tmp = tmpstring.split(rx, QString::SkipEmptyParts);
-        temp.oraInizio = tmp[0].toStdString();
-        temp.oraFine = tmp[2].toStdString();
-        temp.giornoSettimana = toDayOfWeek(tmp[3].toStdString());
-        giorniLezione.push(temp);
-    }
 }
 
 void lezione::addGiornoLezione(string _inizio, string _fine, DayOfWeek _giorno){
@@ -113,6 +101,10 @@ bool lezione::operator==(const lezione &_lez) const{
 
 bool lezione::operator!=(const lezione &_lez) const{
     return !(*this==_lez);
+}
+
+void lezione::clearGiorniLezione(){
+    giorniLezione.clear();
 }
 
 lezione::lezione(string _materia, string _corsolaurea, string _stanza, int _crediti):materia(_materia), corsoLaurea(_corsolaurea), stanza(_stanza), crediti(_crediti){

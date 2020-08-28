@@ -1,7 +1,6 @@
 #ifndef CONTENITORE_H
 #define CONTENITORE_H
 #include <string>
-#include <iostream>
 
 using std::string;
 

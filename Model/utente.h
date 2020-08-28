@@ -2,11 +2,8 @@
 #define UTENTE_H
 
 #include <string>
-#include <QDate>
-#include <iostream>
 
 using std::string;
-using std::ostream;
 
 enum tipoutente{Utente=0, Studente=1, Professore=2, Insegnante=3, Tutor=4};
 
@@ -17,7 +14,9 @@ private:
     string codiceFiscale;
     string telefono;
     string email;
-    QDate dataNascita;
+    int giornoNascita;
+    int meseNascita;
+    int annoNascita;
     string regione;
     string comune;
     string via;
@@ -42,8 +41,6 @@ public:
     void setComune(const string &value);
     string getRegione() const;
     void setRegione(const string &value);
-    QDate getDataNascita() const;
-    void setDataNascita(const QDate &value);
     string getEmail() const;
     void setEmail(const string &value);
     string getTelefono() const;
@@ -54,6 +51,12 @@ public:
     void setCognome(const string &value);
     string getNome() const;
     void setNome(const string &value);
+    int getAnnoNascita() const;
+    void setAnnoNascita(int value);
+    int getMeseNascita() const;
+    void setMeseNascita(int value);
+    int getGiornoNascita() const;
+    void setGiornoNascita(int value);
 };
 
 

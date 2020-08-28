@@ -4,7 +4,6 @@
 #include <Model/utente.h>
 #include <Model/lezione.h>
 #include <Model/contenitore.h>
-#include <QDate>
 
 class insegnante : virtual public utente{
 private:

@@ -1,5 +1,4 @@
 #include "Model/utente.h"
-using std::string;
 
 string utente::fromTipoUtente(const tipoutente &_tipoUtente){
     switch(_tipoUtente){
@@ -13,6 +12,8 @@ string utente::fromTipoUtente(const tipoutente &_tipoUtente){
         return "Insegnante";
     case Tutor:
         return "Tutor";
+    default:
+        throw "Tipo Utente non valido!";
     }
 }
 tipoutente utente::toTipoUtente(const string &_tipoUtente){
@@ -21,6 +22,7 @@ tipoutente utente::toTipoUtente(const string &_tipoUtente){
     if(_tipoUtente == "Professore" || _tipoUtente == "Professori") return Professore;
     if(_tipoUtente == "Insegnante" || _tipoUtente == "Insegnanti") return Insegnante;
     if(_tipoUtente == "Tutor") return Tutor;
+    throw "Stringa Utente non valida!";
 }
 
 string utente::getNumeroCivico() const{
@@ -63,14 +65,6 @@ void utente::setRegione(const string &value){
     regione = value;
 }
 
-QDate utente::getDataNascita() const{
-    return dataNascita;
-}
-
-void utente::setDataNascita(const QDate &value){
-    dataNascita = value;
-}
-
 string utente::getEmail() const{
     return email;
 }
@@ -111,7 +105,37 @@ void utente::setNome(const string &value){
     nome = value;
 }
 
-utente::utente(string _nome, string _cognome, string _codiceFiscale, string _telefono, string _email, int _giornoNascita, int _meseNascita, int _annoNascita, string _regione, string _comune, string _via, string _cap, string _numeroCivico):nome(_nome), cognome(_cognome), codiceFiscale(_codiceFiscale), telefono(_telefono), email(_email), dataNascita(_annoNascita, _meseNascita, _giornoNascita), regione(_regione), comune(_comune), via(_via), cap(_cap), numeroCivico(_numeroCivico){
+int utente::getAnnoNascita() const
+{
+    return annoNascita;
+}
+
+void utente::setAnnoNascita(int value)
+{
+    annoNascita = value;
+}
+
+int utente::getMeseNascita() const
+{
+    return meseNascita;
+}
+
+void utente::setMeseNascita(int value)
+{
+    meseNascita = value;
+}
+
+int utente::getGiornoNascita() const
+{
+    return giornoNascita;
+}
+
+void utente::setGiornoNascita(int value)
+{
+    giornoNascita = value;
+}
+
+utente::utente(string _nome, string _cognome, string _codiceFiscale, string _telefono, string _email, int _giornoNascita, int _meseNascita, int _annoNascita, string _regione, string _comune, string _via, string _cap, string _numeroCivico):nome(_nome), cognome(_cognome), codiceFiscale(_codiceFiscale), telefono(_telefono), email(_email), giornoNascita(_giornoNascita), meseNascita(_meseNascita), annoNascita(_annoNascita), regione(_regione), comune(_comune), via(_via), cap(_cap), numeroCivico(_numeroCivico){
 }
 
 

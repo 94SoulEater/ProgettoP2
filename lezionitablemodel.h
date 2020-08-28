@@ -12,7 +12,6 @@
 #include "QAbstractTableModel"
 #include <QTime>
 #include <QModelIndex>
-#include <iostream>
 
 class lezionitablemodel : public QAbstractTableModel{
     Q_OBJECT
@@ -30,6 +29,8 @@ public:
     lezionitablemodel(contenitore<lezione> _listaLezioni, QObject *parent = nullptr);
     bool contains(const lezione& _lez);
     contenitore<lezione>& getListaLezioni();
+    static QStringList cont2strlist(const contenitore<string>& _tmp);
+
 private:
     contenitore<lezione> listaLezioni;
 };
