@@ -2,7 +2,7 @@
 
 menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     setWindowTitle("Aggiungi utente");
-    setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    //setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     maindatiLayout = new QVBoxLayout();
     formLayoutUtente = new QGridLayout();
 
@@ -187,9 +187,10 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     modelloRicerche = new ricerchetablemodel(this);
     ricercheTableView = new QTableView();
     ricercheTableView->setModel(modelloRicerche);
+    ricercheTableView->hideColumn(2);
     ricercheTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ricercheTableView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-    ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     //Seleziona una riga al posto di una singola cella
     ricercheTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ricTableLayout->addWidget(ricercheTableView);
@@ -244,8 +245,8 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     lezioniTableView->setModel(modelloLezioni);
     lezioniTableView->setItemDelegateForColumn(4,oraridelegate);
     lezioniTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    lezioniTableView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
     lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    lezioniTableView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
     //Seleziona una riga al posto di una singola cella
     lezioniTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 
@@ -281,7 +282,6 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     //Inizializza i campi nascosti mettendo l'indice a 0
     showRow("Studente");
-    resize(sizeHint());
 }
 
 void menudatiutente::clear(){
@@ -382,9 +382,15 @@ void menudatiutente::showRow(QString combo){
     QApplication::processEvents();
     lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    setMinimumSize(sizeHint());
-    lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    QSize tmp = sizeHint();
+    tmp.setWidth(tmp.width()+10);
+    setMinimumSize(tmp);
+    ricercheTableView->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Stretch);
+    ricercheTableView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
+    lezioniTableView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
+    lezioniTableView->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
+    lezioniTableView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+
 }
 
 void menudatiutente::accept()
