@@ -409,7 +409,7 @@ void menudatiutente::accept()
         messageBox.critical(0,"Error","Errore: Non hai inserito il campo email!");
         messageBox.setFixedSize(500,200);
     }
-    else if(telefonoLineEdit->text()=="+ "){
+    else if(telefonoLineEdit->text().isEmpty()){
         QMessageBox messageBox;
         messageBox.critical(0,"Error","Errore: Non hai inserito il campo telefono!");
         messageBox.setFixedSize(500,200);
