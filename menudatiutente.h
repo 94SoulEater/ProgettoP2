@@ -32,7 +32,7 @@ public:
     QGridLayout *formLayoutUtente, *formLayoutProf, *formLayoutStudente;
     QVBoxLayout *maindatiLayout;
     QHBoxLayout *aggRimuoviLezioneLayout, *aggRimuoviRicercaLayout, *lezTableLayout, *ricTableLayout, *bottoniLayout, *labelLayout, *aggiungiAnnullaMenuButtonLayout, *fuoriLayout, *vnLayout;
-    QPushButton *ricercaModificaButton, *lezioneModificaButton, *aggiungiMenuButton, *annullaMenuButton, *cancellaMenuButton, *ricercaAggiungiButton, *lezioneAggiungiButton, *lezioneEliminaButton, *ricercaEliminaButton;
+    QPushButton *ricercaModificaButton, *lezioneModificaButton, *aggiungiMenuButton, *annullaMenuButton, *ricercaAggiungiButton, *lezioneAggiungiButton, *lezioneEliminaButton, *ricercaEliminaButton;
     QComboBox *tipoUtenteMenuComboBox, *laureaMenuComboBox;
     QLabel *tipoUtenteComboboxLabel, *codiceFiscaleLabel, *nomeLabel, *cognomeLabel, *dataNascitaLabel, *tipoUtenteLabel, *annifuoricorsoLabel, *fuoricorsoLabel, *viaLabel, *numeroCivicoLabel, *emailLabel,*telefonoLabel, *capLabel, *regioneLabel, *comuneLabel, *tipoLabel, *anniServizioLabel, *laureaLabel,*corsoLabel,*matricolaLabel,*annocorsoLabel, *dataIscrizioneLabel, *ricercaLabel, *lezioneLabel;
     QLineEdit *codiceFiscaleLineEdit, *nomeLineEdit, *cognomeLineEdit, *dataNascitaLineEdit, *emailLineEdit, *telefonoLineEdit, *capLineEdit, *regioneLineEdit, *comuneLineEdit, *viaLineEdit, *numeroCivicoLineEdit, *annocorsoLineEdit, *corsoLineEdit, *anniServizioLineEdit, *tipoLineEdit, *matricolaLineEdit;
@@ -49,7 +49,6 @@ public slots:
     void showRow(QString);
 
 private slots:
-    void clear();
     void aggiungiLezione();
     void aggiungiRicerca();
     void eliminaLezione();

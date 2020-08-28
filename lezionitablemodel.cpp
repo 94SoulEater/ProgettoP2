@@ -125,13 +125,4 @@ bool lezionitablemodel::contains(const lezione& _lez){
     return listaLezioni.contains(_lez);
 }
 
-contenitore<giornoLezione> lezionitablemodel::getListaGiornoLezione(int row)
-{
-/*
-   puntatoresmart<lezione> tmp= listaLezioni.value(row);
-    if(dynamic_cast<lezione*>(tmp.operator->())){
-       return dynamic_cast<lezione*>(tmp.operator->())->getGiorniLezione();
-    }
-    return contenitore<giornoLezione>();
-*/
-}
+
