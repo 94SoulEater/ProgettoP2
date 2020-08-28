@@ -2,15 +2,18 @@
 
 menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     setWindowTitle("Aggiungi utente");
-    //setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     maindatiLayout = new QVBoxLayout();
-    formLayoutUtente = new QFormLayout();
+    formLayoutUtente = new QGridLayout();
 
+    tipoUtenteComboboxLabel = new QLabel("Tipo Utente:");
     tipoUtenteMenuComboBox = new QComboBox();
     tipoUtenteMenuComboBox->addItem(tr("Studente"));
     tipoUtenteMenuComboBox->addItem(tr("Professore"));
     tipoUtenteMenuComboBox->addItem(tr("Tutor"));
-    formLayoutUtente->addRow(tr("Tipo Utente:"), tipoUtenteMenuComboBox);
+    formLayoutUtente->addWidget(tipoUtenteComboboxLabel, 0, 0);
+    formLayoutUtente->addWidget(tipoUtenteMenuComboBox, 0, 1);
+
     connect(tipoUtenteMenuComboBox, SIGNAL(currentIndexChanged(QString)), this,SLOT (showRow(QString)));
 
     //UTENTE
@@ -18,50 +21,61 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     codiceFiscaleLabel=new QLabel("Codice Fiscale:");
     codiceFiscaleLineEdit = new QLineEdit();
     codiceFiscaleLineEdit->setInputMask("NNNNNNNNNNNNNNNN;");
-    formLayoutUtente->addRow(codiceFiscaleLabel, codiceFiscaleLineEdit);
+    codiceFiscaleLineEdit->setCursorPosition(0);
+    formLayoutUtente->addWidget(codiceFiscaleLabel, 1, 0);
+    formLayoutUtente->addWidget(codiceFiscaleLineEdit, 1, 1);
 
     //cognome
     cognomeLabel=new QLabel("Cognome:");
     cognomeLineEdit = new QLineEdit();
-    formLayoutUtente->addRow(cognomeLabel, cognomeLineEdit);
+    formLayoutUtente->addWidget(cognomeLabel, 2, 0);
+    formLayoutUtente->addWidget(cognomeLineEdit, 2, 1);
 
     //nome
     nomeLabel=new QLabel("Nome:");
     nomeLineEdit = new QLineEdit();
-    formLayoutUtente->addRow(nomeLabel, nomeLineEdit);
+    formLayoutUtente->addWidget(nomeLabel, 3, 0);
+    formLayoutUtente->addWidget(nomeLineEdit, 3, 1);
 
     //data di nascita
     dataNascitaLabel=new QLabel("Data di Nascita:");
     dataNascitaEdit = new QDateEdit();
     dataNascitaEdit->setCalendarPopup(true);
-    formLayoutUtente->addRow(dataNascitaLabel, dataNascitaEdit);
+    formLayoutUtente->addWidget(dataNascitaLabel, 4, 0);
+    formLayoutUtente->addWidget(dataNascitaEdit, 4, 1);
 
     //email
     emailLabel=new QLabel("Email:");
     emailLineEdit = new QLineEdit();
-    formLayoutUtente->addRow(emailLabel, emailLineEdit);
+    formLayoutUtente->addWidget(emailLabel, 5, 0);
+    formLayoutUtente->addWidget(emailLineEdit, 5, 1);
 
     //telefono
     telefonoLabel=new QLabel("Telefono:");
     telefonoLineEdit = new QLineEdit();
     telefonoLineEdit->setInputMask("+99 9999999999;");
-    formLayoutUtente->addRow(telefonoLabel, telefonoLineEdit);
+    telefonoLineEdit->setCursorPosition(0);
+    formLayoutUtente->addWidget(telefonoLabel, 6, 0);
+    formLayoutUtente->addWidget(telefonoLineEdit, 6, 1);
 
     //cap
     capLabel=new QLabel("CAP:");
     capLineEdit = new QLineEdit();
     capLineEdit->setValidator(new QIntValidator(this));
-    formLayoutUtente->addRow(capLabel, capLineEdit);
+    formLayoutUtente->addWidget(capLabel, 7, 0);
+    formLayoutUtente->addWidget(capLineEdit, 7, 1);
 
     //regione
     regioneLabel=new QLabel("Regione:");
     regioneLineEdit = new QLineEdit();
-    formLayoutUtente->addRow(regioneLabel, regioneLineEdit);
+    formLayoutUtente->addWidget(regioneLabel, 8, 0);
+    formLayoutUtente->addWidget(regioneLineEdit, 8, 1);
 
     //comune
     comuneLabel=new QLabel("Comune:");
     comuneLineEdit = new QLineEdit();
-    formLayoutUtente->addRow(comuneLabel, comuneLineEdit);
+    formLayoutUtente->addWidget(comuneLabel, 9, 0);
+    formLayoutUtente->addWidget(comuneLineEdit, 9, 1);
 
     //via e numero
     viaLineEdit = new QLineEdit();
@@ -79,14 +93,14 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     maindatiLayout->addLayout(vnLayout);
 
     //riprendo layout
-    formLayoutStudente=new QFormLayout();
-
+    formLayoutStudente=new QGridLayout();
     //STUDENTE
     //matricola
     matricolaLabel=new QLabel("Matricola:");
     matricolaLineEdit = new QLineEdit();
     matricolaLineEdit->setValidator(new QIntValidator(this));
-    formLayoutStudente->addRow(matricolaLabel, matricolaLineEdit);
+    formLayoutStudente->addWidget(matricolaLabel, 0, 0);
+    formLayoutStudente->addWidget(matricolaLineEdit, 0, 1);
 
     //laurea
     laureaLabel=new QLabel("Laurea:");
@@ -95,24 +109,28 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     laureaMenuComboBox->addItem("Magistrale");
     laureaMenuComboBox->addItem("Diploma Specializzazione");
     laureaMenuComboBox->addItem("Dottorato Ricerca");
-    formLayoutStudente->addRow(laureaLabel, laureaMenuComboBox);
+    formLayoutStudente->addWidget(laureaLabel, 1, 0);
+    formLayoutStudente->addWidget(laureaMenuComboBox, 1, 1);
 
     //corso
     corsoLabel=new QLabel("Corso:");
     corsoLineEdit = new QLineEdit();
-    formLayoutStudente->addRow(corsoLabel, corsoLineEdit);
+    formLayoutStudente->addWidget(corsoLabel, 2, 0);
+    formLayoutStudente->addWidget(corsoLineEdit, 2, 1);
 
     //annocorso
     annocorsoLabel=new QLabel("Anno Corso:");
     annocorsoLineEdit = new QLineEdit();
     annocorsoLineEdit->setValidator(new QIntValidator(this));
-    formLayoutStudente->addRow(annocorsoLabel, annocorsoLineEdit);
+    formLayoutStudente->addWidget(annocorsoLabel, 3, 0);
+    formLayoutStudente->addWidget(annocorsoLineEdit, 3, 1);
 
     //iscrizione
     dataIscrizioneLabel=new QLabel("Data di Iscrizione:");
     dataIscrizioneEdit = new QDateEdit();
     dataIscrizioneEdit->setCalendarPopup(true);
-    formLayoutStudente->addRow(dataIscrizioneLabel, dataIscrizioneEdit);
+    formLayoutStudente->addWidget(dataIscrizioneLabel, 4, 0);
+    formLayoutStudente->addWidget(dataIscrizioneEdit, 4, 1);
 
     //fuoricorso e annifuoricorso
     checkBox = new QCheckBox();
@@ -130,19 +148,21 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     maindatiLayout->addLayout(fuoriLayout);
 
     //riprendo layout
-    formLayoutProf=new QFormLayout();
+    formLayoutProf=new QGridLayout();
 
     //PROFESSORE
     //tipo
     tipoLabel=new QLabel("Tipo:");
     tipoLineEdit = new QLineEdit();
-    formLayoutProf->addRow(tipoLabel, tipoLineEdit);
+    formLayoutProf->addWidget(tipoLabel, 0, 0);
+    formLayoutProf->addWidget(tipoLineEdit, 0, 1);
 
     //anni servizio
     anniServizioLabel=new QLabel("Anni Servizio:");
     anniServizioLineEdit = new QLineEdit();
     anniServizioLineEdit->setValidator(new QIntValidator(this));
-    formLayoutProf->addRow(anniServizioLabel, anniServizioLineEdit);
+    formLayoutProf->addWidget(anniServizioLabel, 1, 0);
+    formLayoutProf->addWidget(anniServizioLineEdit, 1, 1);
 
     maindatiLayout->addLayout(formLayoutProf);
 
@@ -222,7 +242,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     lezioniTableView->setItemDelegateForColumn(4,oraridelegate);
     lezioniTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     lezioniTableView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-    lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     //Seleziona una riga al posto di una singola cella
     lezioniTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 
@@ -258,6 +278,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
 
     //Inizializza i campi nascosti mettendo l'indice a 0
     showRow("Studente");
+    resize(sizeHint());
 }
 
 void menudatiutente::clear(){
@@ -327,6 +348,7 @@ void menudatiutente::showRow(QString combo){
         lezioniTableView->setVisible(false);
     }
     if(combo=="Professore"){
+        //matricola
         matricolaLineEdit->setVisible(false);
         matricolaLabel ->setVisible(false);
         laureaMenuComboBox->setVisible(false);
