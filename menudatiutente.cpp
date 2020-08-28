@@ -189,7 +189,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     ricercheTableView->setModel(modelloRicerche);
     ricercheTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ricercheTableView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-    ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     //Seleziona una riga al posto di una singola cella
     ricercheTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ricTableLayout->addWidget(ricercheTableView);
@@ -384,7 +384,7 @@ void menudatiutente::showRow(QString combo){
     ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     setMinimumSize(sizeHint());
     lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void menudatiutente::accept()
