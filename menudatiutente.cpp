@@ -352,18 +352,17 @@ void menudatiutente::showRow(QString combo){
         ricercheTableView->setVisible(true);
         ricercaModificaButton->setVisible(true);
     }
-    QApplication::processEvents();
+    //QApplication::processEvents();
     lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     QSize tmp = sizeHint();
     tmp.setWidth(tmp.width()+10);
     setMinimumSize(tmp);
     ricercheTableView->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Stretch);
-    ricercheTableView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
+    //ricercheTableView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
     lezioniTableView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
     lezioniTableView->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
     lezioniTableView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
-
 }
 
 void menudatiutente::accept()
