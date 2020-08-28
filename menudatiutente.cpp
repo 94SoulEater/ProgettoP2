@@ -20,8 +20,9 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     //codice fiscale
     codiceFiscaleLabel=new QLabel("Codice Fiscale:");
     codiceFiscaleLineEdit = new QLineEdit();
-    codiceFiscaleLineEdit->setInputMask("NNNNNNNNNNNNNNNN;");
-    codiceFiscaleLineEdit->setCursorPosition(0);
+    QRegularExpression rx1("^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$");
+    QValidator *validator1 = new QRegularExpressionValidator(rx1, this);
+    codiceFiscaleLineEdit->setValidator(validator1);
     formLayoutUtente->addWidget(codiceFiscaleLabel, 1, 0);
     formLayoutUtente->addWidget(codiceFiscaleLineEdit, 1, 1);
 
@@ -53,8 +54,9 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     //telefono
     telefonoLabel=new QLabel("Telefono:");
     telefonoLineEdit = new QLineEdit();
-    telefonoLineEdit->setInputMask("+99 9999999999;");
-    telefonoLineEdit->setCursorPosition(0);
+    QRegularExpression rx2("^((00|\\+)39[\\. ]??)??3\d{2}[\\. ]??\\d{6,7}$");
+    QValidator *validator2 = new QRegularExpressionValidator(rx2, this);
+    telefonoLineEdit->setValidator(validator2);
     formLayoutUtente->addWidget(telefonoLabel, 6, 0);
     formLayoutUtente->addWidget(telefonoLineEdit, 6, 1);
 
