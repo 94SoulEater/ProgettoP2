@@ -11,6 +11,8 @@
 #include <QPushButton>
 #include <QtWidgets>
 #include <QComboBox>
+#include <QMessageBox>
+
 
 class menulezione: public QDialog
 {
@@ -26,9 +28,14 @@ public:
      QPushButton *aggiungiLezioneButton, *annullaLezioneButton, *aggiungiOrarioButton, *eliminaOrarioButton;
      QComboBox *combo, *orarioGiornoCombo;
 
+
 public slots:
     void aggiungiCombo();
     void rimuoviDaCombo();
+
+
+private slots:
+      void accept();
 };
 
 #endif // MENULEZIONE_H

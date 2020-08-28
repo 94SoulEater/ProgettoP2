@@ -381,12 +381,36 @@ void menudatiutente::showRow(QString combo){
 
 void menudatiutente::accept()
 {
-    if(nomeLineEdit->text().isEmpty() )
-       throw new std::runtime_error("Errore: manca il campo nome");
-    //else if(cognomeLineEdit->text().isEmpty())
-      //  throw new std::domain_error("Errore: manca il campo cognome");
-  //  else if(codiceFiscaleLineEdit->text().isEmpty())
-    //     throw new std::domain_error("Errore: manca il campo codice fiscale");
+    if(codiceFiscaleLineEdit->text().isEmpty()){
+           QMessageBox messageBox;
+           messageBox.critical(0,"Error","Errore: Non hai inserito il campo codice fiscale!");
+           messageBox.setFixedSize(500,200);
+       }
+    else if(nomeLineEdit->text().isEmpty()){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Errore: Non hai inserito il campo nome!");
+        messageBox.setFixedSize(500,200);
+    }
+    else if(cognomeLineEdit->text().isEmpty()){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Errore: Non hai inserito il campo cognome!");
+        messageBox.setFixedSize(500,200);
+    }
+    else if(emailLineEdit->text().isEmpty()){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Errore: Non hai inserito il campo email!");
+        messageBox.setFixedSize(500,200);
+    }
+    else if(telefonoLineEdit->text()=="+ "){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Errore: Non hai inserito il campo telefono!");
+        messageBox.setFixedSize(500,200);
+    }
+    else if(tipoUtenteMenuComboBox->currentText()=="Studente" || tipoUtenteMenuComboBox->currentText()=="Tutor" && matricolaLineEdit->text().isEmpty()){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Errore: Non hai inserito il campo matricola!");
+        messageBox.setFixedSize(500,200);
+    }
          else
        QDialog::accept();
 }

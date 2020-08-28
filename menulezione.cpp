@@ -109,4 +109,15 @@ void menulezione::rimuoviDaCombo()
     combo->removeItem(combo->currentIndex());
 }
 
+void menulezione::accept()
+{
+    if(materiaLineEdit->text().isEmpty()){
+            QMessageBox messageBoxLez;
+            messageBoxLez.critical(0,"Error","Errore: Non hai inserito il campo materia!");
+            messageBoxLez.setFixedSize(500,200);
+        }
+             else
+           QDialog::accept();
+}
+
 
