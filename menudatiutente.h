@@ -20,6 +20,7 @@
 #include "ricerchetablemodel.h"
 #include "comboboxdelegate.h"
 #include <stdexcept>
+#include <QMessageBox>
 
 
 class menudatiutente : public QDialog{
@@ -45,7 +46,7 @@ public:
 
 public slots:
     void showRow(QString);
-    void accept();
+
 private slots:
     void clear();
     void aggiungiLezione();
@@ -56,6 +57,7 @@ private slots:
     void modificaRicerca(const QModelIndex &index = QModelIndex());
     void aggiornalezioneAzioni(const QItemSelection &selected , const QItemSelection &deselected);
     void aggiornaricercaAzioni(const QItemSelection &selected , const QItemSelection &deselected);
+    void accept();
 };
 
 #endif // MENUDATIUTENTE_H

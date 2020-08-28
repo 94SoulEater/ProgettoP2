@@ -10,6 +10,7 @@
 #include <QDateEdit>
 #include <QFormLayout>
 #include <QPushButton>
+#include <QMessageBox>
 
 
 class menuricerca: public QDialog
@@ -24,6 +25,9 @@ public:
     QLabel *titoloLabel, *autoriLabel, *linkLabel, *rivistaLabel, *dataPubblicazioneLabel;
     QLineEdit *dataPubblicazioneLineEdit, *titoloLineEdit, *autoriLineEdit, *rivistaLineEdit, *linkLineEdit;
      QPushButton *aggiungiRicercaButton, *annullaRicercaButton;
+
+private slots:
+      void accept();
 };
 
 #endif // MENURICERCA_H
