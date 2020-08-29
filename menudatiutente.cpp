@@ -2,7 +2,7 @@
 
 menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     setWindowTitle("Aggiungi utente");
-    //setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    //setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Minimum);
     maindatiLayout = new QVBoxLayout();
     formLayoutUtente = new QGridLayout();
 
@@ -276,9 +276,6 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     connect(aggiungiMenuButton, SIGNAL(clicked()), this, SLOT(accept()));
 
     setLayout(maindatiLayout);
-
-    //Inizializza i campi nascosti mettendo l'indice a 0
-    showRow("Studente");
 }
 
 void menudatiutente::showRow(QString combo){
@@ -298,18 +295,21 @@ void menudatiutente::showRow(QString combo){
         spinBox->setVisible(true);
         fuoricorsoLabel->setVisible(true);
         annifuoricorsoLabel->setVisible(true);
+        formLayoutStudente->activate();
 
         //campi prof
         tipoLineEdit->setVisible(false);
         tipoLabel->setVisible(false);
         anniServizioLineEdit->setVisible(false);
         anniServizioLabel->setVisible(false);
+        formLayoutProf->invalidate();
 
         //ricerca
         ricercaAggiungiButton->setVisible(false);
         ricercaEliminaButton->setVisible(false);
         ricercheTableView->setVisible(false);
         ricercaModificaButton->setVisible(false);
+        ricTableLayout->invalidate();
     }
     if(combo=="Tutor" || combo =="Professore"){
         //lezione
@@ -317,11 +317,13 @@ void menudatiutente::showRow(QString combo){
         lezioneEliminaButton->setVisible(true);
         lezioniTableView->setVisible(true);
         lezioneModificaButton->setVisible(true);
+        lezTableLayout->activate();
     }else{
         lezioneAggiungiButton->setVisible(false);
         lezioneEliminaButton->setVisible(false);
         lezioneModificaButton->setVisible(false);
         lezioniTableView->setVisible(false);
+        lezTableLayout->invalidate();
     }
     if(combo=="Professore"){
         //matricola
@@ -339,31 +341,55 @@ void menudatiutente::showRow(QString combo){
         spinBox->setVisible(false);
         fuoricorsoLabel->setVisible(false);
         annifuoricorsoLabel->setVisible(false);
+        formLayoutStudente->invalidate();
 
         //campi prof
         tipoLineEdit->setVisible(true);
         tipoLabel->setVisible(true);
         anniServizioLineEdit->setVisible(true);
         anniServizioLabel->setVisible(true);
+        formLayoutProf->activate();
 
         //ricerca e lezione
         ricercaAggiungiButton->setVisible(true);
         ricercaEliminaButton->setVisible(true);
         ricercheTableView->setVisible(true);
         ricercaModificaButton->setVisible(true);
+        ricTableLayout->activate();
     }
-    //QApplication::processEvents();
-    lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    QSize tmp = sizeHint();
-    tmp.setWidth(tmp.width()+10);
-    setMinimumSize(tmp);
-    ricercheTableView->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Stretch);
-    //ricercheTableView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
-    lezioniTableView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
-    lezioniTableView->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
-    lezioniTableView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+    if(combo == "Professore"){
+        ricercheTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+        ricercheTableView->setMinimumSize(ricercheTableView->sizeHint());
+    }
+    if(combo == "Professore" || combo == "Tutor"){
+        lezioniTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+        lezioniTableView->setMinimumSize(lezioniTableView->sizeHint());
+        QSize tmp = sizeHint();
+        tmp.setWidth(tmp.width()+10);
+        setMinimumSize(tmp);
+        resize(sizeHint());
+    }else{
+        lezioniTableView->setMinimumSize(0,0);
+        ricercheTableView->setMinimumSize(0,0);
+        adjustSize();
+    }
+    if(combo == "Professore"){
+        ricercheTableView->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Stretch);
+    }
+    if(combo == "Professore" || combo == "Tutor"){
+        lezioniTableView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
+        lezioniTableView->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
+        lezioniTableView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+    }
 }
+
+int menudatiutente::exec(){
+    //Inizializza i campi nascosti mettendo l'indice a 0
+    showRow(tipoUtenteMenuComboBox->currentText());
+    return QDialog::exec();
+}
+
+
 
 void menudatiutente::accept()
 {

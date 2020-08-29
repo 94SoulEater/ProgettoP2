@@ -47,6 +47,7 @@ public:
 
 public slots:
     void showRow(QString);
+    int exec();
 
 private slots:
     void aggiungiLezione();
