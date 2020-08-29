@@ -2,7 +2,6 @@
 
 menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     setWindowTitle("Aggiungi utente");
-    //setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Minimum);
     maindatiLayout = new QVBoxLayout();
     formLayoutUtente = new QGridLayout();
 

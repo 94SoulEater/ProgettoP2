@@ -30,7 +30,6 @@ public:
     virtual tipoutente getTipoUtente() const = 0;
     static string fromTipoUtente(const tipoutente &_tipoUtente);
     static tipoutente toTipoUtente(const string &_tipoUtente);
-    virtual bool equals(utente* x) const = 0;
     string getNumeroCivico() const;
     void setNumeroCivico(const string &value);
     string getCap() const;

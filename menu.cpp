@@ -4,9 +4,6 @@ menu::menu(QWidget *parent)
     : QWidget(parent){
     mainLayout = new QVBoxLayout(this);
 
-    //Chiusura
-    //addCLose();
-
     //Bottoni di aggiunta / rimozione utenti
     aggiungiRimuoviButtonsLayout = new QHBoxLayout();
     aggiungiButton= new QPushButton("Aggiungi utente");
@@ -64,7 +61,6 @@ menu::menu(QWidget *parent)
     //Quando viene selezionata una riga viene sbloccato il pulsante di rimozione, altrimenti viene bloccato
     connect(utentiTableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)) ,this, SLOT(aggiornaAzioni(QItemSelection,QItemSelection)));
 
-    //TEST
     connect(utentiTableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(modificaUtente(QModelIndex)));
 
     //Modalità Visualizzazione
