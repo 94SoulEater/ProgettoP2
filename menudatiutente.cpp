@@ -40,6 +40,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     //data di nascita
     dataNascitaLabel=new QLabel("Data di Nascita:");
     dataNascitaEdit = new QDateEdit();
+    dataNascitaEdit->setDisplayFormat("MMMM.dd.yyyy");
     dataNascitaEdit->setCalendarPopup(true);
     formLayoutUtente->addWidget(dataNascitaLabel, 4, 0);
     formLayoutUtente->addWidget(dataNascitaEdit, 4, 1);
@@ -130,6 +131,7 @@ menudatiutente::menudatiutente(QWidget *parent) : QDialog(parent){
     //iscrizione
     dataIscrizioneLabel=new QLabel("Data di Iscrizione:");
     dataIscrizioneEdit = new QDateEdit();
+    dataIscrizioneEdit->setDisplayFormat("MMMM.dd.yyyy");
     dataIscrizioneEdit->setCalendarPopup(true);
     formLayoutStudente->addWidget(dataIscrizioneLabel, 4, 0);
     formLayoutStudente->addWidget(dataIscrizioneEdit, 4, 1);

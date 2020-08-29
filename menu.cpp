@@ -181,21 +181,6 @@ void menu::aggiungiUtente(){
         puntatoresmart<utente> utemp = creaUtenteTemp(aggiungi);
         if (!(modelloTabellaUtenti->contains(utemp))) {
             modelloTabellaUtenti->aggiungiUtente(utemp);
-            /*
-            modelloProxy->sourceModel()->setData(index, codiceFiscale, Qt::EditRole);
-            index = modelloProxy->sourceModel()->index(0, 2, QModelIndex());
-            modelloProxy->sourceModel()->setData(index, nome, Qt::EditRole);
-            index = modelloProxy->sourceModel()->index(0, 3, QModelIndex());
-            modelloProxy->sourceModel()->setData(index, cognome, Qt::EditRole);
-            index = modelloProxy->sourceModel()->index(0, 4, QModelIndex());
-            modelloProxy->sourceModel()->setData(index, dataNascita, Qt::EditRole);
-            index = modelloProxy->sourceModel()->index(0, 5, QModelIndex());
-            modelloProxy->sourceModel()->setData(index, telefono, Qt::EditRole);
-            index = modelloProxy->sourceModel()->index(0, 6, QModelIndex());
-            modelloProxy->sourceModel()->setData(index, email, Qt::EditRole);
-            index = modelloProxy->sourceModel()->index(0, 5, QModelIndex());
-            modelloProxy->sourceModel()->setData(index, telefono, Qt::EditRole);
-            */
         }
     }
 }
@@ -244,7 +229,7 @@ void menu::modificaUtente(const QModelIndex &index){
     cognome = modelloProxy->sourceModel()->data(cognomeIndex, Qt::DisplayRole).toString();
 
     QModelIndex dataNascitaIndex = modelloProxy->sourceModel()->index(row, 4, QModelIndex());
-    dataNascita = QDate::fromString(modelloProxy->sourceModel()->data(dataNascitaIndex, Qt::DisplayRole).toString(),  Qt::RFC2822Date);
+    dataNascita = modelloProxy->sourceModel()->data(dataNascitaIndex, Qt::DisplayRole).toDate();
 
     QModelIndex telefonoIndex = modelloProxy->sourceModel()->index(row, 5, QModelIndex());
     telefono = modelloProxy->sourceModel()->data(telefonoIndex, Qt::DisplayRole).toString();
@@ -285,7 +270,7 @@ void menu::modificaUtente(const QModelIndex &index){
         anniFuoriCorso = modelloProxy->sourceModel()->data(anniFuoriCorsoIndex, Qt::DisplayRole).toString();
 
         QModelIndex dataIscrizioneIndex = modelloProxy->sourceModel()->index(row, 19, QModelIndex());
-        dataIscrizione = QDate::fromString(modelloProxy->sourceModel()->data(dataIscrizioneIndex, Qt::DisplayRole).toString(), Qt::RFC2822Date);
+        dataIscrizione = modelloProxy->sourceModel()->data(dataIscrizioneIndex, Qt::DisplayRole).toDate();
 
         modifica.matricolaLineEdit->setText(matricola);
         modifica.corsoLineEdit->setText(corso);
@@ -408,20 +393,4 @@ void menu::aggiornaColonnaRicerca(const QString& _colonna){
 
 menu::~menu(){
 }
-
-
-/*Aggiunge barra menu
-void menu::addCLose(){
-    QMenuBar* menubar=new QMenuBar(this);
-    QMenu* close=new QMenu("File", menubar);
-    QAction* esci=new QAction("Esci", close);
-
-    connect(esci,SIGNAL(triggered()),this,SLOT(close()));
-    close->addAction(esci);
-    menubar->addMenu(close);
-    mainLayout->addWidget(menubar);
-}
-*/
-
-
 

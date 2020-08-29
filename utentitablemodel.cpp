@@ -32,7 +32,7 @@ void utentitablemodel::aggiungiUtenti(){
     provaIns1->addRicerca(provaRic1);
     ricerca provaRic2("A. Cortesi, R. Giacobazzi, G. Filé, C. Palamidessi, and F. Ranzato", "Complementation in abstract interpretation", "https://www.math.unipd.it/~ranzato/papers/sas95.pdf", "Springer-Verlag", 1995);
     provaIns1->addRicerca(provaRic2);
-    ricerca provaRic3("C. De Francesco, C. E. Palazzi, D. Ronzani","Fast Message Broadcasting in Vehicular Networks: Model Analysis and Performance Evaluation", "https://ieeexplore.ieee.org/document/9088960", "IEEE Communications Letters", 2020);
+    ricerca provaRic3("C. De Francesco, C. E. Palazzi, D. Ronzani","Fast Message Broadcasting in Vehicular Networks", "https://ieeexplore.ieee.org/document/9088960", "IEEE Communications Letters", 2020);
     provaIns5->addRicerca(provaRic3);
     listaUtenti.push(puntatoresmart<utente>(provaIns1)); //Ranzato
     listaUtenti.push(puntatoresmart<utente>(provaIns2)); //Gualtieri
@@ -77,7 +77,7 @@ QVariant utentitablemodel::data(const QModelIndex &index, int role) const{
         case 3: //Cognome
             return QString::fromStdString(utenteTemp->getCognome());
         case 4: //Data di nascita
-            return (QDate(utenteTemp->getAnnoNascita(), utenteTemp->getMeseNascita(), utenteTemp->getGiornoNascita())).toString(Qt::RFC2822Date);
+            return QDate(utenteTemp->getAnnoNascita(), utenteTemp->getMeseNascita(), utenteTemp->getGiornoNascita());
         case 5: //Numero di telefono
             return QString::fromStdString(utenteTemp->getTelefono());
         case 6: //Email
@@ -140,7 +140,7 @@ QVariant utentitablemodel::data(const QModelIndex &index, int role) const{
         case 19:{ //Data Iscrizione
             studente* tmp = dynamic_cast<studente*>(utenteTemp);
             if(tmp){
-                return QDate(tmp->getAnnoIscrizione(), tmp->getMeseIscrizione(), tmp->getGiornoIscrizione()).toString(Qt::RFC2822Date);
+                return QDate(tmp->getAnnoIscrizione(), tmp->getMeseIscrizione(), tmp->getGiornoIscrizione());
             }
             return QVariant();
         }
@@ -225,8 +225,7 @@ bool utentitablemodel::setData(const QModelIndex &index, const QVariant &value, 
             tmp->setCognome(value.toString().toStdString());
             break;
         case 4:{ //Data di nascita
-            QDate tmpDate;
-            tmpDate.fromString(value.toString(),  Qt::RFC2822Date);
+            QDate tmpDate = value.toDate();
             tmp->setGiornoNascita(tmpDate.day());
             tmp->setMeseNascita(tmpDate.month());
             tmp->setAnnoNascita(tmpDate.year());
@@ -293,8 +292,7 @@ bool utentitablemodel::setData(const QModelIndex &index, const QVariant &value, 
             break;
         case 19: //Data iscrizione
             if(dynamic_cast<studente*>(tmp.operator->())){
-                QDate tmpDate;
-                tmpDate.fromString(value.toString(),  Qt::RFC2822Date);
+                QDate tmpDate = value.toDate();
                 dynamic_cast<studente*>(tmp.operator->())->setGiornoIscrizione(tmpDate.day());
                 dynamic_cast<studente*>(tmp.operator->())->setMeseIscrizione(tmpDate.month());
                 dynamic_cast<studente*>(tmp.operator->())->setAnnoIscrizione(tmpDate.year());
