@@ -3,6 +3,7 @@
 menuricerca::menuricerca(QWidget *parent) : QDialog(parent)
 {
     setWindowTitle("Aggiungi ricerca");
+    resize(600, 200);
     setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     maindatiLayout = new QVBoxLayout();
     formLayout = new QFormLayout();
