@@ -96,12 +96,24 @@ menulezione::menulezione(QWidget *parent) : QDialog(parent)
 
 void menulezione::aggiungiCombo()
 {
+    if(orarioInizioLineEdit->text().isEmpty()){
+            QMessageBox messageBoxLez;
+            messageBoxLez.critical(0,"Error","Errore: Non hai inserito il campo orario inizio!");
+            messageBoxLez.setFixedSize(500,200);
+    }
+     else if(orarioFineLineEdit->text().isEmpty()){
+                    QMessageBox messageBoxLez;
+                    messageBoxLez.critical(0,"Error","Errore: Non hai inserito il campo orario fine!");
+                    messageBoxLez.setFixedSize(500,200);
+    }
+    else{
     combo->setVisible(true);
     eliminaOrarioButton->setVisible(true);
     QString orario=orarioInizioLineEdit->text()+" - "+orarioFineLineEdit->text()+"  "+orarioGiornoCombo->currentText();
     combo->addItem(orario);
     orarioInizioLineEdit->clear();
     orarioFineLineEdit->clear();
+}
 }
 
 
@@ -112,6 +124,7 @@ void menulezione::rimuoviDaCombo()
 
 void menulezione::accept()
 {
+
     if(materiaLineEdit->text().isEmpty()){
             QMessageBox messageBoxLez;
             messageBoxLez.critical(0,"Error","Errore: Non hai inserito il campo materia!");
