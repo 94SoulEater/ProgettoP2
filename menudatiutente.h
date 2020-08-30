@@ -34,12 +34,11 @@ public:
     QHBoxLayout *aggRimuoviLezioneLayout, *aggRimuoviRicercaLayout, *lezTableLayout, *ricTableLayout, *bottoniLayout, *labelLayout, *aggiungiAnnullaMenuButtonLayout, *fuoriLayout, *vnLayout;
     QPushButton *ricercaModificaButton, *lezioneModificaButton, *aggiungiMenuButton, *annullaMenuButton, *ricercaAggiungiButton, *lezioneAggiungiButton, *lezioneEliminaButton, *ricercaEliminaButton;
     QComboBox *tipoUtenteMenuComboBox, *laureaMenuComboBox;
-    QLabel *tipoUtenteComboboxLabel, *codiceFiscaleLabel, *nomeLabel, *cognomeLabel, *dataNascitaLabel, *tipoUtenteLabel, *annifuoricorsoLabel, *fuoricorsoLabel, *viaLabel, *numeroCivicoLabel, *emailLabel,*telefonoLabel, *capLabel, *regioneLabel, *comuneLabel, *tipoLabel, *anniServizioLabel, *laureaLabel,*corsoLabel,*matricolaLabel,*annocorsoLabel, *dataIscrizioneLabel, *ricercaLabel, *lezioneLabel;
+    QLabel *lezioneEliminaLabel, *ricercaEliminaLabel, *tipoUtenteComboboxLabel, *codiceFiscaleLabel, *nomeLabel, *cognomeLabel, *dataNascitaLabel, *tipoUtenteLabel, *annifuoricorsoLabel, *fuoricorsoLabel, *viaLabel, *numeroCivicoLabel, *emailLabel,*telefonoLabel, *capLabel, *regioneLabel, *comuneLabel, *tipoLabel, *anniServizioLabel, *laureaLabel,*corsoLabel,*matricolaLabel,*annocorsoLabel, *dataIscrizioneLabel, *ricercaLabel, *lezioneLabel;
     QLineEdit *codiceFiscaleLineEdit, *nomeLineEdit, *cognomeLineEdit, *dataNascitaLineEdit, *emailLineEdit, *telefonoLineEdit, *capLineEdit, *regioneLineEdit, *comuneLineEdit, *viaLineEdit, *numeroCivicoLineEdit, *annocorsoLineEdit, *corsoLineEdit, *anniServizioLineEdit, *tipoLineEdit, *matricolaLineEdit;
     QDateEdit * dataNascitaEdit, *dataIscrizioneEdit, * dataPubblicazioneEdit;
     QCheckBox *checkBox;
     QSpinBox *spinBox;
-    QLabel  *lezioneEliminaLabel, *ricercaEliminaLabel;
     lezionitablemodel *modelloLezioni;
     ricerchetablemodel *modelloRicerche;
     QTableView *lezioniTableView, *ricercheTableView;
@@ -47,7 +46,7 @@ public:
 
 public slots:
     void showRow(QString);
-    int exec();
+    int exec() override;
 
 private slots:
     void aggiungiLezione();
@@ -58,7 +57,7 @@ private slots:
     void modificaRicerca(const QModelIndex &index = QModelIndex());
     void aggiornalezioneAzioni(const QItemSelection &selected , const QItemSelection &deselected);
     void aggiornaricercaAzioni(const QItemSelection &selected , const QItemSelection &deselected);
-    void accept();
+    void accept() override;
 };
 
 #endif // MENUDATIUTENTE_H

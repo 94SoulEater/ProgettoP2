@@ -296,7 +296,7 @@ bool utentitablemodel::setData(const QModelIndex &index, const QVariant &value, 
                 dynamic_cast<studente*>(tmp.operator->())->setGiornoIscrizione(tmpDate.day());
                 dynamic_cast<studente*>(tmp.operator->())->setMeseIscrizione(tmpDate.month());
                 dynamic_cast<studente*>(tmp.operator->())->setAnnoIscrizione(tmpDate.year());
-              }
+            }
             break;
         default:
             return false;

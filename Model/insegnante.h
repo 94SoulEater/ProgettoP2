@@ -9,7 +9,7 @@ class insegnante : virtual public utente{
 private:
     contenitore<lezione> lezioni;
 public:
-    insegnante(string="", string="", string="", string="", string="", int=1, int=1, int=1970, string="", string="", string="", string="", string="");
+    insegnante(string _nome="", string _cognome="", string _codiceFiscale="", string _telefono="", string _email="", int _giornoNascita=1, int _meseNascita=1, int _annoNascita=1970, string _regione="", string _comune="", string _via="", string _cap="", string _numeroCivico="");
     ~insegnante() = default;
     virtual insegnante* clone() const = 0;
     virtual tipoutente getTipoUtente() const = 0;

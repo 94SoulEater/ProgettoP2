@@ -22,7 +22,7 @@ private:
     static nodo* copia(nodo*);
 
 public:
-   class iteratore{
+    class iteratore{
         friend class contenitore<T>;
     private:
         nodo* p;
@@ -37,7 +37,7 @@ public:
         bool operator ==(const iteratore&)const;
         bool operator !=(const iteratore&)const;
     };
-   class iteratore_const{
+    class iteratore_const{
         friend class contenitore<T>;
     private:
         nodo* p;
@@ -53,28 +53,28 @@ public:
         bool operator==(const iteratore_const&)const;
         bool operator!=(const iteratore_const&)const;
     };
-   contenitore();
-   contenitore(const contenitore&);
-   ~contenitore();
+    contenitore();
+    contenitore(const contenitore&);
+    ~contenitore();
 
-   bool operator==(const contenitore&)const;
-   bool operator!=(const contenitore&)const;
-   contenitore& operator=(const contenitore&);
+    bool operator==(const contenitore&)const;
+    bool operator!=(const contenitore&)const;
+    contenitore& operator=(const contenitore&);
 
-   void push(const T&);
-   int size() const;
-   void clear();
-   bool contains(const T&) const;
-   T& value(int _pos);
-   const T& value(int _pos) const;
-   void remove(int _pos);
-   void remove(const T& t);
-   void replace(int _pos, const T&);
+    void push(const T&);
+    int size() const;
+    void clear();
+    bool contains(const T&) const;
+    T& value(int _pos);
+    const T& value(int _pos) const;
+    void remove(int _pos);
+    void remove(const T& t);
+    void replace(int _pos, const T&);
 
-   iteratore begin();
-   iteratore end();
-   iteratore_const begin()const;
-   iteratore_const end()const;
+    iteratore begin();
+    iteratore end();
+    iteratore_const begin()const;
+    iteratore_const end()const;
 
 
 };

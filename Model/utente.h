@@ -24,7 +24,7 @@ private:
     string numeroCivico;
 
 public:
-    utente(string="", string="", string="", string="", string="", int=1, int=1, int=1970, string="", string="", string="", string="", string="");
+    utente(string _nome="", string _cognome="", string _codiceFiscale="", string _telefono="", string _email="", int _giornoNascita=1, int _meseNascita=1, int _annoNascita=1970, string _regione="", string _comune="", string _via="", string _cap="", string _numeroCivico="");
     virtual ~utente() = default;
     virtual utente* clone() const = 0;
     virtual tipoutente getTipoUtente() const = 0;

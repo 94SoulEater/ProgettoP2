@@ -47,10 +47,8 @@ private:
     QTableView *utentiTableView;
     proxymodel *modelloProxy;
     utentitablemodel *modelloTabellaUtenti;
-    void addCLose();
     void setupColonneTableView(tipoutente _tipoutente);
     utente* creaUtenteTemp(const menudatiutente &_menu)const;
-
 };
 
 #endif // MENU_H

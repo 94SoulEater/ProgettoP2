@@ -25,8 +25,8 @@ public:
     QHBoxLayout *bottoniLezioneLayout, *orarioLayout, *comboLayout;
     QLabel *materiaLabel, *corsoLabel, *creditiLabel, *stanzaLabel, *orarioInizioLabel, *orarioFineLabel, *orarioGiornoLabel;
     QLineEdit *materiaLineEdit, *corsoLineEdit, *creditiLineEdit, *stanzaLineEdit, *orarioInizioLineEdit,  *orarioFineLineEdit;
-     QPushButton *aggiungiLezioneButton, *annullaLezioneButton, *aggiungiOrarioButton, *eliminaOrarioButton;
-     QComboBox *combo, *orarioGiornoCombo;
+    QPushButton *aggiungiLezioneButton, *annullaLezioneButton, *aggiungiOrarioButton, *eliminaOrarioButton;
+    QComboBox *combo, *orarioGiornoCombo;
 
 
 public slots:
@@ -35,7 +35,7 @@ public slots:
 
 
 private slots:
-      void accept();
+    void accept() override;
 };
 
 #endif // MENULEZIONE_H

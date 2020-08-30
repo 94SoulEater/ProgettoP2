@@ -30,7 +30,7 @@ void comboboxdelegate::setModelData(QWidget *editor, QAbstractItemModel *model, 
 }
 
 void comboboxdelegate::updateEditorGeometry(QWidget *editor,
-                                           const QStyleOptionViewItem &option,
-                                           const QModelIndex &/* index */) const{
+                                            const QStyleOptionViewItem &option,
+                                            const QModelIndex &/* index */) const{
     editor->setGeometry(option.rect);
 }

@@ -14,8 +14,8 @@ private:
     int colonnaRicerca;
 public:
     proxymodel(QObject *parent = nullptr);
-    bool filterAcceptsColumn(int source_column, const QModelIndex&) const;
-    bool filterAcceptsRow(int source_row, const QModelIndex&) const;
+    bool filterAcceptsColumn(int source_column, const QModelIndex&) const override;
+    bool filterAcceptsRow(int source_row, const QModelIndex&) const override;
     void setFiltroColonne(tipoutente _tipoUtente);
     void setColonnaRicerca(int _colonnaRicerca);
     bool isColonnaNascosta(int _col);

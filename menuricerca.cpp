@@ -56,10 +56,10 @@ menuricerca::menuricerca(QWidget *parent) : QDialog(parent)
 void menuricerca::accept()
 {
     if(titoloLineEdit->text().isEmpty()){
-            QMessageBox messageBoxRic;
-            messageBoxRic.critical(0,"Error","Errore: Non hai inserito il campo titolo!");
-            messageBoxRic.setFixedSize(500,200);
-        }
-             else
-           QDialog::accept();
+        QMessageBox messageBoxRic;
+        messageBoxRic.critical(0,"Error","Errore: Non hai inserito il campo titolo!");
+        messageBoxRic.setFixedSize(500,200);
+    }
+    else
+        QDialog::accept();
 }

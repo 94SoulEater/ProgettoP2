@@ -13,7 +13,7 @@ private:
     string rivistaPubblicazione;
     int annoPubblicazione;
 public:
-    ricerca(string="", string="", string="", string="", int=1970);
+    ricerca(string _autori="", string _titolo="", string _link="", string _rivistaPubblicazione="", int _annoPubblicazione=1970);
     ~ricerca() = default;
     bool operator==(const ricerca&)const;
     bool operator!=(const ricerca&)const;

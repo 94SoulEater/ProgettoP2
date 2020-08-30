@@ -24,10 +24,10 @@ public:
     QHBoxLayout *bottoniRicercaLayout;
     QLabel *titoloLabel, *autoriLabel, *linkLabel, *rivistaLabel, *dataPubblicazioneLabel;
     QLineEdit *dataPubblicazioneLineEdit, *titoloLineEdit, *autoriLineEdit, *rivistaLineEdit, *linkLineEdit;
-     QPushButton *aggiungiRicercaButton, *annullaRicercaButton;
+    QPushButton *aggiungiRicercaButton, *annullaRicercaButton;
 
 private slots:
-      void accept();
+    void accept() override;
 };
 
 #endif // MENURICERCA_H
