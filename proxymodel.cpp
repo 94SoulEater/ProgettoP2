@@ -31,6 +31,9 @@ bool proxymodel::filterAcceptsRow(int source_row, const QModelIndex &sourceParen
     case Professore: //Mostra solo professori
         filtroUtente = sourceModel()->data(tipoUtente).toString().contains(QString::fromStdString("Professore"));
         break;
+    default:
+        filtroUtente = true;
+        break;
     }
     //Se l'utente appartiene al tipo selezionato e contiene la stringa cercata viene mostrato
     return (filtroUtente && sourceModel()->data(index).toString().contains(filterRegExp()));
