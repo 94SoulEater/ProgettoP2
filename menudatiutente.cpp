@@ -424,6 +424,17 @@ void menudatiutente::accept()
         messageBox.critical(0,"Error","Errore: Non hai inserito il campo matricola!");
         messageBox.setFixedSize(500,200);
     }
+
+    else if( dataIscrizioneEdit->date()>=QDate::currentDate()){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Errore: Hai inserito una data di iscrizione non valida!");
+        messageBox.setFixedSize(500,200);
+}
+    else if( dataNascitaEdit->date()>=QDate::currentDate()){
+            QMessageBox messageBox;
+            messageBox.critical(0,"Error","Errore: Hai inserito una data di nascita non valida!");
+            messageBox.setFixedSize(500,200);
+        }
     else
         QDialog::accept();
 }
