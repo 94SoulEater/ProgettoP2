@@ -1,0 +1,39 @@
+Feedback Progetto di Programmazione ad Oggetti
+Studente: Marco Dello Iacovo
+
+Vincoli obbligatori
++ Soddisfatti
+
+
+Orientamento ad oggetti
++ Incapsulamento
++ Modularità (modello logico e la GUI sono separati)
+- metodi come getTipoUtente "aggirano" il polimorfismo, consentendo l'uso
+  di controlli di flusso tradizionali (if-then-else) per cambiare il
+  comportamento del codice, anziché affidarsi all'uso dei metodi virtuali;
+  di conseguenza l'aggiunta di nuovi tipi richiede una modifica al codice
+  in ogni punto in cui viene usato il valore di ritorno di getTipoUtente
+  per aggiungere la gestione delle nuove stringhe
+
+
+Funzionalità
++ Ordinamento
++ Ricerca su più attributi
++ Filtro
+
+
+GUI
++ Visualizza i diversi tipi di dato in maniera opportuna
++ Usabile e intuitiva
++ Robusta, gestisce ridimensionamento
+- Migliorabile utilizzando icone o elementi grafici
+
+
+Relazione
++ Adeguata
+
+
+Suggerimenti non collegati alla valutazione
+Nessuno.
+
+Viene confermato il voto 26
